@@ -1,0 +1,374 @@
+[
+  {
+    "name": "ရေခဲ",
+    "balance": 45079760,
+    "order": 1,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 45079760,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ဒီဇယ်",
+    "balance": 15332579,
+    "order": 2,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 15332579,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "HOH",
+    "balance": 3119900,
+    "order": 3,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 8119900,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "NLH",
+    "balance": 500000,
+    "order": 4,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 500000,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ငါး",
+    "balance": 186666171,
+    "order": 5,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 186666171,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ရာဘာခြံဝန်ထမ်းရန်ပုံငွေ",
+    "balance": 11000000,
+    "order": 6,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 110000000,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "TTM",
+    "balance": -1421301,
+    "order": 7,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -1421301,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "မော်စွန်းခြံရာဘာ",
+    "balance": -36873421,
+    "order": 8,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -36873421,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ဝန့်ချောင်းခြံရာဘာ",
+    "balance": -30791031,
+    "order": 9,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -30791031,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "အစာအိတ်",
+    "balance": -16904165,
+    "order": 10,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -16904165,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "Main cash အတွင်း",
+    "balance": 582536,
+    "order": 11,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 582536,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "Bank ချေးငွေအတိုး",
+    "balance": 18120453,
+    "order": 12,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 18120453,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "သက်န်းရောင်းရငွေ",
+    "balance": -4856056,
+    "order": 13,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -4856056,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "စိုက်/ချေး စာရင်း",
+    "balance": 7280245,
+    "order": 14,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 7280245,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ဗမချေးငွေ",
+    "balance": -21940000,
+    "order": 15,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -21940000,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "အလှူရန်ပုံငွေ",
+    "balance": 556282,
+    "order": 16,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -556282,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "လစာရန်ပုံငွေ",
+    "balance": 9801000,
+    "order": 17,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9801000,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "အင်ဂျင်ဝိုင်",
+    "balance": 10826950,
+    "order": 18,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 10826950,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ယောလုံချည်/ပုဝါပိုင်း",
+    "balance": 1960300,
+    "order": 19,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 1960300,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ကွမ်း + ဒူးရင်း + ငှက်ပျော",
+    "balance": 9170824,
+    "order": 20,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9170824,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "သမုတ်ဆီရောင်းရငွေ",
+    "balance": 9832334,
+    "order": 21,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9832334,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ဆီဆိုင်လုပ်ငန်း",
+    "balance": 22519,
+    "order": 22,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 22519,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "လှေကပ်ခရငွေ",
+    "balance": 2229700,
+    "order": 23,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 2229700,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "ရာဘာရောင်းရငွေ",
+    "balance": 78253828,
+    "order": 24,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 78253828,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "(မဒဂ) အိမ်ဆောက်စာရင်း",
+    "balance": -137445000,
+    "order": 25,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -137445000,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "UZW, TTM ရန်ပုံငွေ",
+    "balance": 8441350,
+    "order": 26,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 8441350,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "Bank အပ်",
+    "balance": -15823253,
+    "order": 27,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -15823253,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "K Pay",
+    "balance": -9333700,
+    "order": 28,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9333700,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "TTM Cash",
+    "balance": -2196410,
+    "order": 29,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -2196410,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "Baht ဝယ်စာရင်း ()",
+    "balance": -92201368,
+    "order": 30,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -92201368,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "Baht ဝယ်စာရင်း ()",
+    "balance": -30825000,
+    "order": 31,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -30825000,
+        "date": "2026-03-01"
+      }
+    ]
+  }
+]
