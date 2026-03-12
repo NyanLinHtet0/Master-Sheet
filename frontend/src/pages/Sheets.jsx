@@ -49,19 +49,17 @@ function Sheets() {
   };
 
   // --- NEW: Simplified transaction handler ---
-  const handleAddTx = (newTx) => {
+const handleAddTx = (newTx) => {
     const updatedCorp = { ...selectedCorp };
-    
-    // Calculate the base MMK value to update the overall balance
-    // (If it's MMK, rate is 1. If it's Baht, it multiplies by the exchange rate)
-    const baseValue = newTx.amount * (newTx.rate || 1);
-    updatedCorp.balance += baseValue;
-    
+
+    // Update the overall balance directly with the transaction amount
+    updatedCorp.balance += newTx.amount;
+
     if (!updatedCorp.transactions) updatedCorp.transactions = [];
     
     // Fallback date just in case
     if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
-    
+
     updatedCorp.transactions.push(newTx);
 
     fetch('/api/corps', {
@@ -71,7 +69,7 @@ function Sheets() {
     }).then(() => {
       fetchCorps();
     });
-  };
+};
 
   return (
     <div className={styles.appContainer}>

@@ -92,25 +92,45 @@ FILE: backend\data\corps.json
 [
   {
     "name": "ရေခဲ",
-    "balance": 45079760,
+    "balance": 34639360,
     "order": 1,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 45079760,
+        "amount": 34100860,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
       }
     ]
   },
   {
     "name": "ဒီဇယ်",
-    "balance": 15332579,
+    "balance": 13065679,
     "order": 2,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 15332579,
+        "amount": 45213679,
         "date": "2026-03-01"
+      },
+      {
+        "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
+        "amount": -16698000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "Diesel 15 ပီပါ (1,030,000/ပီပါ)",
+        "amount": -15450000,
+        "date": "2026-03-07"
       }
     ]
   },
@@ -121,7 +141,7 @@ FILE: backend\data\corps.json
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 8119900,
+        "amount": 3119900,
         "date": "2026-03-01"
       }
     ]
@@ -140,12 +160,12 @@ FILE: backend\data\corps.json
   },
   {
     "name": "ငါး",
-    "balance": 186666171,
+    "balance": 212530871,
     "order": 5,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 186666171,
+        "amount": 212530871,
         "date": "2026-03-01"
       }
     ]
@@ -157,67 +177,67 @@ FILE: backend\data\corps.json
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 110000000,
+        "amount": 11000000,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "TTM",
-    "balance": -1421301,
+    "balance": 8844599,
     "order": 7,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -1421301,
+        "amount": 8844599,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "မော်စွန်းခြံရာဘာ",
-    "balance": -36873421,
+    "balance": -88787116,
     "order": 8,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -36873421,
+        "amount": -88787116,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "ဝန့်ချောင်းခြံရာဘာ",
-    "balance": -30791031,
+    "balance": -62939641,
     "order": 9,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -30791031,
+        "amount": -62939641,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "အစာအိတ်",
-    "balance": -16904165,
+    "balance": 19383835,
     "order": 10,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -16904165,
+        "amount": 19383835,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "Main cash အတွင်း",
-    "balance": 582536,
+    "balance": 1982536,
     "order": 11,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 582536,
+        "amount": 1982536,
         "date": "2026-03-01"
       }
     ]
@@ -236,25 +256,45 @@ FILE: backend\data\corps.json
   },
   {
     "name": "သက်န်းရောင်းရငွေ",
-    "balance": -4856056,
+    "balance": -6601556,
     "order": 13,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -4856056,
+        "amount": -4034556,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 587000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ဗောဓိမှန်တိုင်သင်္ကန်းချုပ်ခ",
+        "amount": -3154000,
+        "date": "2026-03-07"
       }
     ]
   },
   {
     "name": "စိုက်/ချေး စာရင်း",
-    "balance": 7280245,
+    "balance": 25314475,
     "order": 14,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 7280245,
+        "amount": 29854475,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ခြံသုံးထုတ်",
+        "amount": -300000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "HP ဒီဇယ် + PD ဝယ်",
+        "amount": -4240000,
+        "date": "2026-03-09"
       }
     ]
   },
@@ -272,24 +312,24 @@ FILE: backend\data\corps.json
   },
   {
     "name": "အလှူရန်ပုံငွေ",
-    "balance": 556282,
+    "balance": 784082,
     "order": 16,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -556282,
+        "amount": 784082,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "လစာရန်ပုံငွေ",
-    "balance": 9801000,
+    "balance": 10752000,
     "order": 17,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9801000,
+        "amount": 10752000,
         "date": "2026-03-01"
       }
     ]
@@ -320,25 +360,45 @@ FILE: backend\data\corps.json
   },
   {
     "name": "ကွမ်း + ဒူးရင်း + ငှက်ပျော",
-    "balance": 9170824,
+    "balance": 9415824,
     "order": 20,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9170824,
+        "amount": 9415824,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "သမုတ်ဆီရောင်းရငွေ",
-    "balance": 9832334,
+    "balance": 29005019,
     "order": 21,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9832334,
+        "amount": 60605144,
         "date": "2026-03-01"
+      },
+      {
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": -15654375,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
+        "amount": -6762690,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
+        "amount": -12022560,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 2839500,
+        "date": "2026-03-06"
       }
     ]
   },
@@ -356,25 +416,35 @@ FILE: backend\data\corps.json
   },
   {
     "name": "လှေကပ်ခရငွေ",
-    "balance": 2229700,
+    "balance": 2216700,
     "order": 23,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 2229700,
+        "amount": 2186700,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရငွေ",
+        "amount": 30000,
+        "date": "2026-03-07"
       }
     ]
   },
   {
     "name": "ရာဘာရောင်းရငွေ",
-    "balance": 78253828,
+    "balance": 137932266,
     "order": 24,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 78253828,
+        "amount": 79155478,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရာဘာတုံး (257) ရောင်းရ",
+        "amount": 58776788,
+        "date": "2026-03-07"
       }
     ]
   },
@@ -416,12 +486,12 @@ FILE: backend\data\corps.json
   },
   {
     "name": "K Pay",
-    "balance": -9333700,
+    "balance": -14633700,
     "order": 28,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9333700,
+        "amount": -14633700,
         "date": "2026-03-01"
       }
     ]
@@ -440,24 +510,61 @@ FILE: backend\data\corps.json
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -92201368,
+    "balance": -98587043,
     "order": 30,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -92201368,
+        "amount": -150357168,
         "date": "2026-03-01"
+      },
+      {
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": 15654375,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
+        "amount": 6762690,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
+        "amount": 12022560,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
+        "amount": 16698000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "UZW + ဆရာငယ် BKK သုံး",
+        "amount": 632500,
+        "date": "2026-03-03"
       }
     ]
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -30825000,
+    "balance": -12330000,
     "order": 31,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -30825000,
+        "amount": -12330000,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "HP wave pay",
+    "balance": -2000000,
+    "order": 32,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -2000000,
         "date": "2026-03-01"
       }
     ]
@@ -747,20 +854,11 @@ FILE: frontend\src\components\Navbar.module.css
 FILE: frontend\src\components\Sheets\CorpDetails.jsx
 ==================================================
 
+import TransactionForm from './TransactionForm';
+import TransactionTable from './TransactionTable';
 import styles from '../../pages/Sheets.module.css';
 
-function CorpDetails({ 
-  selectedCorp, 
-  showAddTxForm, 
-  setShowAddTxForm,
-  txDesc,
-  setTxDesc,
-  txAmount,
-  setTxAmount,
-  txDate,
-  setTxDate,
-  handleAddTx 
-}) {
+function CorpDetails({ selectedCorp, onAddTransaction }) {
   if (!selectedCorp) {
     return (
       <div className={styles.corpDetails}>
@@ -770,96 +868,31 @@ function CorpDetails({
     );
   }
 
-  // 1. SPLIT THE TRANSACTIONS INTO "IN" AND "OUT"
   const transactions = selectedCorp.transactions || [];
+  
+  // Split transactions based on positive (Income) or negative (Expense) amounts
   const incomeTx = transactions.filter(tx => tx.amount >= 0);
   const expenseTx = transactions.filter(tx => tx.amount < 0);
 
   return (
     <div className={styles.corpDetails}>
       <h2>{selectedCorp.name}</h2>
-      <p>Balance: {Number(selectedCorp.balance).toLocaleString()}</p>
+      <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
+        Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
+      </p>
       
-      <div className={styles.txHeader}>
-        <h3>Transactions:</h3>
-        <button onClick={() => setShowAddTxForm(true)}>Add Transaction</button>
-      </div>
+      {/* 1. The Composed Form */}
+      <TransactionForm onSubmit={onAddTransaction} />
 
-      {showAddTxForm && (
-        <form onSubmit={handleAddTx} className={styles.formContainer}>
-          <input 
-            type="text" placeholder="Description" required 
-            value={txDesc} onChange={(e) => setTxDesc(e.target.value)}
-          />
-          <input 
-            type="number" placeholder="Amount (e.g., 100 or -50)" required 
-            value={txAmount} onChange={(e) => setTxAmount(e.target.value)}
-          />
-          <input type="date" value={txDate} onChange={(e) => setTxDate(e.target.value)} />
-          <div>
-            <button type="submit">Submit Transaction</button>
-            <button type="button" onClick={() => setShowAddTxForm(false)}>Cancel</button>
-          </div>
-        </form>
-      )}
-
-      {/* 2. RENDER THE TWO TABLES SIDE-BY-SIDE */}
+      {/* 2. The Composed Tables */}
       <div className={styles.tablesContainer}>
+        <div className={styles.tableWrapper}>
+          <TransactionTable title="Income (In)" data={incomeTx} type="income" />
+        </div>
         
-        {/* INCOMES TABLE */}
         <div className={styles.tableWrapper}>
-          <h4 className={styles.tableTitle}>Income (In)</h4>
-          <div className={`${styles.tableScroll} custom-scrollbar`}>
-            <table className={styles.txTable}>
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th style={{ textAlign: 'right' }}>Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                {incomeTx.length > 0 ? incomeTx.map((tx, idx) => (
-                    <tr key={idx}>
-                    <td className={styles.txDate}>{tx.date || '-'}</td>
-                    <td>{tx.description}</td>
-                    <td className={styles.incomeAmount}>+{Number(tx.amount).toLocaleString()}</td>
-                    </tr>
-                )) : (
-                    <tr><td colSpan="3" className={styles.emptyTableMessage}>No income recorded</td></tr>
-                )}
-                </tbody>
-            </table>
-          </div>
+          <TransactionTable title="Expenses (Out)" data={expenseTx} type="expense" />
         </div>
-
-        {/* EXPENSES TABLE */}
-        <div className={styles.tableWrapper}>
-          <h4 className={styles.tableTitle}>Expenses (Out)</h4>
-          <div className={`${styles.tableScroll} custom-scrollbar`}>
-            <table className={styles.txTable}>
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th style={{ textAlign: 'right' }}>Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                {expenseTx.length > 0 ? expenseTx.map((tx, idx) => (
-                    <tr key={idx}>
-                    <td className={styles.txDate}>{tx.date || '-'}</td>
-                    <td>{tx.description}</td>
-                    <td className={styles.expenseAmount}>{Number(tx.amount).toLocaleString()}</td>
-                    </tr>
-                )) : (
-                    <tr><td colSpan="3" className={styles.emptyTableMessage}>No expenses recorded</td></tr>
-                )}
-                </tbody>
-            </table>
-          </div>
-        </div>
-
       </div>
     </div>
   );
@@ -937,6 +970,157 @@ export default CorpList;
 
 
 ==================================================
+FILE: frontend\src\components\Sheets\TransactionForm.jsx
+==================================================
+
+import { useState } from 'react';
+import styles from '../../pages/Sheets.module.css';
+
+export default function TransactionForm({ onSubmit }) {
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!description || !amount) return;
+
+    // Send the cleanly formatted data up to the parent
+    onSubmit({
+      description,
+      amount: Number(amount)
+    });
+
+    // Reset the form
+    setDescription('');
+    setAmount('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={styles.transactionForm}>
+      <h3>Add New Transaction</h3>
+      
+      <div className={styles.formGroup}>
+        <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <input
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit">Add Transaction</button>
+    </form>
+  );
+}
+
+
+==================================================
+FILE: frontend\src\components\Sheets\TransactionTable.jsx
+==================================================
+
+import styles from '../../pages/Sheets.module.css';
+
+export default function TransactionTable({ title, data, type }) {
+  // If there's no data, we show the title outside, and an empty state inside the bordered box
+  if (!data || data.length === 0) {
+    return (
+      <>
+        <h3 className={styles.tableTitle}>{title}</h3>
+        <div className={styles.tableScroll}>
+          <p style={{ padding: '15px', color: 'var(--text-muted)' }}>No transactions yet.</p>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <h3 className={styles.tableTitle}>{title}</h3>
+      <div className={styles.tableScroll}>
+        <table className={styles.txTable}>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((tx, index) => (
+              <tr key={index}>
+                <td>{new Date(tx.date).toLocaleDateString()}</td>
+                <td>{tx.description}</td>
+                <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
+                  {Number(tx.amount).toLocaleString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+}
+
+
+==================================================
+FILE: frontend\src\models\Coporation.js
+==================================================
+
+export class Transaction {
+  constructor({ description, amount, date, rate = 1, currency = 'MMK' }) {
+    this.description = description;
+    this.amount = Number(amount);
+    this.date = date || new Date().toISOString().split('T')[0];
+    this.rate = Number(rate); // Exchange rate
+    this.currency = currency;
+  }
+
+  // Example of a complex function: Get value in base currency
+  getConvertedValue() {
+    return this.amount * this.rate;
+  }
+}
+
+export class Corporation {
+  constructor(data) {
+    this.name = data.name || "";
+    this.balance = Number(data.balance) || 0;
+    this.order = data.order;
+    this.transactions = (data.transactions || []).map(tx => new Transaction(tx));
+  }
+
+  // Composition: Add complex logic here
+  calculateTotalByCurrency(currency) {
+    return this.transactions
+      .filter(tx => tx.currency === currency)
+      .reduce((sum, tx) => sum + tx.amount, 0);
+  }
+
+  // Formats data back for the API
+  toJSON() {
+    return {
+      name: this.name,
+      balance: this.balance,
+      order: this.order,
+      transactions: this.transactions
+    };
+  }
+}
+
+
+==================================================
 FILE: frontend\src\pages\Home.jsx
 ==================================================
 
@@ -966,19 +1150,13 @@ import CorpList from '../components/Sheets/CorpList';
 import CorpDetails from '../components/Sheets/CorpDetails';
 
 function Sheets() {
-  // 1. ALL YOUR STATE VARIABLES (Put back!)
   const [corps, setCorps] = useState([]);
   const [selectedCorpIndex, setSelectedCorpIndex] = useState(null);
   const [showAddCorpForm, setShowAddCorpForm] = useState(false);
-  const [showAddTxForm, setShowAddTxForm] = useState(false);
 
   const [newCorpName, setNewCorpName] = useState('');
   const [newCorpBalance, setNewCorpBalance] = useState('');
-  const [txDesc, setTxDesc] = useState('');
-  const [txAmount, setTxAmount] = useState('');
-  const [txDate, setTxDate] = useState('');
 
-  // 2. YOUR FETCH FUNCTION (Put back!)
   const fetchCorps = () => {
     fetch('/api/corps')
       .then(res => res.json())
@@ -989,7 +1167,6 @@ function Sheets() {
       .catch(err => console.error('Error fetching corps:', err));
   };
 
-  // 3. YOUR USE EFFECT (Put back!)
   useEffect(() => {
     fetchCorps();
   }, []);
@@ -997,7 +1174,6 @@ function Sheets() {
   const grandTotal = corps.reduce((sum, corp) => sum + Number(corp.balance), 0);
   const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
 
-  // 4. YOUR HANDLERS (Put back!)
   const handleAddCorp = (e) => {
     e.preventDefault();
     if (corps.some(c => c.name.toLowerCase() === newCorpName.trim().toLowerCase())) {
@@ -1005,6 +1181,7 @@ function Sheets() {
       return;
     }
     const newCorp = { name: newCorpName.trim(), balance: Number(newCorpBalance) || 0, transactions: [] };
+    
     fetch('/api/corps', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1017,13 +1194,18 @@ function Sheets() {
     });
   };
 
-  const handleAddTx = (e) => {
-    e.preventDefault();
-    const date = txDate.trim() !== "" ? txDate : new Date().toISOString().split('T')[0];
-    const newTx = { description: txDesc.trim(), amount: parseFloat(txAmount), date: date };
+  // --- NEW: Simplified transaction handler ---
+const handleAddTx = (newTx) => {
     const updatedCorp = { ...selectedCorp };
+
+    // Update the overall balance directly with the transaction amount
     updatedCorp.balance += newTx.amount;
+
     if (!updatedCorp.transactions) updatedCorp.transactions = [];
+    
+    // Fallback date just in case
+    if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
+
     updatedCorp.transactions.push(newTx);
 
     fetch('/api/corps', {
@@ -1032,14 +1214,9 @@ function Sheets() {
       body: JSON.stringify(updatedCorp)
     }).then(() => {
       fetchCorps();
-      setTxDesc('');
-      setTxAmount('');
-      setTxDate('');
-      setShowAddTxForm(false);
     });
-  };
+};
 
-  // 5. THE UI (Passing the data down)
   return (
     <div className={styles.appContainer}>
       <CorpList 
@@ -1056,17 +1233,10 @@ function Sheets() {
         handleAddCorp={handleAddCorp}
       />
 
+      {/* Look how much cleaner this component is now! */}
       <CorpDetails 
         selectedCorp={selectedCorp}
-        showAddTxForm={showAddTxForm}
-        setShowAddTxForm={setShowAddTxForm}
-        txDesc={txDesc}
-        setTxDesc={setTxDesc}
-        txAmount={txAmount}
-        setTxAmount={setTxAmount}
-        txDate={txDate}
-        setTxDate={setTxDate}
-        handleAddTx={handleAddTx}
+        onAddTransaction={handleAddTx}
       />
     </div>
   );
@@ -1334,9 +1504,6 @@ FILE: frontend\src\pages\Sheets.module.css
   box-shadow: 0 1px 0 var(--border-color); /* Keeps a crisp line under the sticky header */
 }
 
-.txTable tr:last-child td {
-  border-bottom: none;
-}
 
 /* Specific text styles inside the table */
 .txDate { color: var(--text-muted); font-size: 0.9rem; }

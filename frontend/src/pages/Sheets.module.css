@@ -253,12 +253,54 @@
   box-shadow: 0 1px 0 var(--border-color); /* Keeps a crisp line under the sticky header */
 }
 
-.txTable tr:last-child td {
-  border-bottom: none;
-}
 
 /* Specific text styles inside the table */
 .txDate { color: var(--text-muted); font-size: 0.9rem; }
 .incomeAmount { color: var(--success-color); font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 .expenseAmount { color: #ef4444; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 .emptyTableMessage { text-align: center !important; color: var(--text-muted); font-style: italic; padding: 20px !important; }
+
+
+/* --- Transaction Form Styles --- */
+
+/* Wraps the Title and the Form */
+.transactionFormWrapper {
+  margin-top: 10px;
+}
+
+/* Forces the inputs to sit side-by-side */
+.inputRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+}
+
+/* Makes each input take up equal space */
+.flexInput {
+  flex: 1;
+}
+
+/* Pushes the button slightly down from the inputs */
+.submitBtn {
+  margin-top: 5px;
+  width: 100%; 
+  
+  /* CHANGE THIS COLOR! */
+  background-color: #64748b; /* <-- This is the main button color */
+  
+  color: white; /* Text color */
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px; 
+  font-size: 0.85rem; 
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Adds a nice subtle effect when you hover over it */
+.submitBtn:hover {
+  /* CHANGE THIS COLOR TO MATCH (Usually a slightly darker shade) */
+  background-color: #475569; /* <-- Hover color */
+}

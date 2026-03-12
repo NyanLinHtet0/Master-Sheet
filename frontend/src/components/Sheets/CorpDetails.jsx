@@ -24,18 +24,18 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
       <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
         Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
       </p>
-      
+
       {/* 1. The Composed Form */}
       <TransactionForm onSubmit={onAddTransaction} />
 
       {/* 2. The Composed Tables */}
       <div className={styles.tablesContainer}>
         <div className={styles.tableWrapper}>
-          <TransactionTable title="Income (In)" data={incomeTx} type="income" />
+          <TransactionTable title="Income (In)" data={incomeTx} type="income" corpname={selectedCorp.name}/>
         </div>
         
         <div className={styles.tableWrapper}>
-          <TransactionTable title="Expenses (Out)" data={expenseTx} type="expense" />
+          <TransactionTable title="Expenses (Out)" data={expenseTx} type="expense" corpname={selectedCorp.name} />
         </div>
       </div>
     </div>

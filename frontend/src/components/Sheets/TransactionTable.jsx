@@ -1,53 +1,75 @@
 import styles from '../../pages/Sheets.module.css';
 
-export default function TransactionTable({ title, data, type }) {
-  // If there's no data, we can just show an empty state
+export default function TransactionTable({ title, data, type, corpname }) {
+  // If there's no data, we show the title outside, and an empty state inside the bordered box
   if (!data || data.length === 0) {
     return (
-      <div className={styles.tableScroll}>
+      <>
         <h3 className={styles.tableTitle}>{title}</h3>
-        <p style={{ padding: '15px', color: 'var(--text-muted)' }}>No transactions yet.</p>
-      </div>
+        <div className={styles.tableScroll}>
+          <p style={{ padding: '15px', color: 'var(--text-muted)' }}>No transactions yet.</p>
+        </div>
+      </>
     );
   }
 
-  return (
-    <div className={styles.tableScroll}>
+  if (corpname == 'Baht ဝယ်စာရင်း ()'){
+    return (
+    <>
       <h3 className={styles.tableTitle}>{title}</h3>
-      <table className={styles.txTable}>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Rate</th>
-            <th>Total (MMK)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((tx, index) => {
-            // Calculate the total MMK base value 
-            // (Assuming your data model normalizes missing rates to 1)
-            const exchangeRate = tx.rate || 1;
-            const totalMMK = tx.amount * exchangeRate;
-
-            return (
+      <div className={styles.tableScroll}>
+        <table className={styles.txTable}>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Baht</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((tx, index) => (
               <tr key={index}>
+                <td>{new Date(tx.date).toLocaleDateString()}</td>
                 <td>{tx.description}</td>
-                <td>
-                  {Number(tx.amount).toLocaleString()} {tx.currency || 'MMK'}
-                </td>
-                <td>{tx.currency === 'THB' ? exchangeRate : '-'}</td>
-                <td style={{ 
-                  color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit',
-                  fontWeight: 'bold'
-                }}>
-                  {totalMMK.toLocaleString()}
+                <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
+                  {Number(tx.amount).toLocaleString()}
                 </td>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+    );
+  }
+
+
+  return (
+    <>
+      <h3 className={styles.tableTitle}>{title}</h3>
+      <div className={styles.tableScroll}>
+        <table className={styles.txTable}>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((tx, index) => (
+              <tr key={index}>
+                <td>{new Date(tx.date).toLocaleDateString()}</td>
+                <td>{tx.description}</td>
+                <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
+                  {Number(tx.amount).toLocaleString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
