@@ -284,19 +284,13 @@
 /* Pushes the button slightly down from the inputs */
 .submitBtn {
   margin-top: 5px;
-  width: 100%; 
-  
-  /* CHANGE THIS COLOR! */
-  background-color: #64748b; /* <-- This is the main button color */
-  
-  color: white; /* Text color */
+  background-color: var(--success-color);
+  color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 6px;
-  padding: 8px 12px; 
-  font-size: 0.85rem; 
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  flex: 1;
 }
 
 /* Adds a nice subtle effect when you hover over it */

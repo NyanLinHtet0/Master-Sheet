@@ -1,21 +1,34 @@
 import { useState } from 'react';
 import styles from '../../pages/Sheets.module.css';
 
-export default function TransactionForm({ onSubmit }) {
+export default function TransactionForm({ onSubmit, corpname }) {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
+  const [rate, setRate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!description || !amount) return;
-
-    onSubmit({
+    if (isBaht){
+      const calculatedTotal = Number(amount) * Number(rate);
+      onSubmit({
+      description,
+      amount: Number(amount),
+      rate: Number(rate),
+      totalAmount: calculatedTotal
+    });}
+    
+    else{
+      onSubmit({
       description,
       amount: Number(amount)
-    });
+    });}
+
 
     setDescription('');
     setAmount('');
+    setRate('')
   };
 
   return (
@@ -25,7 +38,6 @@ export default function TransactionForm({ onSubmit }) {
       </h3>
       
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        
         {/* Horizontal Input Row */}
         <div className={styles.inputRow}>
           <input
@@ -44,6 +56,16 @@ export default function TransactionForm({ onSubmit }) {
             required
             className={styles.flexInput}
           />
+          {isBaht && (
+            <input
+              type="number"
+              placeholder="Rate"
+              value={rate}
+              onChange={(e) => setRate(e.target.value)} 
+              required
+              className={styles.flexInput}
+            />
+          )}
         </div>
 
         {/* Submit Button */}

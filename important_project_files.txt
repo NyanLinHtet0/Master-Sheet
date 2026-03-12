@@ -109,6 +109,136 @@ FILE: backend\data\corps.json
         "description": "စရိတ်",
         "amount": -66000,
         "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "abc",
+        "amount": 1000,
+        "date": "2026-03-12"
+      },
+      {
+        "description": "abc",
+        "amount": -1000,
+        "date": "2026-03-12"
       }
     ]
   },
@@ -136,13 +266,28 @@ FILE: backend\data\corps.json
   },
   {
     "name": "HOH",
-    "balance": 3119900,
+    "balance": 3131900,
     "order": 3,
     "transactions": [
       {
         "description": "Initial Balance",
         "amount": 3119900,
         "date": "2026-03-01"
+      },
+      {
+        "description": "hello",
+        "amount": 10000,
+        "date": "2026-03-12"
+      },
+      {
+        "description": "hi",
+        "amount": 1000,
+        "date": "2026-03-12"
+      },
+      {
+        "description": "1000",
+        "amount": 1000,
+        "date": "2026-03-12"
       }
     ]
   },
@@ -880,18 +1025,18 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
       <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
         Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
       </p>
-      
+
       {/* 1. The Composed Form */}
-      <TransactionForm onSubmit={onAddTransaction} />
+      <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
 
       {/* 2. The Composed Tables */}
       <div className={styles.tablesContainer}>
         <div className={styles.tableWrapper}>
-          <TransactionTable title="Income (In)" data={incomeTx} type="income" />
+          <TransactionTable title="Income (In)" data={incomeTx} type="income" corpname={selectedCorp.name}/>
         </div>
         
         <div className={styles.tableWrapper}>
-          <TransactionTable title="Expenses (Out)" data={expenseTx} type="expense" />
+          <TransactionTable title="Expenses (Out)" data={expenseTx} type="expense" corpname={selectedCorp.name} />
         </div>
       </div>
     </div>
@@ -976,51 +1121,81 @@ FILE: frontend\src\components\Sheets\TransactionForm.jsx
 import { useState } from 'react';
 import styles from '../../pages/Sheets.module.css';
 
-export default function TransactionForm({ onSubmit }) {
+export default function TransactionForm({ onSubmit, corpname }) {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
+  const [rate, setRate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!description || !amount) return;
-
-    // Send the cleanly formatted data up to the parent
-    onSubmit({
+    if (isBaht){
+      const calculatedTotal = Number(amount) * Number(rate);
+      onSubmit({
+      description,
+      amount: Number(amount),
+      rate: Number(rate),
+      totalAmount: calculatedTotal
+    });}
+    
+    else{
+      onSubmit({
       description,
       amount: Number(amount)
-    });
+    });}
 
-    // Reset the form
+
     setDescription('');
     setAmount('');
+    setRate('')
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.transactionForm}>
-      <h3>Add New Transaction</h3>
+    <div className={styles.transactionFormWrapper}>
+      <h3 className={styles.formTitle}>
+        Add New Transaction
+      </h3>
       
-      <div className={styles.formGroup}>
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        
-        <div style={{ display: 'flex', gap: '10px' }}>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        {/* Horizontal Input Row */}
+        <div className={styles.inputRow}>
+          <input
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            className={styles.flexInput}
+          />
           <input
             type="number"
             placeholder="Amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             required
+            className={styles.flexInput}
           />
+          {isBaht ? (
+            <input
+              type="number"
+              placeholder="Rate"
+              value={rate}
+              onChange={(e) => setAmount(e.target.value)}
+              required
+              className={styles.flexInput}
+            />
+          ):(
+            pass
+          )}
         </div>
-      </div>
 
-      <button type="submit">Add Transaction</button>
-    </form>
+        {/* Submit Button */}
+        <button type="submit" className={styles.submitBtn}>
+          Add Transaction
+        </button>
+      </form>
+    </div>
   );
 }
 
@@ -1031,43 +1206,60 @@ FILE: frontend\src\components\Sheets\TransactionTable.jsx
 
 import styles from '../../pages/Sheets.module.css';
 
-export default function TransactionTable({ title, data, type }) {
-  // If there's no data, we show the title outside, and an empty state inside the bordered box
-  if (!data || data.length === 0) {
-    return (
-      <>
-        <h3 className={styles.tableTitle}>{title}</h3>
-        <div className={styles.tableScroll}>
-          <p style={{ padding: '15px', color: 'var(--text-muted)' }}>No transactions yet.</p>
-        </div>
-      </>
-    );
-  }
+export default function TransactionTable({ title, data, type, corpname }) {
+  const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
+  const isEmpty = !data || data.length === 0;
 
   return (
     <>
       <h3 className={styles.tableTitle}>{title}</h3>
       <div className={styles.tableScroll}>
-        <table className={styles.txTable}>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((tx, index) => (
-              <tr key={index}>
-                <td>{new Date(tx.date).toLocaleDateString()}</td>
-                <td>{tx.description}</td>
-                <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
-                  {Number(tx.amount).toLocaleString()}
-                </td>
+        
+        {isEmpty ? (
+          <p style={{ padding: '15px', color: 'var(--text-muted)' }}>No transactions yet.</p>
+        ) : (
+          <table className={styles.txTable}>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+
+                {/* Conditionally Rendering for Baht */}
+                {isBaht ? (
+                  <>
+                    <th>Baht</th>
+                    <th>Rate</th>
+                    <th>Total Amount</th>
+                  </>
+                ) : (
+                  <th>Amount</th>
+                )}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.map((tx, index) => (
+                <tr key={index}>
+                  <td>{new Date(tx.date).toLocaleDateString()}</td>
+                  <td>{tx.description}</td>
+                  <td>
+                    -
+                  </td>
+                  
+                  {/* Conditionally Rendering for Baht*/}
+                  {isBaht && (
+                    <>
+                      <td>{tx.rate || '0'}</td>
+                      <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
+                        {tx.totalAmount = Number(tx.amount).toLocaleString() || '-'}
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
       </div>
     </>
   );
@@ -1195,27 +1387,27 @@ function Sheets() {
   };
 
   // --- NEW: Simplified transaction handler ---
-const handleAddTx = (newTx) => {
-    const updatedCorp = { ...selectedCorp };
+  const handleAddTx = (newTx) => {
+      const updatedCorp = { ...selectedCorp };
 
-    // Update the overall balance directly with the transaction amount
-    updatedCorp.balance += newTx.amount;
+      // Update the overall balance directly with the transaction amount
+      updatedCorp.balance += newTx.amount;
 
-    if (!updatedCorp.transactions) updatedCorp.transactions = [];
-    
-    // Fallback date just in case
-    if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
+      if (!updatedCorp.transactions) updatedCorp.transactions = [];
+      
+      // Fallback date just in case
+      if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
 
-    updatedCorp.transactions.push(newTx);
+      updatedCorp.transactions.push(newTx);
 
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedCorp)
-    }).then(() => {
-      fetchCorps();
-    });
-};
+      fetch('/api/corps', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedCorp)
+      }).then(() => {
+        fetchCorps();
+      });
+  };
 
   return (
     <div className={styles.appContainer}>
@@ -1510,5 +1702,44 @@ FILE: frontend\src\pages\Sheets.module.css
 .incomeAmount { color: var(--success-color); font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 .expenseAmount { color: #ef4444; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 .emptyTableMessage { text-align: center !important; color: var(--text-muted); font-style: italic; padding: 20px !important; }
+
+
+/* --- Transaction Form Styles --- */
+
+/* Wraps the Title and the Form */
+.transactionFormWrapper {
+  margin-top: 10px;
+}
+
+/* Forces the inputs to sit side-by-side */
+.inputRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+}
+
+/* Makes each input take up equal space */
+.flexInput {
+  flex: 1;
+}
+
+/* Pushes the button slightly down from the inputs */
+.submitBtn {
+  margin-top: 5px;
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  flex: 1;
+}
+
+/* Adds a nice subtle effect when you hover over it */
+.submitBtn:hover {
+  /* CHANGE THIS COLOR TO MATCH (Usually a slightly darker shade) */
+  background-color: #475569; /* <-- Hover color */
+}
 
 

@@ -49,27 +49,27 @@ function Sheets() {
   };
 
   // --- NEW: Simplified transaction handler ---
-const handleAddTx = (newTx) => {
-    const updatedCorp = { ...selectedCorp };
+  const handleAddTx = (newTx) => {
+      const updatedCorp = { ...selectedCorp };
 
-    // Update the overall balance directly with the transaction amount
-    updatedCorp.balance += newTx.amount;
+      // Update the overall balance directly with the transaction amount
+      updatedCorp.balance += newTx.amount;
 
-    if (!updatedCorp.transactions) updatedCorp.transactions = [];
-    
-    // Fallback date just in case
-    if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
+      if (!updatedCorp.transactions) updatedCorp.transactions = [];
+      
+      // Fallback date just in case
+      if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
 
-    updatedCorp.transactions.push(newTx);
+      updatedCorp.transactions.push(newTx);
 
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedCorp)
-    }).then(() => {
-      fetchCorps();
-    });
-};
+      fetch('/api/corps', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedCorp)
+      }).then(() => {
+        fetchCorps();
+      });
+  };
 
   return (
     <div className={styles.appContainer}>

@@ -26,7 +26,7 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
       </p>
 
       {/* 1. The Composed Form */}
-      <TransactionForm onSubmit={onAddTransaction} />
+      <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
 
       {/* 2. The Composed Tables */}
       <div className={styles.tablesContainer}>
