@@ -4,19 +4,13 @@ import CorpList from '../components/Sheets/CorpList';
 import CorpDetails from '../components/Sheets/CorpDetails';
 
 function Sheets() {
-  // 1. ALL YOUR STATE VARIABLES (Put back!)
   const [corps, setCorps] = useState([]);
   const [selectedCorpIndex, setSelectedCorpIndex] = useState(null);
   const [showAddCorpForm, setShowAddCorpForm] = useState(false);
-  const [showAddTxForm, setShowAddTxForm] = useState(false);
 
   const [newCorpName, setNewCorpName] = useState('');
   const [newCorpBalance, setNewCorpBalance] = useState('');
-  const [txDesc, setTxDesc] = useState('');
-  const [txAmount, setTxAmount] = useState('');
-  const [txDate, setTxDate] = useState('');
 
-  // 2. YOUR FETCH FUNCTION (Put back!)
   const fetchCorps = () => {
     fetch('/api/corps')
       .then(res => res.json())
@@ -27,7 +21,6 @@ function Sheets() {
       .catch(err => console.error('Error fetching corps:', err));
   };
 
-  // 3. YOUR USE EFFECT (Put back!)
   useEffect(() => {
     fetchCorps();
   }, []);
@@ -35,7 +28,6 @@ function Sheets() {
   const grandTotal = corps.reduce((sum, corp) => sum + Number(corp.balance), 0);
   const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
 
-  // 4. YOUR HANDLERS (Put back!)
   const handleAddCorp = (e) => {
     e.preventDefault();
     if (corps.some(c => c.name.toLowerCase() === newCorpName.trim().toLowerCase())) {
@@ -43,6 +35,7 @@ function Sheets() {
       return;
     }
     const newCorp = { name: newCorpName.trim(), balance: Number(newCorpBalance) || 0, transactions: [] };
+    
     fetch('/api/corps', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -55,13 +48,20 @@ function Sheets() {
     });
   };
 
-  const handleAddTx = (e) => {
-    e.preventDefault();
-    const date = txDate.trim() !== "" ? txDate : new Date().toISOString().split('T')[0];
-    const newTx = { description: txDesc.trim(), amount: parseFloat(txAmount), date: date };
+  // --- NEW: Simplified transaction handler ---
+  const handleAddTx = (newTx) => {
     const updatedCorp = { ...selectedCorp };
-    updatedCorp.balance += newTx.amount;
+    
+    // Calculate the base MMK value to update the overall balance
+    // (If it's MMK, rate is 1. If it's Baht, it multiplies by the exchange rate)
+    const baseValue = newTx.amount * (newTx.rate || 1);
+    updatedCorp.balance += baseValue;
+    
     if (!updatedCorp.transactions) updatedCorp.transactions = [];
+    
+    // Fallback date just in case
+    if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
+    
     updatedCorp.transactions.push(newTx);
 
     fetch('/api/corps', {
@@ -70,14 +70,9 @@ function Sheets() {
       body: JSON.stringify(updatedCorp)
     }).then(() => {
       fetchCorps();
-      setTxDesc('');
-      setTxAmount('');
-      setTxDate('');
-      setShowAddTxForm(false);
     });
   };
 
-  // 5. THE UI (Passing the data down)
   return (
     <div className={styles.appContainer}>
       <CorpList 
@@ -94,17 +89,10 @@ function Sheets() {
         handleAddCorp={handleAddCorp}
       />
 
+      {/* Look how much cleaner this component is now! */}
       <CorpDetails 
         selectedCorp={selectedCorp}
-        showAddTxForm={showAddTxForm}
-        setShowAddTxForm={setShowAddTxForm}
-        txDesc={txDesc}
-        setTxDesc={setTxDesc}
-        txAmount={txAmount}
-        setTxAmount={setTxAmount}
-        txDate={txDate}
-        setTxDate={setTxDate}
-        handleAddTx={handleAddTx}
+        onAddTransaction={handleAddTx}
       />
     </div>
   );

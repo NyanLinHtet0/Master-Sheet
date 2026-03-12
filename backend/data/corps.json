@@ -1,25 +1,45 @@
 [
   {
     "name": "ရေခဲ",
-    "balance": 45079760,
+    "balance": 34639360,
     "order": 1,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 45079760,
+        "amount": 34100860,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 604500,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "စရိတ်",
+        "amount": -66000,
+        "date": "2026-03-07"
       }
     ]
   },
   {
     "name": "ဒီဇယ်",
-    "balance": 15332579,
+    "balance": 13065679,
     "order": 2,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 15332579,
+        "amount": 45213679,
         "date": "2026-03-01"
+      },
+      {
+        "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
+        "amount": -16698000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "Diesel 15 ပီပါ (1,030,000/ပီပါ)",
+        "amount": -15450000,
+        "date": "2026-03-07"
       }
     ]
   },
@@ -30,7 +50,7 @@
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 8119900,
+        "amount": 3119900,
         "date": "2026-03-01"
       }
     ]
@@ -49,12 +69,12 @@
   },
   {
     "name": "ငါး",
-    "balance": 186666171,
+    "balance": 212530871,
     "order": 5,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 186666171,
+        "amount": 212530871,
         "date": "2026-03-01"
       }
     ]
@@ -66,67 +86,67 @@
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 110000000,
+        "amount": 11000000,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "TTM",
-    "balance": -1421301,
+    "balance": 8844599,
     "order": 7,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -1421301,
+        "amount": 8844599,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "မော်စွန်းခြံရာဘာ",
-    "balance": -36873421,
+    "balance": -88787116,
     "order": 8,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -36873421,
+        "amount": -88787116,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "ဝန့်ချောင်းခြံရာဘာ",
-    "balance": -30791031,
+    "balance": -62939641,
     "order": 9,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -30791031,
+        "amount": -62939641,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "အစာအိတ်",
-    "balance": -16904165,
+    "balance": 19383835,
     "order": 10,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -16904165,
+        "amount": 19383835,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "Main cash အတွင်း",
-    "balance": 582536,
+    "balance": 1982536,
     "order": 11,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 582536,
+        "amount": 1982536,
         "date": "2026-03-01"
       }
     ]
@@ -145,25 +165,45 @@
   },
   {
     "name": "သက်န်းရောင်းရငွေ",
-    "balance": -4856056,
+    "balance": -6601556,
     "order": 13,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -4856056,
+        "amount": -4034556,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 587000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ဗောဓိမှန်တိုင်သင်္ကန်းချုပ်ခ",
+        "amount": -3154000,
+        "date": "2026-03-07"
       }
     ]
   },
   {
     "name": "စိုက်/ချေး စာရင်း",
-    "balance": 7280245,
+    "balance": 25314475,
     "order": 14,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 7280245,
+        "amount": 29854475,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ခြံသုံးထုတ်",
+        "amount": -300000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "HP ဒီဇယ် + PD ဝယ်",
+        "amount": -4240000,
+        "date": "2026-03-09"
       }
     ]
   },
@@ -181,24 +221,24 @@
   },
   {
     "name": "အလှူရန်ပုံငွေ",
-    "balance": 556282,
+    "balance": 784082,
     "order": 16,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -556282,
+        "amount": 784082,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "လစာရန်ပုံငွေ",
-    "balance": 9801000,
+    "balance": 10752000,
     "order": 17,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9801000,
+        "amount": 10752000,
         "date": "2026-03-01"
       }
     ]
@@ -229,25 +269,45 @@
   },
   {
     "name": "ကွမ်း + ဒူးရင်း + ငှက်ပျော",
-    "balance": 9170824,
+    "balance": 9415824,
     "order": 20,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9170824,
+        "amount": 9415824,
         "date": "2026-03-01"
       }
     ]
   },
   {
     "name": "သမုတ်ဆီရောင်းရငွေ",
-    "balance": 9832334,
+    "balance": 29005019,
     "order": 21,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9832334,
+        "amount": 60605144,
         "date": "2026-03-01"
+      },
+      {
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": -15654375,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
+        "amount": -6762690,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
+        "amount": -12022560,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "ရောင်းရ",
+        "amount": 2839500,
+        "date": "2026-03-06"
       }
     ]
   },
@@ -265,25 +325,35 @@
   },
   {
     "name": "လှေကပ်ခရငွေ",
-    "balance": 2229700,
+    "balance": 2216700,
     "order": 23,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 2229700,
+        "amount": 2186700,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရငွေ",
+        "amount": 30000,
+        "date": "2026-03-07"
       }
     ]
   },
   {
     "name": "ရာဘာရောင်းရငွေ",
-    "balance": 78253828,
+    "balance": 137932266,
     "order": 24,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 78253828,
+        "amount": 79155478,
         "date": "2026-03-01"
+      },
+      {
+        "description": "ရာဘာတုံး (257) ရောင်းရ",
+        "amount": 58776788,
+        "date": "2026-03-07"
       }
     ]
   },
@@ -325,12 +395,12 @@
   },
   {
     "name": "K Pay",
-    "balance": -9333700,
+    "balance": -14633700,
     "order": 28,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 9333700,
+        "amount": -14633700,
         "date": "2026-03-01"
       }
     ]
@@ -349,24 +419,61 @@
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -92201368,
+    "balance": -98587043,
     "order": 30,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -92201368,
+        "amount": -150357168,
         "date": "2026-03-01"
+      },
+      {
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": 15654375,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
+        "amount": 6762690,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
+        "amount": 12022560,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
+        "amount": 16698000,
+        "date": "2026-03-07"
+      },
+      {
+        "description": "UZW + ဆရာငယ် BKK သုံး",
+        "amount": 632500,
+        "date": "2026-03-03"
       }
     ]
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -30825000,
+    "balance": -12330000,
     "order": 31,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": -30825000,
+        "amount": -12330000,
+        "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "HP wave pay",
+    "balance": -2000000,
+    "order": 32,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -2000000,
         "date": "2026-03-01"
       }
     ]

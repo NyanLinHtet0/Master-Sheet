@@ -1,17 +1,8 @@
+import TransactionForm from './TransactionForm';
+import TransactionTable from './TransactionTable';
 import styles from '../../pages/Sheets.module.css';
 
-function CorpDetails({ 
-  selectedCorp, 
-  showAddTxForm, 
-  setShowAddTxForm,
-  txDesc,
-  setTxDesc,
-  txAmount,
-  setTxAmount,
-  txDate,
-  setTxDate,
-  handleAddTx 
-}) {
+function CorpDetails({ selectedCorp, onAddTransaction }) {
   if (!selectedCorp) {
     return (
       <div className={styles.corpDetails}>
@@ -21,96 +12,31 @@ function CorpDetails({
     );
   }
 
-  // 1. SPLIT THE TRANSACTIONS INTO "IN" AND "OUT"
   const transactions = selectedCorp.transactions || [];
+  
+  // Split transactions based on positive (Income) or negative (Expense) amounts
   const incomeTx = transactions.filter(tx => tx.amount >= 0);
   const expenseTx = transactions.filter(tx => tx.amount < 0);
 
   return (
     <div className={styles.corpDetails}>
       <h2>{selectedCorp.name}</h2>
-      <p>Balance: {Number(selectedCorp.balance).toLocaleString()}</p>
+      <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
+        Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
+      </p>
       
-      <div className={styles.txHeader}>
-        <h3>Transactions:</h3>
-        <button onClick={() => setShowAddTxForm(true)}>Add Transaction</button>
-      </div>
+      {/* 1. The Composed Form */}
+      <TransactionForm onSubmit={onAddTransaction} />
 
-      {showAddTxForm && (
-        <form onSubmit={handleAddTx} className={styles.formContainer}>
-          <input 
-            type="text" placeholder="Description" required 
-            value={txDesc} onChange={(e) => setTxDesc(e.target.value)}
-          />
-          <input 
-            type="number" placeholder="Amount (e.g., 100 or -50)" required 
-            value={txAmount} onChange={(e) => setTxAmount(e.target.value)}
-          />
-          <input type="date" value={txDate} onChange={(e) => setTxDate(e.target.value)} />
-          <div>
-            <button type="submit">Submit Transaction</button>
-            <button type="button" onClick={() => setShowAddTxForm(false)}>Cancel</button>
-          </div>
-        </form>
-      )}
-
-      {/* 2. RENDER THE TWO TABLES SIDE-BY-SIDE */}
+      {/* 2. The Composed Tables */}
       <div className={styles.tablesContainer}>
+        <div className={styles.tableWrapper}>
+          <TransactionTable title="Income (In)" data={incomeTx} type="income" />
+        </div>
         
-        {/* INCOMES TABLE */}
         <div className={styles.tableWrapper}>
-          <h4 className={styles.tableTitle}>Income (In)</h4>
-          <div className={`${styles.tableScroll} custom-scrollbar`}>
-            <table className={styles.txTable}>
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th style={{ textAlign: 'right' }}>Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                {incomeTx.length > 0 ? incomeTx.map((tx, idx) => (
-                    <tr key={idx}>
-                    <td className={styles.txDate}>{tx.date || '-'}</td>
-                    <td>{tx.description}</td>
-                    <td className={styles.incomeAmount}>+{Number(tx.amount).toLocaleString()}</td>
-                    </tr>
-                )) : (
-                    <tr><td colSpan="3" className={styles.emptyTableMessage}>No income recorded</td></tr>
-                )}
-                </tbody>
-            </table>
-          </div>
+          <TransactionTable title="Expenses (Out)" data={expenseTx} type="expense" />
         </div>
-
-        {/* EXPENSES TABLE */}
-        <div className={styles.tableWrapper}>
-          <h4 className={styles.tableTitle}>Expenses (Out)</h4>
-          <div className={`${styles.tableScroll} custom-scrollbar`}>
-            <table className={styles.txTable}>
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th style={{ textAlign: 'right' }}>Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                {expenseTx.length > 0 ? expenseTx.map((tx, idx) => (
-                    <tr key={idx}>
-                    <td className={styles.txDate}>{tx.date || '-'}</td>
-                    <td>{tx.description}</td>
-                    <td className={styles.expenseAmount}>{Number(tx.amount).toLocaleString()}</td>
-                    </tr>
-                )) : (
-                    <tr><td colSpan="3" className={styles.emptyTableMessage}>No expenses recorded</td></tr>
-                )}
-                </tbody>
-            </table>
-          </div>
-        </div>
-
       </div>
     </div>
   );
