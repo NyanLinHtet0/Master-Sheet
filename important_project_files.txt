@@ -92,7 +92,7 @@ FILE: backend\data\corps.json
 [
   {
     "name": "ရေခဲ",
-    "balance": 34639360,
+    "balance": 34839360,
     "order": 1,
     "transactions": [
       {
@@ -239,6 +239,16 @@ FILE: backend\data\corps.json
         "description": "abc",
         "amount": -1000,
         "date": "2026-03-12"
+      },
+      {
+        "date": "2026-03-12",
+        "description": "abcdef",
+        "amount": 100000
+      },
+      {
+        "date": "2026-03-05",
+        "description": "abcdef",
+        "amount": 100000
       }
     ]
   },
@@ -655,38 +665,71 @@ FILE: backend\data\corps.json
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -98587043,
+    "balance": -98536670,
     "order": 30,
     "transactions": [
       {
         "description": "Initial Balance",
         "amount": -150357168,
-        "date": "2026-03-01"
+        "date": "2026-03-01",
+        "totalAmount": "-150,357,168"
       },
       {
         "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
         "amount": 15654375,
-        "date": "2026-03-07"
+        "date": "2026-03-07",
+        "totalAmount": "15,654,375"
       },
       {
         "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
         "amount": 6762690,
-        "date": "2026-03-07"
+        "date": "2026-03-07",
+        "totalAmount": "6,762,690"
       },
       {
         "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
         "amount": 12022560,
-        "date": "2026-03-07"
+        "date": "2026-03-07",
+        "totalAmount": "12,022,560"
       },
       {
         "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
         "amount": 16698000,
-        "date": "2026-03-07"
+        "date": "2026-03-07",
+        "totalAmount": "16,698,000"
       },
       {
         "description": "UZW + ဆရာငယ် BKK သုံး",
         "amount": 632500,
-        "date": "2026-03-03"
+        "date": "2026-03-03",
+        "totalAmount": "632,500"
+      },
+      {
+        "description": "(92) 10 ပီပါ",
+        "amount": 250,
+        "rate": 120,
+        "totalAmount": "250",
+        "date": "2026-03-12"
+      },
+      {
+        "description": "(92) 25 ပီပါ",
+        "amount": 25000,
+        "rate": 120,
+        "totalAmount": "25,000",
+        "date": "2026-03-12"
+      },
+      {
+        "description": "(92) 25 ပီပါ",
+        "amount": 25000,
+        "rate": 330,
+        "date": "2026-03-12",
+        "totalAmount": "25,000"
+      },
+      {
+        "date": "2026-03-05",
+        "description": "abc",
+        "amount": 123,
+        "rate": 123
       }
     ]
   },
@@ -1126,6 +1169,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
   const [amount, setAmount] = useState('');
   const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
   const [rate, setRate] = useState('');
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -1133,14 +1177,15 @@ export default function TransactionForm({ onSubmit, corpname }) {
     if (isBaht){
       const calculatedTotal = Number(amount) * Number(rate);
       onSubmit({
+      date,
       description,
       amount: Number(amount),
-      rate: Number(rate),
-      totalAmount: calculatedTotal
+      rate: Number(rate)
     });}
     
     else{
       onSubmit({
+      date,
       description,
       amount: Number(amount)
     });}
@@ -1148,7 +1193,8 @@ export default function TransactionForm({ onSubmit, corpname }) {
 
     setDescription('');
     setAmount('');
-    setRate('')
+    setRate('');
+    setDate(new Date().toISOString().split('T')[0]);
   };
 
   return (
@@ -1160,6 +1206,13 @@ export default function TransactionForm({ onSubmit, corpname }) {
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         {/* Horizontal Input Row */}
         <div className={styles.inputRow}>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+            className={styles.flexInput}
+          />
           <input
             type="text"
             placeholder="Description"
@@ -1176,17 +1229,15 @@ export default function TransactionForm({ onSubmit, corpname }) {
             required
             className={styles.flexInput}
           />
-          {isBaht ? (
+          {isBaht && (
             <input
               type="number"
               placeholder="Rate"
               value={rate}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setRate(e.target.value)} 
               required
               className={styles.flexInput}
             />
-          ):(
-            pass
           )}
         </div>
 
@@ -1241,14 +1292,22 @@ export default function TransactionTable({ title, data, type, corpname }) {
                 <tr key={index}>
                   <td>{new Date(tx.date).toLocaleDateString()}</td>
                   <td>{tx.description}</td>
-                  <td>
-                    -
-                  </td>
+                  {/*Conditional Rendering for Baht*/}
+                  {isBaht ? (
+                    <td>
+                    {Number(tx.amount).toLocaleString()}
+                    </td>
+                  ):(
+                    <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
+                    {Number(tx.amount).toLocaleString()}
+                    </td>
+                  )}
+   
                   
                   {/* Conditionally Rendering for Baht*/}
                   {isBaht && (
                     <>
-                      <td>{tx.rate || '0'}</td>
+                      <td>{tx.rate || '-'}</td>
                       <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
                         {tx.totalAmount = Number(tx.amount).toLocaleString() || '-'}
                       </td>

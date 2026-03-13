@@ -1,7 +1,7 @@
 [
   {
     "name": "ရေခဲ",
-    "balance": 34639360,
+    "balance": 34839360,
     "order": 1,
     "transactions": [
       {
@@ -148,6 +148,16 @@
         "description": "abc",
         "amount": -1000,
         "date": "2026-03-12"
+      },
+      {
+        "date": "2026-03-12",
+        "description": "abcdef",
+        "amount": 100000
+      },
+      {
+        "date": "2026-03-05",
+        "description": "abcdef",
+        "amount": 100000
       }
     ]
   },
@@ -564,7 +574,7 @@
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -98586793,
+    "balance": -98536670,
     "order": 30,
     "transactions": [
       {
@@ -607,8 +617,28 @@
         "description": "(92) 10 ပီပါ",
         "amount": 250,
         "rate": 120,
-        "totalAmount": 30000,
+        "totalAmount": "250",
         "date": "2026-03-12"
+      },
+      {
+        "description": "(92) 25 ပီပါ",
+        "amount": 25000,
+        "rate": 120,
+        "totalAmount": "25,000",
+        "date": "2026-03-12"
+      },
+      {
+        "description": "(92) 25 ပီပါ",
+        "amount": 25000,
+        "rate": 330,
+        "date": "2026-03-12",
+        "totalAmount": "25,000"
+      },
+      {
+        "date": "2026-03-05",
+        "description": "abc",
+        "amount": 123,
+        "rate": 123
       }
     ]
   },
