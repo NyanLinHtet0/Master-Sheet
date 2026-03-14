@@ -34,7 +34,16 @@ function Sheets() {
       alert("A corporation with this name already exists!");
       return;
     }
-    const newCorp = { name: newCorpName.trim(), balance: Number(newCorpBalance) || 0, transactions: [] };
+    const newCorp = {
+      name: newCorpName.trim(),
+      balance: Number(newCorpBalance) || 0,
+      order: corps.length + 1, // Added missing 'order' property!
+      transactions: Number(newCorpBalance) !== 0 ? [{
+        description: "Initial Balance",
+        amount: Number(newCorpBalance),
+        date: new Date().toLocaleDateString('en-CA')
+      }] : []
+    };
     
     fetch('/api/corps', {
       method: 'POST',
@@ -50,17 +59,22 @@ function Sheets() {
 
   // --- NEW: Simplified transaction handler ---
   const handleAddTx = (newTx) => {
-      const updatedCorp = { ...selectedCorp };
-
-      // Update the overall balance directly with the transaction amount
-      updatedCorp.balance += newTx.amount;
-
-      if (!updatedCorp.transactions) updatedCorp.transactions = [];
-      
       // Fallback date just in case
-      if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
-
-      updatedCorp.transactions.push(newTx);
+      if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
+      
+      const updatedCorp = { 
+        ...selectedCorp,
+        transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
+      };
+      // Update the overall balance directly with the transaction amount
+      if (newTx.rate) {
+        // Calculate the total dynamically to update the balance in Kyat
+        const calculatedTotal = Number(newTx.amount) * Number(newTx.rate);
+        updatedCorp.balance += calculatedTotal;
+      } else {
+        // Standard transaction
+        updatedCorp.balance += Number(newTx.amount);
+      }
 
       fetch('/api/corps', {
         method: 'POST',

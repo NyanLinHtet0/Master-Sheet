@@ -216,7 +216,7 @@
   flex-shrink: 0; /* Prevents the title from squishing */
 }
 
-/* NEW: The scrollable window for the table */
+/* The container */
 .tableScroll {
   flex: 1;
   overflow-y: auto;
@@ -224,8 +224,37 @@
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  /* Firefox: Hide by default, show a thin scrollbar on hover */
+  scrollbar-width: none; 
 }
 
+.tableScroll:hover {
+  scrollbar-width: thin; 
+}
+
+/* --- WebKit (Chrome, Safari, modern Edge) --- */
+
+/* 1. Define the scrollbar width but keep the track completely invisible */
+.tableScroll::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent; 
+}
+
+/* 2. Make the thumb (the draggable part) invisible by default */
+.tableScroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* 3. Color in the thumb ONLY when the user hovers over the table container */
+.tableScroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* A nice, subtle grey */
+}
+
+/* 4. Optional: Make it slightly darker when they actually click and drag it */
+.tableScroll::-webkit-scrollbar-thumb:active {
+  background-color: rgba(0, 0, 0, 0.4);
+}
 .txTable {
   width: 100%;
   border-collapse: collapse;
@@ -298,3 +327,5 @@
   /* CHANGE THIS COLOR TO MATCH (Usually a slightly darker shade) */
   background-color: #475569; /* <-- Hover color */
 }
+
+

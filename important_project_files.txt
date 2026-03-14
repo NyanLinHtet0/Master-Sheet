@@ -46,7 +46,12 @@ app.get('/api/corps', (req, res) => {
       console.error(err);
       return res.status(500).json({ error: 'Failed to read data' });
     }
-    res.json(JSON.parse(data));
+    try {
+      let corps = JSON.parse(data);
+      res.json(corps);
+    } catch (parseError) {
+      return res.status(500).json({ error: 'Database JSON is corrupted' });
+    }
   });
 });
 
@@ -92,7 +97,7 @@ FILE: backend\data\corps.json
 [
   {
     "name": "ရေခဲ",
-    "balance": 34839360,
+    "balance": 35431329,
     "order": 1,
     "transactions": [
       {
@@ -249,6 +254,26 @@ FILE: backend\data\corps.json
         "date": "2026-03-05",
         "description": "abcdef",
         "amount": 100000
+      },
+      {
+        "date": "2026-03-14",
+        "description": "abcdef",
+        "amount": -5000
+      },
+      {
+        "date": "2026-03-14",
+        "description": "abcdef",
+        "amount": -5000
+      },
+      {
+        "date": "2026-03-14",
+        "description": "abcdef",
+        "amount": 696969
+      },
+      {
+        "date": "2026-03-14",
+        "description": "test",
+        "amount": -100000
       }
     ]
   },
@@ -665,7 +690,7 @@ FILE: backend\data\corps.json
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -98536670,
+    "balance": -67227920,
     "order": 30,
     "transactions": [
       {
@@ -730,6 +755,30 @@ FILE: backend\data\corps.json
         "description": "abc",
         "amount": 123,
         "rate": 123
+      },
+      {
+        "date": "2026-03-06",
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": 626175,
+        "rate": 25
+      },
+      {
+        "date": "2026-03-06",
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": 626175,
+        "rate": 25
+      },
+      {
+        "date": "2026-03-14",
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": 626175,
+        "rate": 25
+      },
+      {
+        "date": "2026-03-14",
+        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
+        "amount": 626175,
+        "rate": 25
       }
     ]
   },
@@ -813,6 +862,7 @@ FILE: frontend\package.json
   },
   "dependencies": {
     "react": "^19.2.0",
+    "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.1"
   },
@@ -1140,7 +1190,7 @@ function CorpList({
       <div className={`${styles.corpItems} custom-scrollbar`}>
         {corps.map((corp, index) => (
           <div 
-            key={index} 
+            key={corp.name} 
             className={styles.corpItem} 
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}
@@ -1161,58 +1211,110 @@ export default CorpList;
 FILE: frontend\src\components\Sheets\TransactionForm.jsx
 ==================================================
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // <-- 1. Import useEffect
 import styles from '../../pages/Sheets.module.css';
 
 export default function TransactionForm({ onSubmit, corpname }) {
+  const today = new Date();
+  
+  const [year, setYear] = useState(today.getFullYear());
+  const [month, setMonth] = useState(today.getMonth() + 1);
+  const [day, setDay] = useState(today.getDate());
+  
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [rate, setRate] = useState(''); 
+  
   const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
-  const [rate, setRate] = useState('');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+
+  // 2. Static arrays for Years and Months
+  const years = Array.from({ length: 3 }, (_, i) => today.getFullYear() - 1 + i); 
+  const months = Array.from({ length: 12 }, (_, i) => i + 1);
+
+  // 3. DYNAMIC array for Days!
+  // The '0' trick in JavaScript Dates automatically returns the last day of the previous month.
+  // So new Date(2023, 2, 0) gives the last day of February 2023 (28).
+  const daysInSelectedMonth = new Date(year, month, 0).getDate();
+  const days = Array.from({ length: daysInSelectedMonth }, (_, i) => i + 1);
+
+  // 4. Auto-correct the day if they switch to a shorter month
+  // Example: If they pick Jan 31st, then switch to Feb, it forces the day down to 28.
+  useEffect(() => {
+    if (day > daysInSelectedMonth) {
+      setDay(daysInSelectedMonth);
+    }
+  }, [year, month, daysInSelectedMonth, day]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) return;
-    if (isBaht){
-      const calculatedTotal = Number(amount) * Number(rate);
-      onSubmit({
-      date,
-      description,
-      amount: Number(amount),
-      rate: Number(rate)
-    });}
+    if (!description || !amount || (isBaht && !rate)) return; 
     
-    else{
-      onSubmit({
-      date,
-      description,
-      amount: Number(amount)
-    });}
+    // Stitch the dates together into standard YYYY-MM-DD format
+    const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
+    if (isBaht){
+      onSubmit({
+        date: formattedDate,
+        description,
+        amount: Number(amount),
+        rate: Number(rate)
+      });
+    } else {
+      onSubmit({
+        date: formattedDate,
+        description,
+        amount: Number(amount)
+      });
+    }
 
     setDescription('');
     setAmount('');
     setRate('');
-    setDate(new Date().toISOString().split('T')[0]);
+    setYear(today.getFullYear());
+    setMonth(today.getMonth() + 1);
+    setDay(today.getDate());
   };
 
   return (
     <div className={styles.transactionFormWrapper}>
-      <h3 className={styles.formTitle}>
-        Add New Transaction
-      </h3>
+      <h3 className={styles.formTitle}>Add New Transaction</h3>
       
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        {/* Horizontal Input Row */}
         <div className={styles.inputRow}>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-            className={styles.flexInput}
-          />
+          
+          <div style={{ display: 'flex', gap: '4px', flex: 1 }}>
+            <select 
+              value={year} 
+              onChange={(e) => setYear(Number(e.target.value))} 
+              className={styles.flexInput} 
+              style={{ padding: '8px 4px', minWidth: '70px' }}
+            >
+              {years.map(y => <option key={y} value={y}>{y}</option>)}
+            </select>
+
+            <select 
+              value={month} 
+              onChange={(e) => setMonth(Number(e.target.value))} 
+              className={styles.flexInput}
+              style={{ padding: '8px 4px', minWidth: '50px' }}
+            >
+              {months.map(m => (
+                <option key={m} value={m}>
+                  {new Date(2000, m - 1).toLocaleString('default', { month: 'short' })}
+                </option>
+              ))}
+            </select>
+
+            <select 
+              value={day} 
+              onChange={(e) => setDay(Number(e.target.value))} 
+              className={styles.flexInput}
+              style={{ padding: '8px 4px', minWidth: '50px' }}
+            >
+              {days.map(d => <option key={d} value={d}>{d}</option>)}
+            </select>
+          </div>
+
           <input
             type="text"
             placeholder="Description"
@@ -1221,6 +1323,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
             required
             className={styles.flexInput}
           />
+          
           <input
             type="number"
             placeholder="Amount"
@@ -1229,6 +1332,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
             required
             className={styles.flexInput}
           />
+          
           {isBaht && (
             <input
               type="number"
@@ -1241,7 +1345,6 @@ export default function TransactionForm({ onSubmit, corpname }) {
           )}
         </div>
 
-        {/* Submit Button */}
         <button type="submit" className={styles.submitBtn}>
           Add Transaction
         </button>
@@ -1308,8 +1411,10 @@ export default function TransactionTable({ title, data, type, corpname }) {
                   {isBaht && (
                     <>
                       <td>{tx.rate || '-'}</td>
+                      
+                      {/* Calculate the total amount dynamically inside the HTML! */}
                       <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
-                        {tx.totalAmount = Number(tx.amount).toLocaleString() || '-'}
+                        {tx.rate ? (Number(tx.amount) * Number(tx.rate)).toLocaleString() : '-'}
                       </td>
                     </>
                   )}
@@ -1322,52 +1427,6 @@ export default function TransactionTable({ title, data, type, corpname }) {
       </div>
     </>
   );
-}
-
-
-==================================================
-FILE: frontend\src\models\Coporation.js
-==================================================
-
-export class Transaction {
-  constructor({ description, amount, date, rate = 1, currency = 'MMK' }) {
-    this.description = description;
-    this.amount = Number(amount);
-    this.date = date || new Date().toISOString().split('T')[0];
-    this.rate = Number(rate); // Exchange rate
-    this.currency = currency;
-  }
-
-  // Example of a complex function: Get value in base currency
-  getConvertedValue() {
-    return this.amount * this.rate;
-  }
-}
-
-export class Corporation {
-  constructor(data) {
-    this.name = data.name || "";
-    this.balance = Number(data.balance) || 0;
-    this.order = data.order;
-    this.transactions = (data.transactions || []).map(tx => new Transaction(tx));
-  }
-
-  // Composition: Add complex logic here
-  calculateTotalByCurrency(currency) {
-    return this.transactions
-      .filter(tx => tx.currency === currency)
-      .reduce((sum, tx) => sum + tx.amount, 0);
-  }
-
-  // Formats data back for the API
-  toJSON() {
-    return {
-      name: this.name,
-      balance: this.balance,
-      order: this.order,
-      transactions: this.transactions
-    };
-  }
 }
 
 
@@ -1431,7 +1490,16 @@ function Sheets() {
       alert("A corporation with this name already exists!");
       return;
     }
-    const newCorp = { name: newCorpName.trim(), balance: Number(newCorpBalance) || 0, transactions: [] };
+    const newCorp = {
+      name: newCorpName.trim(),
+      balance: Number(newCorpBalance) || 0,
+      order: corps.length + 1, // Added missing 'order' property!
+      transactions: Number(newCorpBalance) !== 0 ? [{
+        description: "Initial Balance",
+        amount: Number(newCorpBalance),
+        date: new Date().toLocaleDateString('en-CA')
+      }] : []
+    };
     
     fetch('/api/corps', {
       method: 'POST',
@@ -1447,17 +1515,22 @@ function Sheets() {
 
   // --- NEW: Simplified transaction handler ---
   const handleAddTx = (newTx) => {
-      const updatedCorp = { ...selectedCorp };
-
-      // Update the overall balance directly with the transaction amount
-      updatedCorp.balance += newTx.amount;
-
-      if (!updatedCorp.transactions) updatedCorp.transactions = [];
-      
       // Fallback date just in case
-      if (!newTx.date) newTx.date = new Date().toISOString().split('T')[0];
-
-      updatedCorp.transactions.push(newTx);
+      if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
+      
+      const updatedCorp = { 
+        ...selectedCorp,
+        transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
+      };
+      // Update the overall balance directly with the transaction amount
+      if (newTx.rate) {
+        // Calculate the total dynamically to update the balance in Kyat
+        const calculatedTotal = Number(newTx.amount) * Number(newTx.rate);
+        updatedCorp.balance += calculatedTotal;
+      } else {
+        // Standard transaction
+        updatedCorp.balance += Number(newTx.amount);
+      }
 
       fetch('/api/corps', {
         method: 'POST',
@@ -1718,7 +1791,7 @@ FILE: frontend\src\pages\Sheets.module.css
   flex-shrink: 0; /* Prevents the title from squishing */
 }
 
-/* NEW: The scrollable window for the table */
+/* The container */
 .tableScroll {
   flex: 1;
   overflow-y: auto;
@@ -1726,8 +1799,37 @@ FILE: frontend\src\pages\Sheets.module.css
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  /* Firefox: Hide by default, show a thin scrollbar on hover */
+  scrollbar-width: none; 
 }
 
+.tableScroll:hover {
+  scrollbar-width: thin; 
+}
+
+/* --- WebKit (Chrome, Safari, modern Edge) --- */
+
+/* 1. Define the scrollbar width but keep the track completely invisible */
+.tableScroll::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent; 
+}
+
+/* 2. Make the thumb (the draggable part) invisible by default */
+.tableScroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* 3. Color in the thumb ONLY when the user hovers over the table container */
+.tableScroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* A nice, subtle grey */
+}
+
+/* 4. Optional: Make it slightly darker when they actually click and drag it */
+.tableScroll::-webkit-scrollbar-thumb:active {
+  background-color: rgba(0, 0, 0, 0.4);
+}
 .txTable {
   width: 100%;
   border-collapse: collapse;
@@ -1800,5 +1902,7 @@ FILE: frontend\src\pages\Sheets.module.css
   /* CHANGE THIS COLOR TO MATCH (Usually a slightly darker shade) */
   background-color: #475569; /* <-- Hover color */
 }
+
+
 
 

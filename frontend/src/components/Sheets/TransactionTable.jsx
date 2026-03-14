@@ -51,8 +51,10 @@ export default function TransactionTable({ title, data, type, corpname }) {
                   {isBaht && (
                     <>
                       <td>{tx.rate || '-'}</td>
+                      
+                      {/* Calculate the total amount dynamically inside the HTML! */}
                       <td style={{ color: type === 'income' ? 'green' : type === 'expense' ? 'red' : 'inherit', fontWeight: 'bold' }}>
-                        {tx.totalAmount = Number(tx.amount).toLocaleString() || '-'}
+                        {tx.rate ? (Number(tx.amount) * Number(tx.rate)).toLocaleString() : '-'}
                       </td>
                     </>
                   )}

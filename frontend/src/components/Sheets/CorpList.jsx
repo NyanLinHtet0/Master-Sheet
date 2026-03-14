@@ -45,7 +45,7 @@ function CorpList({
       <div className={`${styles.corpItems} custom-scrollbar`}>
         {corps.map((corp, index) => (
           <div 
-            key={index} 
+            key={corp.name} 
             className={styles.corpItem} 
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}

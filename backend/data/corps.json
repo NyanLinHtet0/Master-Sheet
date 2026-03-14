@@ -1,7 +1,7 @@
 [
   {
     "name": "ရေခဲ",
-    "balance": 34839360,
+    "balance": 34639360,
     "order": 1,
     "transactions": [
       {
@@ -18,146 +18,6 @@
         "description": "စရိတ်",
         "amount": -66000,
         "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "abc",
-        "amount": 1000,
-        "date": "2026-03-12"
-      },
-      {
-        "description": "abc",
-        "amount": -1000,
-        "date": "2026-03-12"
-      },
-      {
-        "date": "2026-03-12",
-        "description": "abcdef",
-        "amount": 100000
-      },
-      {
-        "date": "2026-03-05",
-        "description": "abcdef",
-        "amount": 100000
       }
     ]
   },
@@ -185,28 +45,13 @@
   },
   {
     "name": "HOH",
-    "balance": 3131900,
+    "balance": 3119900,
     "order": 3,
     "transactions": [
       {
         "description": "Initial Balance",
         "amount": 3119900,
         "date": "2026-03-01"
-      },
-      {
-        "description": "hello",
-        "amount": 10000,
-        "date": "2026-03-12"
-      },
-      {
-        "description": "hi",
-        "amount": 1000,
-        "date": "2026-03-12"
-      },
-      {
-        "description": "1000",
-        "amount": 1000,
-        "date": "2026-03-12"
       }
     ]
   },
@@ -574,71 +419,38 @@
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -98536670,
+    "balance": -98587043,
     "order": 30,
     "transactions": [
       {
         "description": "Initial Balance",
         "amount": -150357168,
-        "date": "2026-03-01",
-        "totalAmount": "-150,357,168"
+        "date": "2026-03-01"
       },
       {
         "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
         "amount": 15654375,
-        "date": "2026-03-07",
-        "totalAmount": "15,654,375"
+        "date": "2026-03-07"
       },
       {
         "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
         "amount": 6762690,
-        "date": "2026-03-07",
-        "totalAmount": "6,762,690"
+        "date": "2026-03-07"
       },
       {
         "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
         "amount": 12022560,
-        "date": "2026-03-07",
-        "totalAmount": "12,022,560"
+        "date": "2026-03-07"
       },
       {
         "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
         "amount": 16698000,
-        "date": "2026-03-07",
-        "totalAmount": "16,698,000"
+        "date": "2026-03-07"
       },
       {
         "description": "UZW + ဆရာငယ် BKK သုံး",
         "amount": 632500,
-        "date": "2026-03-03",
-        "totalAmount": "632,500"
-      },
-      {
-        "description": "(92) 10 ပီပါ",
-        "amount": 250,
-        "rate": 120,
-        "totalAmount": "250",
-        "date": "2026-03-12"
-      },
-      {
-        "description": "(92) 25 ပီပါ",
-        "amount": 25000,
-        "rate": 120,
-        "totalAmount": "25,000",
-        "date": "2026-03-12"
-      },
-      {
-        "description": "(92) 25 ပီပါ",
-        "amount": 25000,
-        "rate": 330,
-        "date": "2026-03-12",
-        "totalAmount": "25,000"
-      },
-      {
-        "date": "2026-03-05",
-        "description": "abc",
-        "amount": 123,
-        "rate": 123
+        "date": "2026-03-03"
       }
     ]
   },

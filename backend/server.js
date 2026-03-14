@@ -18,7 +18,12 @@ app.get('/api/corps', (req, res) => {
       console.error(err);
       return res.status(500).json({ error: 'Failed to read data' });
     }
-    res.json(JSON.parse(data));
+    try {
+      let corps = JSON.parse(data);
+      res.json(corps);
+    } catch (parseError) {
+      return res.status(500).json({ error: 'Database JSON is corrupted' });
+    }
   });
 });
 
