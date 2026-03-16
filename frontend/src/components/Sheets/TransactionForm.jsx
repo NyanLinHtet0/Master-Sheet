@@ -12,7 +12,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
   const [amount, setAmount] = useState('');
   const [rate, setRate] = useState(''); 
   
-  const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
+  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
 
   // 2. Static arrays for Years and Months
   const years = Array.from({ length: 3 }, (_, i) => today.getFullYear() - 1 + i); 

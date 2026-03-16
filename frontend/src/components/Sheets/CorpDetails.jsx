@@ -13,6 +13,7 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
   }
 
   const transactions = selectedCorp.transactions || [];
+  const isBaht = selectedCorp.name && selectedCorp.name.includes('ဝယ်စာရင်း');
   
   // Split transactions based on positive (Income) or negative (Expense) amounts
   const incomeTx = transactions.filter(tx => tx.amount >= 0);
@@ -21,9 +22,21 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
   return (
     <div className={styles.corpDetails}>
       <h2>{selectedCorp.name}</h2>
-      <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
-        Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
-      </p>
+
+      {(isBaht) ? (
+        <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
+          Balance:                   {selectedCorp.rate 
+                    ? Number(selectedCorp.balance * selectedCorp.global_rate).toLocaleString() 
+                    : Number(selectedCorp.balance).toLocaleString()} MMK
+          
+        </p>
+      ) : (
+        <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
+          Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
+        </p>
+      )}
+
+      
 
       {/* 1. The Composed Form */}
       <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />

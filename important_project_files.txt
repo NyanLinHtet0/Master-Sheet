@@ -97,7 +97,7 @@ FILE: backend\data\corps.json
 [
   {
     "name": "ရေခဲ",
-    "balance": 35431329,
+    "balance": 34639360,
     "order": 1,
     "transactions": [
       {
@@ -114,166 +114,6 @@ FILE: backend\data\corps.json
         "description": "စရိတ်",
         "amount": -66000,
         "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "abc",
-        "amount": 1000,
-        "date": "2026-03-12"
-      },
-      {
-        "description": "abc",
-        "amount": -1000,
-        "date": "2026-03-12"
-      },
-      {
-        "date": "2026-03-12",
-        "description": "abcdef",
-        "amount": 100000
-      },
-      {
-        "date": "2026-03-05",
-        "description": "abcdef",
-        "amount": 100000
-      },
-      {
-        "date": "2026-03-14",
-        "description": "abcdef",
-        "amount": -5000
-      },
-      {
-        "date": "2026-03-14",
-        "description": "abcdef",
-        "amount": -5000
-      },
-      {
-        "date": "2026-03-14",
-        "description": "abcdef",
-        "amount": 696969
-      },
-      {
-        "date": "2026-03-14",
-        "description": "test",
-        "amount": -100000
       }
     ]
   },
@@ -301,28 +141,13 @@ FILE: backend\data\corps.json
   },
   {
     "name": "HOH",
-    "balance": 3131900,
+    "balance": 3119900,
     "order": 3,
     "transactions": [
       {
         "description": "Initial Balance",
         "amount": 3119900,
         "date": "2026-03-01"
-      },
-      {
-        "description": "hello",
-        "amount": 10000,
-        "date": "2026-03-12"
-      },
-      {
-        "description": "hi",
-        "amount": 1000,
-        "date": "2026-03-12"
-      },
-      {
-        "description": "1000",
-        "amount": 1000,
-        "date": "2026-03-12"
       }
     ]
   },
@@ -690,95 +515,38 @@ FILE: backend\data\corps.json
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -67227920,
+    "balance": -98587043,
     "order": 30,
     "transactions": [
       {
         "description": "Initial Balance",
         "amount": -150357168,
-        "date": "2026-03-01",
-        "totalAmount": "-150,357,168"
+        "date": "2026-03-01"
       },
       {
         "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
         "amount": 15654375,
-        "date": "2026-03-07",
-        "totalAmount": "15,654,375"
+        "date": "2026-03-07"
       },
       {
         "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
         "amount": 6762690,
-        "date": "2026-03-07",
-        "totalAmount": "6,762,690"
+        "date": "2026-03-07"
       },
       {
         "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
         "amount": 12022560,
-        "date": "2026-03-07",
-        "totalAmount": "12,022,560"
+        "date": "2026-03-07"
       },
       {
         "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
         "amount": 16698000,
-        "date": "2026-03-07",
-        "totalAmount": "16,698,000"
+        "date": "2026-03-07"
       },
       {
         "description": "UZW + ဆရာငယ် BKK သုံး",
         "amount": 632500,
-        "date": "2026-03-03",
-        "totalAmount": "632,500"
-      },
-      {
-        "description": "(92) 10 ပီပါ",
-        "amount": 250,
-        "rate": 120,
-        "totalAmount": "250",
-        "date": "2026-03-12"
-      },
-      {
-        "description": "(92) 25 ပီပါ",
-        "amount": 25000,
-        "rate": 120,
-        "totalAmount": "25,000",
-        "date": "2026-03-12"
-      },
-      {
-        "description": "(92) 25 ပီပါ",
-        "amount": 25000,
-        "rate": 330,
-        "date": "2026-03-12",
-        "totalAmount": "25,000"
-      },
-      {
-        "date": "2026-03-05",
-        "description": "abc",
-        "amount": 123,
-        "rate": 123
-      },
-      {
-        "date": "2026-03-06",
-        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
-        "amount": 626175,
-        "rate": 25
-      },
-      {
-        "date": "2026-03-06",
-        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
-        "amount": 626175,
-        "rate": 25
-      },
-      {
-        "date": "2026-03-14",
-        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
-        "amount": 626175,
-        "rate": 25
-      },
-      {
-        "date": "2026-03-14",
-        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
-        "amount": 626175,
-        "rate": 25
+        "date": "2026-03-03"
       }
     ]
   },
@@ -1107,6 +875,7 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
   }
 
   const transactions = selectedCorp.transactions || [];
+  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
   
   // Split transactions based on positive (Income) or negative (Expense) amounts
   const incomeTx = transactions.filter(tx => tx.amount >= 0);
@@ -1118,6 +887,7 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
       <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
         Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
       </p>
+      
 
       {/* 1. The Composed Form */}
       <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
@@ -1158,6 +928,7 @@ function CorpList({
   setNewCorpBalance,
   handleAddCorp 
 }) {
+  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
   return (
     <div className={styles.corpList}>
       <div className={styles.corpListHeader}>
@@ -1195,8 +966,22 @@ function CorpList({
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}
           >
-            <span>{corp.name}</span>
-            <span>{Number(corp.balance).toLocaleString()}</span>
+            {isBaht ? (
+              <>
+                <span>{corp.name}</span>
+                {/* 2. Safeguard: If corp.rate exists, multiply it. Otherwise, just show the balance (or 0) */}
+                <span>
+                  {corp.rate 
+                    ? Number(corp.balance * corp.rate).toLocaleString() 
+                    : Number(corp.balance).toLocaleString()}
+                </span>
+              </>
+            ) : (
+              <>
+                <span>{corp.name}</span>
+                <span>{Number(corp.balance).toLocaleString()}</span>
+              </>
+            )}
           </div>
         ))}
       </div>
@@ -1225,7 +1010,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
   const [amount, setAmount] = useState('');
   const [rate, setRate] = useState(''); 
   
-  const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
+  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
 
   // 2. Static arrays for Years and Months
   const years = Array.from({ length: 3 }, (_, i) => today.getFullYear() - 1 + i); 
@@ -1275,6 +1060,8 @@ export default function TransactionForm({ onSubmit, corpname }) {
     setDay(today.getDate());
   };
 
+  //form format spacing
+  const spacing = [.5,2,.5,.5];
   return (
     <div className={styles.transactionFormWrapper}>
       <h3 className={styles.formTitle}>Add New Transaction</h3>
@@ -1282,7 +1069,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <div className={styles.inputRow}>
           
-          <div style={{ display: 'flex', gap: '4px', flex: 1 }}>
+          <div style={{ display: 'flex', gap: '4px', flex: spacing[0] }}>
             <select 
               value={year} 
               onChange={(e) => setYear(Number(e.target.value))} 
@@ -1315,7 +1102,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
             </select>
           </div>
 
-          <input
+          <input style={{flex: spacing[1] }}
             type="text"
             placeholder="Description"
             value={description}
@@ -1324,7 +1111,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
             className={styles.flexInput}
           />
           
-          <input
+          <input style={{flex:spacing[2] }}
             type="number"
             placeholder="Amount"
             value={amount}
@@ -1334,7 +1121,7 @@ export default function TransactionForm({ onSubmit, corpname }) {
           />
           
           {isBaht && (
-            <input
+            <input style={{flex: spacing[3] }}
               type="number"
               placeholder="Rate"
               value={rate}
@@ -1361,7 +1148,7 @@ FILE: frontend\src\components\Sheets\TransactionTable.jsx
 import styles from '../../pages/Sheets.module.css';
 
 export default function TransactionTable({ title, data, type, corpname }) {
-  const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
+  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
   const isEmpty = !data || data.length === 0;
 
   return (

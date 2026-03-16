@@ -27,18 +27,20 @@ function CorpList({
 
       {showAddCorpForm && (
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
-          <input 
+        <div className={styles.corpFormWrapper}>
+          <input style={{flex:'2' }}
             type="text" placeholder="Corporation Name" required 
             value={newCorpName} onChange={(e) => setNewCorpName(e.target.value)} 
           />
-          <input 
+          <input style={{flex:'1' }}
             type="number" placeholder="Balance (default 0)" 
             value={newCorpBalance} onChange={(e) => setNewCorpBalance(e.target.value)}
           />
-          <div>
-            <button type="submit">Submit</button>
-            <button type="button" onClick={() => setShowAddCorpForm(false)}>Cancel</button>
-          </div>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+          <button type="button" onClick={() => setShowAddCorpForm(false)}>Cancel</button>
+        </div>
         </form>
       )}
 
@@ -50,13 +52,26 @@ function CorpList({
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}
           >
-            <span>{corp.name}</span>
-            <span>{Number(corp.balance).toLocaleString()}</span>
+            {(corp.name && corp.name.includes('ဝယ်စာရင်း')) ? (
+              <>
+                <span>{corp.name}</span>
+                <span>
+                  {corp.total_mmk
+                    ? Number(corp.balance * corp.total_mmk).toLocaleString() 
+                    : Number(corp.balance).toLocaleString()}
+                </span>
+              </>
+            ) : (
+              <>
+                <span>{corp.name}</span>
+                <span>{Number(corp.balance).toLocaleString()}</span>
+              </>
+            )}
           </div>
-        ))}
+        ))} 
       </div>
     </div>
-  );
+  ); 
 }
 
 export default CorpList;

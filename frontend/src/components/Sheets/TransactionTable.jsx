@@ -1,7 +1,7 @@
 import styles from '../../pages/Sheets.module.css';
 
 export default function TransactionTable({ title, data, type, corpname }) {
-  const isBaht = corpname === 'Baht ဝယ်စာရင်း ()';
+  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
   const isEmpty = !data || data.length === 0;
 
   return (

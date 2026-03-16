@@ -18,6 +18,16 @@
         "description": "စရိတ်",
         "amount": -66000,
         "date": "2026-03-07"
+      },
+      {
+        "date": "2026-03-15",
+        "description": "abc",
+        "amount": 1000
+      },
+      {
+        "date": "2026-03-15",
+        "description": "abc",
+        "amount": -1000
       }
     ]
   },
@@ -422,36 +432,6 @@
     "balance": -98587043,
     "order": 30,
     "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -150357168,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
-        "amount": 15654375,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
-        "amount": 6762690,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
-        "amount": 12022560,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
-        "amount": 16698000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "UZW + ဆရာငယ် BKK သုံး",
-        "amount": 632500,
-        "date": "2026-03-03"
-      }
     ]
   },
   {

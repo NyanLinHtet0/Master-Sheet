@@ -66,14 +66,13 @@ function Sheets() {
         ...selectedCorp,
         transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
       };
-      // Update the overall balance directly with the transaction amount
+      // Standard update
+      updatedCorp.balance += Number(newTx.amount);
+      // Specific updates (special updates for Baht corp)
       if (newTx.rate) {
         // Calculate the total dynamically to update the balance in Kyat
         const calculatedTotal = Number(newTx.amount) * Number(newTx.rate);
-        updatedCorp.balance += calculatedTotal;
-      } else {
-        // Standard transaction
-        updatedCorp.balance += Number(newTx.amount);
+        updatedCorp.total_mmk += calculatedTotal;
       }
 
       fetch('/api/corps', {
@@ -100,8 +99,7 @@ function Sheets() {
         setNewCorpBalance={setNewCorpBalance}
         handleAddCorp={handleAddCorp}
       />
-
-      {/* Look how much cleaner this component is now! */}
+      
       <CorpDetails 
         selectedCorp={selectedCorp}
         onAddTransaction={handleAddTx}

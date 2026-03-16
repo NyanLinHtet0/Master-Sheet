@@ -289,6 +289,20 @@
 .expenseAmount { color: #ef4444; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 .emptyTableMessage { text-align: center !important; color: var(--text-muted); font-style: italic; padding: 20px !important; }
 
+/* CORP FORM STYLES  */
+
+.corpFormWrapper{
+  display: flex;
+  flex-direction: row;
+}
+.inputFieldCont{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
 
 /* --- Transaction Form Styles --- */
 
