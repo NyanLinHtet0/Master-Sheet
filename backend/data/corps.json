@@ -439,11 +439,6 @@
     "balance": -12330000,
     "order": 31,
     "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -12330000,
-        "date": "2026-03-01"
-      }
     ]
   },
   {

@@ -294,14 +294,12 @@
 .corpFormWrapper{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .inputFieldCont{
   display: flex;
   flex-direction: column;
 }
-
-
-
 
 
 /* --- Transaction Form Styles --- */

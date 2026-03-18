@@ -28,14 +28,30 @@ function CorpList({
       {showAddCorpForm && (
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
         <div className={styles.corpFormWrapper}>
-          <input style={{flex:'2' }}
+          <div className={styles.inputFieldCont}  style={{flex:'2' }}>
+            <input id={"newcorpname"}
             type="text" placeholder="Corporation Name" required 
             value={newCorpName} onChange={(e) => setNewCorpName(e.target.value)} 
-          />
-          <input style={{flex:'1' }}
+            />
+          </div>
+
+          <div className={styles.inputFieldCont} style={{flex:'.5' }}>
+            <input 
             type="number" placeholder="Balance (default 0)" 
             value={newCorpBalance} onChange={(e) => setNewCorpBalance(e.target.value)}
-          />
+            />
+          </div>
+          {/* NEW CONDITIONAL FIELD ADDED HERE */}
+            {newCorpName.includes('ဝယ်စာရင်း') && (
+              <div className={styles.inputFieldCont} style={{ flex: '1' }}>
+                <input 
+                  type="text" 
+                  placeholder="Extra Bahtwalsayin Info" 
+                  // Make sure to add value and onChange here for a new state variable!
+                />
+              </div>
+            )}
+
         </div>
         <div>
           <button type="submit">Submit</button>
