@@ -431,15 +431,13 @@
     "name": "Baht ဝယ်စာရင်း ()",
     "balance": -98587043,
     "order": 30,
-    "transactions": [
-    ]
+    "transactions": []
   },
   {
     "name": "Baht ဝယ်စာရင်း ()",
     "balance": -12330000,
     "order": 31,
-    "transactions": [
-    ]
+    "transactions": []
   },
   {
     "name": "HP wave pay",
@@ -450,6 +448,18 @@
         "description": "Initial Balance",
         "amount": -2000000,
         "date": "2026-03-01"
+      }
+    ]
+  },
+  {
+    "name": "Dollar ဝယ်စာရင်း",
+    "balance": 1000,
+    "order": 33,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 1000,
+        "date": "2026-03-18"
       }
     ]
   }

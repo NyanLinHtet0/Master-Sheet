@@ -47,6 +47,7 @@ function CorpList({
                 <input 
                   type="text" 
                   placeholder="Extra Bahtwalsayin Info" 
+                  value = {newCorpRate} onChange={(e) => setNewCorpRate(e.target.value)}
                   // Make sure to add value and onChange here for a new state variable!
                 />
               </div>

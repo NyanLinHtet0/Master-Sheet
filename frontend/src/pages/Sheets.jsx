@@ -46,6 +46,9 @@ function Sheets() {
         date: new Date().toLocaleDateString('en-CA')
       }] : []
     };
+    if (newCorpName.toLowerCase().includes('ဝယ်စာရင်း')) {
+      newCorp.rate = Number(newCorpRate) || 0; 
+    }
     
     fetch('/api/corps', {
       method: 'POST',
