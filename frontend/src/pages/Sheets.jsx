@@ -10,6 +10,8 @@ function Sheets() {
 
   const [newCorpName, setNewCorpName] = useState('');
   const [newCorpBalance, setNewCorpBalance] = useState('');
+  const [newCorpRate, setNewCorpRate] = useState('');
+
 
   const fetchCorps = () => {
     fetch('/api/corps')
