@@ -96,483 +96,25 @@ FILE: backend\data\corps.json
 
 [
   {
-    "name": "ရေခဲ",
-    "balance": 34639360,
+    "name": "Baht ဝယ်စာရင်း ()",
+    "balance": null,
     "order": 1,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 34100860,
-        "date": "2026-03-01"
+        "amount": 100,
+        "date": "2026-03-19",
+        "rate": 15,
+        "total_mmk": 1500
       },
       {
-        "description": "ရောင်းရ",
-        "amount": 604500,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "စရိတ်",
-        "amount": -66000,
-        "date": "2026-03-07"
+        "date": "2026-03-19",
+        "description": "Buy baht",
+        "amount": 150,
+        "rate": 30
       }
-    ]
-  },
-  {
-    "name": "ဒီဇယ်",
-    "balance": 13065679,
-    "order": 2,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 45213679,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
-        "amount": -16698000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "Diesel 15 ပီပါ (1,030,000/ပီပါ)",
-        "amount": -15450000,
-        "date": "2026-03-07"
-      }
-    ]
-  },
-  {
-    "name": "HOH",
-    "balance": 3119900,
-    "order": 3,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 3119900,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "NLH",
-    "balance": 500000,
-    "order": 4,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 500000,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "ငါး",
-    "balance": 212530871,
-    "order": 5,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 212530871,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "ရာဘာခြံဝန်ထမ်းရန်ပုံငွေ",
-    "balance": 11000000,
-    "order": 6,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 11000000,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "TTM",
-    "balance": 8844599,
-    "order": 7,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 8844599,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "မော်စွန်းခြံရာဘာ",
-    "balance": -88787116,
-    "order": 8,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -88787116,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "ဝန့်ချောင်းခြံရာဘာ",
-    "balance": -62939641,
-    "order": 9,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -62939641,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "အစာအိတ်",
-    "balance": 19383835,
-    "order": 10,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 19383835,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "Main cash အတွင်း",
-    "balance": 1982536,
-    "order": 11,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 1982536,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "Bank ချေးငွေအတိုး",
-    "balance": 18120453,
-    "order": 12,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 18120453,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "သက်န်းရောင်းရငွေ",
-    "balance": -6601556,
-    "order": 13,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -4034556,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 587000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ဗောဓိမှန်တိုင်သင်္ကန်းချုပ်ခ",
-        "amount": -3154000,
-        "date": "2026-03-07"
-      }
-    ]
-  },
-  {
-    "name": "စိုက်/ချေး စာရင်း",
-    "balance": 25314475,
-    "order": 14,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 29854475,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "ခြံသုံးထုတ်",
-        "amount": -300000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "HP ဒီဇယ် + PD ဝယ်",
-        "amount": -4240000,
-        "date": "2026-03-09"
-      }
-    ]
-  },
-  {
-    "name": "ဗမချေးငွေ",
-    "balance": -21940000,
-    "order": 15,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -21940000,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "အလှူရန်ပုံငွေ",
-    "balance": 784082,
-    "order": 16,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 784082,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "လစာရန်ပုံငွေ",
-    "balance": 10752000,
-    "order": 17,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 10752000,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "အင်ဂျင်ဝိုင်",
-    "balance": 10826950,
-    "order": 18,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 10826950,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "ယောလုံချည်/ပုဝါပိုင်း",
-    "balance": 1960300,
-    "order": 19,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 1960300,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "ကွမ်း + ဒူးရင်း + ငှက်ပျော",
-    "balance": 9415824,
-    "order": 20,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 9415824,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "သမုတ်ဆီရောင်းရငွေ",
-    "balance": 29005019,
-    "order": 21,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 60605144,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
-        "amount": -15654375,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
-        "amount": -6762690,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
-        "amount": -12022560,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "ရောင်းရ",
-        "amount": 2839500,
-        "date": "2026-03-06"
-      }
-    ]
-  },
-  {
-    "name": "ဆီဆိုင်လုပ်ငန်း",
-    "balance": 22519,
-    "order": 22,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 22519,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "လှေကပ်ခရငွေ",
-    "balance": 2216700,
-    "order": 23,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 2186700,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "ရငွေ",
-        "amount": 30000,
-        "date": "2026-03-07"
-      }
-    ]
-  },
-  {
-    "name": "ရာဘာရောင်းရငွေ",
-    "balance": 137932266,
-    "order": 24,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 79155478,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "ရာဘာတုံး (257) ရောင်းရ",
-        "amount": 58776788,
-        "date": "2026-03-07"
-      }
-    ]
-  },
-  {
-    "name": "(မဒဂ) အိမ်ဆောက်စာရင်း",
-    "balance": -137445000,
-    "order": 25,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -137445000,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "UZW, TTM ရန်ပုံငွေ",
-    "balance": 8441350,
-    "order": 26,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 8441350,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "Bank အပ်",
-    "balance": -15823253,
-    "order": 27,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -15823253,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "K Pay",
-    "balance": -14633700,
-    "order": 28,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -14633700,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "TTM Cash",
-    "balance": -2196410,
-    "order": 29,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -2196410,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -98587043,
-    "order": 30,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -150357168,
-        "date": "2026-03-01"
-      },
-      {
-        "description": "(92) 25 ပီပါ (584,975/ ပီပါ )",
-        "amount": 15654375,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "(PD) 10 ပီပါ (676,269/ပီပါ)",
-        "amount": 6762690,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "(D) 18 ပီပါ (667,920/ပီပါ)",
-        "amount": 12022560,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "Diesel 25 ပီပါ (667,920/ပီပါ)",
-        "amount": 16698000,
-        "date": "2026-03-07"
-      },
-      {
-        "description": "UZW + ဆရာငယ် BKK သုံး",
-        "amount": 632500,
-        "date": "2026-03-03"
-      }
-    ]
-  },
-  {
-    "name": "Baht ဝယ်စာရင်း ()",
-    "balance": -12330000,
-    "order": 31,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -12330000,
-        "date": "2026-03-01"
-      }
-    ]
-  },
-  {
-    "name": "HP wave pay",
-    "balance": -2000000,
-    "order": 32,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -2000000,
-        "date": "2026-03-01"
-      }
-    ]
+    ],
+    "total_mmk": 1500
   }
 ]
 
@@ -875,8 +417,8 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
   }
 
   const transactions = selectedCorp.transactions || [];
-  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
-  
+  const isBaht = selectedCorp.name && selectedCorp.name.includes('ဝယ်စာရင်း');
+
   // Split transactions based on positive (Income) or negative (Expense) amounts
   const incomeTx = transactions.filter(tx => tx.amount >= 0);
   const expenseTx = transactions.filter(tx => tx.amount < 0);
@@ -885,9 +427,8 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
     <div className={styles.corpDetails}>
       <h2>{selectedCorp.name}</h2>
       <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
-        Balance: {Number(selectedCorp.balance).toLocaleString()} MMK
+        Balance: {Number(selectedCorp.total_mmk != null ? selectedCorp.total_mmk : (selectedCorp.balance || 0)).toLocaleString()} MMK
       </p>
-      
 
       {/* 1. The Composed Form */}
       <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
@@ -926,9 +467,9 @@ function CorpList({
   setNewCorpName,
   newCorpBalance,
   setNewCorpBalance,
-  handleAddCorp 
+  handleAddCorp,
+  setNewCorpRate
 }) {
-  const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
   return (
     <div className={styles.corpList}>
       <div className={styles.corpListHeader}>
@@ -938,23 +479,42 @@ function CorpList({
 
       <div className={styles.grandTotal}>
         <span>Grand Total: </span>
-        <span>{grandTotal.toLocaleString()}</span>
+        <span>{Number(grandTotal).toLocaleString()}</span>
       </div>
 
       {showAddCorpForm && (
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
-          <input 
+        <div className={styles.corpFormWrapper}>
+          <div className={styles.inputFieldCont}  style={{flex:'2' }}>
+            <input id={"newcorpname"}
             type="text" placeholder="Corporation Name" required 
             value={newCorpName} onChange={(e) => setNewCorpName(e.target.value)} 
-          />
-          <input 
+            />
+          </div>
+
+          <div className={styles.inputFieldCont} style={{flex:'.5' }}>
+            <input 
             type="number" placeholder="Balance (default 0)" 
             value={newCorpBalance} onChange={(e) => setNewCorpBalance(e.target.value)}
-          />
-          <div>
-            <button type="submit">Submit</button>
-            <button type="button" onClick={() => setShowAddCorpForm(false)}>Cancel</button>
+            />
           </div>
+          
+          {/* NEW CONDITIONAL FIELD ADDED HERE */}
+            {newCorpName.includes('ဝယ်စာရင်း') && (
+              <div className={styles.inputFieldCont} style={{ flex: '1' }}>
+                <input 
+                  type="text" 
+                  placeholder="Extra Bahtwalsayin Info" 
+                  value={newCorpRate} onChange={(e) => setNewCorpRate(e.target.value)}
+                />
+              </div>
+            )}
+
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+          <button type="button" onClick={() => setShowAddCorpForm(false)}>Cancel</button>
+        </div>
         </form>
       )}
 
@@ -966,24 +526,11 @@ function CorpList({
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}
           >
-            {isBaht ? (
-              <>
-                <span>{corp.name}</span>
-                {/* 2. Safeguard: If corp.rate exists, multiply it. Otherwise, just show the balance (or 0) */}
-                <span>
-                  {corp.rate 
-                    ? Number(corp.balance * corp.rate).toLocaleString() 
-                    : Number(corp.balance).toLocaleString()}
-                </span>
-              </>
-            ) : (
-              <>
-                <span>{corp.name}</span>
-                <span>{Number(corp.balance).toLocaleString()}</span>
-              </>
-            )}
+          <span>{corp.name}</span>
+          {/* Safely fallback to balance if total_mmk is undefined */}
+          <span>{Number(corp.total_mmk != null ? corp.total_mmk : (corp.balance || 0)).toLocaleString()}</span>
           </div>
-        ))}
+        ))} 
       </div>
     </div>
   );
@@ -1253,6 +800,7 @@ function Sheets() {
 
   const [newCorpName, setNewCorpName] = useState('');
   const [newCorpBalance, setNewCorpBalance] = useState('');
+  const [newCorpRate, setNewCorpRate] = useState('');
 
   const fetchCorps = () => {
     fetch('/api/corps')
@@ -1268,7 +816,12 @@ function Sheets() {
     fetchCorps();
   }, []);
 
-  const grandTotal = corps.reduce((sum, corp) => sum + Number(corp.balance), 0);
+  const grandTotal = corps.reduce((sum, corp) => {
+    // Safely fallback to balance or 0 if total_mmk is missing
+    const corpTotal = corp.total_mmk != null ? corp.total_mmk : (corp.balance || 0);
+    return sum + Number(corpTotal);
+  }, 0);
+
   const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
 
   const handleAddCorp = (e) => {
@@ -1277,14 +830,26 @@ function Sheets() {
       alert("A corporation with this name already exists!");
       return;
     }
+
+    // Safely parse numbers, defaulting to 0
+    const balanceVal = Number(newCorpBalance) || 0;
+    const rateVal = Number(newCorpRate) || 0;
+    const isBaht = newCorpName.toLowerCase().includes('ဝယ်စာရင်း');
+    
+    // Calculate initial total_mmk uniformly
+    const initialTotalMmk = isBaht ? balanceVal * rateVal : balanceVal;
+
     const newCorp = {
       name: newCorpName.trim(),
-      balance: Number(newCorpBalance) || 0,
-      order: corps.length + 1, // Added missing 'order' property!
-      transactions: Number(newCorpBalance) !== 0 ? [{
-        description: "Initial Balance",
-        amount: Number(newCorpBalance),
-        date: new Date().toLocaleDateString('en-CA')
+      balance: balanceVal,
+      total_mmk: initialTotalMmk, 
+      order: corps.length + 1,
+      transactions: balanceVal !== 0 ? [{
+        description: "Initial Balance", 
+        amount: balanceVal,
+        date: new Date().toLocaleDateString('en-CA'),
+        ...(isBaht && { rate: rateVal }),
+        total_mmk: initialTotalMmk
       }] : []
     };
     
@@ -1296,36 +861,40 @@ function Sheets() {
       fetchCorps();
       setNewCorpName('');
       setNewCorpBalance('');
+      setNewCorpRate('');
       setShowAddCorpForm(false);
     });
   };
 
-  // --- NEW: Simplified transaction handler ---
   const handleAddTx = (newTx) => {
-      // Fallback date just in case
-      if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
-      
-      const updatedCorp = { 
-        ...selectedCorp,
-        transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
-      };
-      // Update the overall balance directly with the transaction amount
-      if (newTx.rate) {
-        // Calculate the total dynamically to update the balance in Kyat
-        const calculatedTotal = Number(newTx.amount) * Number(newTx.rate);
-        updatedCorp.balance += calculatedTotal;
-      } else {
-        // Standard transaction
-        updatedCorp.balance += Number(newTx.amount);
-      }
+    if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
+    
+    const isBaht = selectedCorp.name.toLowerCase().includes('ဝယ်စာရင်း');
+    
+    // 1. Calculate the transaction's total_mmk BEFORE saving
+    const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate) : Number(newTx.amount);
+    newTx.total_mmk = txTotalMmk;
 
-      fetch('/api/corps', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedCorp)
-      }).then(() => {
-        fetchCorps();
-      });
+    const updatedCorp = { 
+      ...selectedCorp,
+      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
+    };
+
+    // 2. Ensure we have actual numbers, defaulting nulls/undefined to 0
+    const currentBalance = Number(updatedCorp.balance) || 0;
+    const currentTotalMmk = Number(updatedCorp.total_mmk != null ? updatedCorp.total_mmk : currentBalance);
+
+    // 3. Update BOTH fields so they stay in perfect sync
+    updatedCorp.balance = currentBalance + txTotalMmk;
+    updatedCorp.total_mmk = currentTotalMmk + txTotalMmk;
+
+    fetch('/api/corps', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedCorp)
+    }).then(() => {
+      fetchCorps();
+    });
   };
 
   return (
@@ -1342,9 +911,9 @@ function Sheets() {
         newCorpBalance={newCorpBalance}
         setNewCorpBalance={setNewCorpBalance}
         handleAddCorp={handleAddCorp}
+        setNewCorpRate={setNewCorpRate}
       />
-
-      {/* Look how much cleaner this component is now! */}
+      
       <CorpDetails 
         selectedCorp={selectedCorp}
         onAddTransaction={handleAddTx}
@@ -1650,6 +1219,18 @@ FILE: frontend\src\pages\Sheets.module.css
 .incomeAmount { color: var(--success-color); font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 .expenseAmount { color: #ef4444; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 .emptyTableMessage { text-align: center !important; color: var(--text-muted); font-style: italic; padding: 20px !important; }
+
+/* CORP FORM STYLES  */
+
+.corpFormWrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.inputFieldCont{
+  display: flex;
+  flex-direction: column;
+}
 
 
 /* --- Transaction Form Styles --- */

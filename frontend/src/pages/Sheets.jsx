@@ -12,7 +12,6 @@ function Sheets() {
   const [newCorpBalance, setNewCorpBalance] = useState('');
   const [newCorpRate, setNewCorpRate] = useState('');
 
-
   const fetchCorps = () => {
     fetch('/api/corps')
       .then(res => res.json())
@@ -27,7 +26,12 @@ function Sheets() {
     fetchCorps();
   }, []);
 
-  const grandTotal = corps.reduce((sum, corp) => sum + Number(corp.balance), 0);
+  const grandTotal = corps.reduce((sum, corp) => {
+    // Safely fallback to balance or 0 if total_mmk is missing
+    const corpTotal = corp.total_mmk != null ? corp.total_mmk : (corp.balance || 0);
+    return sum + Number(corpTotal);
+  }, 0);
+
   const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
 
   const handleAddCorp = (e) => {
@@ -36,21 +40,28 @@ function Sheets() {
       alert("A corporation with this name already exists!");
       return;
     }
+
+    // Safely parse numbers, defaulting to 0
+    const balanceVal = Number(newCorpBalance) || 0;
+    const rateVal = Number(newCorpRate) || 0;
+    const isBaht = newCorpName.toLowerCase().includes('ဝယ်စာရင်း');
+    
+    // Calculate initial total_mmk uniformly
+    const initialTotalMmk = isBaht ? balanceVal * rateVal : balanceVal;
+
     const newCorp = {
       name: newCorpName.trim(),
-      balance: Number(newCorpBalance) || 0,
-      order: corps.length + 1, // Added missing 'order' property!
-      transactions: Number(newCorpBalance) !== 0 ? [{
+      balance: balanceVal,
+      total_mmk: initialTotalMmk, 
+      order: corps.length + 1,
+      transactions: balanceVal !== 0 ? [{
         description: "Initial Balance", 
-        amount: Number(newCorpBalance),
+        amount: balanceVal,
         date: new Date().toLocaleDateString('en-CA'),
-        total_mmk: Number(newCorpBalance)
+        ...(isBaht && { rate: rateVal }),
+        total_mmk: initialTotalMmk
       }] : []
     };
-    if (newCorpName.toLowerCase().includes('ဝယ်စာရင်း')) {
-      newCorp.rate = Number(newCorpRate) || 1; 
-      newCorp.total_mmk  = Number(newCorpBalance*newCorpRate)
-    }
     
     fetch('/api/corps', {
       method: 'POST',
@@ -60,35 +71,40 @@ function Sheets() {
       fetchCorps();
       setNewCorpName('');
       setNewCorpBalance('');
+      setNewCorpRate('');
       setShowAddCorpForm(false);
     });
   };
 
-  // --- NEW: Simplified transaction handler ---
   const handleAddTx = (newTx) => {
-      // Fallback date just in case
-      if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
-      
-      const updatedCorp = { 
-        ...selectedCorp,
-        transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
-      };
-      // Standard update
-      updatedCorp.balance += Number(newTx.amount);
-      // Specific updates (special updates for Baht corp)
-      if (newTx.rate) {
-        // Calculate the total dynamically to update the balance in Kyat
-        const calculatedTotal = Number(newTx.amount) * Number(newTx.rate);
-        updatedCorp.total_mmk += calculatedTotal;
-      }
+    if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
+    
+    const isBaht = selectedCorp.name.toLowerCase().includes('ဝယ်စာရင်း');
+    
+    // 1. Calculate the transaction's total_mmk BEFORE saving
+    const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate) : Number(newTx.amount);
+    newTx.total_mmk = txTotalMmk;
 
-      fetch('/api/corps', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedCorp)
-      }).then(() => {
-        fetchCorps();
-      });
+    const updatedCorp = { 
+      ...selectedCorp,
+      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
+    };
+
+    // 2. Ensure we have actual numbers, defaulting nulls/undefined to 0
+    const currentBalance = Number(updatedCorp.balance) || 0;
+    const currentTotalMmk = Number(updatedCorp.total_mmk != null ? updatedCorp.total_mmk : currentBalance);
+
+    // 3. Update BOTH fields so they stay in perfect sync
+    updatedCorp.balance = currentBalance + txTotalMmk;
+    updatedCorp.total_mmk = currentTotalMmk + txTotalMmk;
+
+    fetch('/api/corps', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedCorp)
+    }).then(() => {
+      fetchCorps();
+    });
   };
 
   return (
@@ -105,6 +121,7 @@ function Sheets() {
         newCorpBalance={newCorpBalance}
         setNewCorpBalance={setNewCorpBalance}
         handleAddCorp={handleAddCorp}
+        setNewCorpRate={setNewCorpRate}
       />
       
       <CorpDetails 

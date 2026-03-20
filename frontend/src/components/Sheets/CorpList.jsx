@@ -11,7 +11,8 @@ function CorpList({
   setNewCorpName,
   newCorpBalance,
   setNewCorpBalance,
-  handleAddCorp 
+  handleAddCorp,
+  setNewCorpRate
 }) {
   return (
     <div className={styles.corpList}>
@@ -22,7 +23,7 @@ function CorpList({
 
       <div className={styles.grandTotal}>
         <span>Grand Total: </span>
-        <span>{grandTotal.toLocaleString()}</span>
+        <span>{Number(grandTotal).toLocaleString()}</span>
       </div>
 
       {showAddCorpForm && (
@@ -41,14 +42,14 @@ function CorpList({
             value={newCorpBalance} onChange={(e) => setNewCorpBalance(e.target.value)}
             />
           </div>
+          
           {/* NEW CONDITIONAL FIELD ADDED HERE */}
             {newCorpName.includes('ဝယ်စာရင်း') && (
               <div className={styles.inputFieldCont} style={{ flex: '1' }}>
                 <input 
                   type="text" 
                   placeholder="Extra Bahtwalsayin Info" 
-                  value = {newCorpRate} onChange={(e) => setNewCorpRate(e.target.value)}
-                  // Make sure to add value and onChange here for a new state variable!
+                  value={newCorpRate} onChange={(e) => setNewCorpRate(e.target.value)}
                 />
               </div>
             )}
@@ -69,26 +70,14 @@ function CorpList({
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}
           >
-            {(corp.name && corp.name.includes('ဝယ်စာရင်း')) ? (
-              <>
-                <span>{corp.name}</span>
-                <span>
-                  {corp.total_mmk
-                    ? Number(corp.balance * corp.total_mmk).toLocaleString() 
-                    : Number(corp.balance).toLocaleString()}
-                </span>
-              </>
-            ) : (
-              <>
-                <span>{corp.name}</span>
-                <span>{Number(corp.balance).toLocaleString()}</span>
-              </>
-            )}
+          <span>{corp.name}</span>
+          {/* Safely fallback to balance if total_mmk is undefined */}
+          <span>{Number(corp.total_mmk != null ? corp.total_mmk : (corp.balance || 0)).toLocaleString()}</span>
           </div>
         ))} 
       </div>
     </div>
-  ); 
+  );
 }
 
 export default CorpList;
