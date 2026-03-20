@@ -41,13 +41,15 @@ function Sheets() {
       balance: Number(newCorpBalance) || 0,
       order: corps.length + 1, // Added missing 'order' property!
       transactions: Number(newCorpBalance) !== 0 ? [{
-        description: "Initial Balance",
+        description: "Initial Balance", 
         amount: Number(newCorpBalance),
-        date: new Date().toLocaleDateString('en-CA')
+        date: new Date().toLocaleDateString('en-CA'),
+        total_mmk: Number(newCorpBalance)
       }] : []
     };
     if (newCorpName.toLowerCase().includes('ဝယ်စာရင်း')) {
-      newCorp.rate = Number(newCorpRate) || 0; 
+      newCorp.rate = Number(newCorpRate) || 1; 
+      newCorp.total_mmk  = Number(newCorpBalance*newCorpRate)
     }
     
     fetch('/api/corps', {
