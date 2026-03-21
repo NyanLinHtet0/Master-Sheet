@@ -31,30 +31,26 @@ app.get('/api/corps', (req, res) => {
 app.post('/api/corps', (req, res) => {
   const incomingCorp = req.body;
 
-  fs.readFile(DATA_FILE, 'utf8', (err, data) => {
-    if (err) return res.status(500).json({ error: 'Failed to read data' });
-    
-    let corps = JSON.parse(data);
+  try {
+    const data = fs.readFileSync(DATA_FILE, 'utf8');
+    let corps = data.trim() ? JSON.parse(data) : [];
+    if (!Array.isArray(corps)) corps = [];
 
-    // Check if the corporation already exists (by name)
     const existingIndex = corps.findIndex(c => c.name === incomingCorp.name);
 
     if (existingIndex >= 0) {
-      // It exists! Overwrite it (this handles new transactions)
       corps[existingIndex] = incomingCorp;
     } else {
-      // It's brand new! Add it to the array
       corps.push(incomingCorp);
     }
 
-    // Save the updated array back to the JSON file
-    fs.writeFile(DATA_FILE, JSON.stringify(corps, null, 2), (err) => {
-      if (err) return res.status(500).json({ error: 'Failed to save data' });
-      
-      // Tell React it was successful
-      res.json({ success: true, message: 'Saved successfully!' });
-    });
-  });
+    fs.writeFileSync(DATA_FILE, JSON.stringify(corps, null, 2));
+    res.json({ success: true, message: 'Saved successfully!' });
+
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: 'Failed to process data' });
+  }
 });
 
 app.listen(PORT, () => {

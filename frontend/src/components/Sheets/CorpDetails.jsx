@@ -2,7 +2,7 @@ import TransactionForm from './TransactionForm';
 import TransactionTable from './TransactionTable';
 import styles from '../../pages/Sheets.module.css';
 
-function CorpDetails({ selectedCorp, onAddTransaction }) {
+function CorpDetails({ selectedCorp, onAddTransaction, onDeleteTransaction, onUpdateTransaction }) {
   if (!selectedCorp) {
     return (
       <div className={styles.corpDetails}>
@@ -13,30 +13,59 @@ function CorpDetails({ selectedCorp, onAddTransaction }) {
   }
 
   const transactions = selectedCorp.transactions || [];
-  const isBaht = selectedCorp.name && selectedCorp.name.includes('ဝယ်စာရင်း');
+  const txWithIndex = transactions.map((tx, index) => ({ ...tx, originalIndex: index }));
+  
+  const incomeTx = txWithIndex.filter(tx => tx.amount >= 0);
+  const expenseTx = txWithIndex.filter(tx => tx.amount < 0);
+  
+  const isForeign = selectedCorp.name && selectedCorp.name.includes('ဝယ်စာရင်း');
+  const currencyName = isForeign ? selectedCorp.name.replace('ဝယ်စာရင်း', '').trim() : '';
 
-  // Split transactions based on positive (Income) or negative (Expense) amounts
-  const incomeTx = transactions.filter(tx => tx.amount >= 0);
-  const expenseTx = transactions.filter(tx => tx.amount < 0);
+  const currentRate = (isForeign && Number(selectedCorp.total_foreign))
+    ? (Number(selectedCorp.total_mmk || 0) / Number(selectedCorp.total_foreign)).toLocaleString(undefined, { maximumFractionDigits: 2 })
+    : '-';
 
   return (
     <div className={styles.corpDetails}>
       <h2>{selectedCorp.name}</h2>
-      <p style={{ marginBottom: '20px', fontSize: '1.2rem', fontWeight: 'bold' }}>
-        Balance: {Number(selectedCorp.total_mmk != null ? selectedCorp.total_mmk : (selectedCorp.balance || 0)).toLocaleString()} MMK
-      </p>
+      <div className={styles.balanceContainer}>
+        <span>Balance: {Number(selectedCorp.total_mmk || 0).toLocaleString()} MMK</span>
+        
+        {isForeign && (
+          <>
+            <span className={styles.divider}>|</span>
+            <span className={styles.foreignText}>
+              {currencyName} Balance: {Number(selectedCorp.total_foreign || 0).toLocaleString()}
+            </span>
+            <span className={styles.divider}>|</span>
+            <span className={styles.rateText}>Rate: {currentRate}</span>
+          </>
+        )}
+      </div>
 
-      {/* 1. The Composed Form */}
       <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
 
-      {/* 2. The Composed Tables */}
       <div className={styles.tablesContainer}>
         <div className={styles.tableWrapper}>
-          <TransactionTable title="Income (In)" data={incomeTx} type="income" corpname={selectedCorp.name}/>
+          <TransactionTable 
+            title="Income (In)" 
+            data={incomeTx} 
+            type="income" 
+            corpname={selectedCorp.name}
+            onDelete={onDeleteTransaction}
+            onUpdate={onUpdateTransaction}
+          />
         </div>
         
         <div className={styles.tableWrapper}>
-          <TransactionTable title="Expenses (Out)" data={expenseTx} type="expense" corpname={selectedCorp.name} />
+          <TransactionTable 
+            title="Expenses (Out)" 
+            data={expenseTx} 
+            type="expense" 
+            corpname={selectedCorp.name} 
+            onDelete={onDeleteTransaction}
+            onUpdate={onUpdateTransaction}
+          />
         </div>
       </div>
     </div>
