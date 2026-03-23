@@ -85,6 +85,76 @@ app.listen(PORT, () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
 });
 
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log(`Backend server running on http://0.0.0.0:${PORT}`);
+//   console.log(`(Accessible on your network)`);
+// });
+
+
+==================================================
+FILE: backend\server_local.js
+==================================================
+
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+// This allows Express to understand JSON data sent from React
+app.use(express.json());
+
+// The absolute path to your JSON database file
+const DATA_FILE = path.join(__dirname, 'data', 'corps.json');
+
+// --- GET: Send the corporations to React ---
+app.get('/api/corps', (req, res) => {
+  fs.readFile(DATA_FILE, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to read data' });
+    }
+    try {
+      let corps = JSON.parse(data);
+      res.json(corps);
+    } catch (parseError) {
+      return res.status(500).json({ error: 'Database JSON is corrupted' });
+    }
+  });
+});
+
+// --- POST: Save a new corp OR update an existing corp ---
+app.post('/api/corps', (req, res) => {
+  const incomingCorp = req.body;
+
+  try {
+    const data = fs.readFileSync(DATA_FILE, 'utf8');
+    let corps = data.trim() ? JSON.parse(data) : [];
+    if (!Array.isArray(corps)) corps = [];
+
+    const existingIndex = corps.findIndex(c => c.name === incomingCorp.name);
+
+    if (existingIndex >= 0) {
+      corps[existingIndex] = incomingCorp;
+    } else {
+      corps.push(incomingCorp);
+    }
+
+    fs.writeFileSync(DATA_FILE, JSON.stringify(corps, null, 2));
+    res.json({ success: true, message: 'Saved successfully!' });
+
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: 'Failed to process data' });
+  }
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Backend server running on http://0.0.0.0:${PORT}`);
+  console.log(`(Accessible on your network)`);
+});
+
 
 ==================================================
 FILE: backend\data\corps.json
@@ -92,90 +162,634 @@ FILE: backend\data\corps.json
 
 [
   {
-    "name": "Baht ဝယ်စာရင်း (1)",
-    "total_mmk": 3000,
-    "total_foreign": 100,
+    "name": "ရေခဲ",
+    "total_mmk": 43133910,
     "order": 1,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 100,
+        "date": "2026-02-25",
+        "total_mmk": 43264260,
+        "amount": 43264260
+      },
+      {
+        "date": "2026-02-26",
+        "description": "ရောင်းရ",
+        "total_mmk": 993100,
+        "amount": 993100
+      },
+      {
+        "date": "2026-02-26",
+        "description": "စရိတ်",
+        "total_mmk": -18000,
+        "amount": -18000
+      },
+      {
+        "date": "2026-02-26",
+        "description": "ရုံးခန်းမီတာ",
+        "total_mmk": -500,
+        "amount": -500
+      },
+      {
+        "date": "2026-02-27",
+        "description": "ရောင်းရ",
+        "total_mmk": 913800,
+        "amount": 913800
+      },
+      {
+        "date": "2026-02-27",
+        "description": "စရိတ်",
+        "total_mmk": -38400,
+        "amount": -38400
+      },
+      {
+        "date": "2026-02-28",
+        "description": "ရောင်းရ",
+        "total_mmk": 279900,
+        "amount": 279900
+      },
+      {
+        "date": "2026-02-28",
+        "description": "စရိတ်",
+        "total_mmk": -14400,
+        "amount": -14400
+      },
+      {
+        "date": "2026-02-28",
+        "description": "မောင်နိုင်ပေး",
+        "total_mmk": -300000,
+        "amount": -300000
+      },
+      {
+        "date": "2026-03-01",
+        "description": "ရောင်းရ",
+        "total_mmk": 530000,
+        "amount": 530000
+      },
+      {
+        "date": "2026-03-01",
+        "description": "စရိတ်",
+        "total_mmk": -24000,
+        "amount": -24000
+      },
+      {
+        "date": "2026-03-02",
+        "description": "ရောင်းရ",
+        "total_mmk": 2428700,
+        "amount": 2428700
+      },
+      {
+        "date": "2026-03-03",
+        "description": "ရောင်းရ",
+        "total_mmk": 364100,
+        "amount": 364100
+      },
+      {
+        "date": "2026-03-03",
+        "description": "စရိတ်",
+        "total_mmk": -46800,
+        "amount": -46800
+      },
+      {
+        "date": "2026-03-03",
+        "description": "(2/2026) မိသားစုရေခဲ ဖိုးပေး",
+        "total_mmk": -14366400,
+        "amount": -14366400
+      },
+      {
+        "date": "2026-03-04",
+        "description": "ရောင်းရ",
+        "total_mmk": 58000,
+        "amount": 58000
+      },
+      {
+        "date": "2026-03-04",
+        "description": "စရိတ်",
+        "total_mmk": -48000,
+        "amount": -48000
+      },
+      {
+        "date": "2026-03-05",
+        "description": "ရောင်းရ",
+        "total_mmk": 325500,
+        "amount": 325500
+      },
+      {
+        "date": "2026-03-05",
+        "description": "စရိတ်",
+        "total_mmk": -90000,
+        "amount": -90000
+      },
+      {
+        "date": "2026-03-06",
+        "description": "ရောင်းရ",
+        "total_mmk": 62000,
+        "amount": 62000
+      },
+      {
+        "date": "2026-03-06",
+        "description": "စရိတ်",
+        "total_mmk": -172000,
+        "amount": -172000
+      },
+      {
+        "date": "2026-03-07",
+        "description": "ရောင်းရ",
+        "total_mmk": 604500,
+        "amount": 604500
+      },
+      {
+        "date": "2026-03-07",
+        "description": "စရိတ်",
+        "total_mmk": -66000,
+        "amount": -66000
+      },
+      {
+        "date": "2026-03-08",
+        "description": "ရောင်းရ",
+        "total_mmk": 216800,
+        "amount": 216800
+      },
+      {
+        "date": "2026-03-08",
+        "description": "စရိတ်",
+        "total_mmk": -41600,
+        "amount": -41600
+      },
+      {
+        "date": "2026-03-09",
+        "description": "ရောင်းရ",
+        "total_mmk": 255000,
+        "amount": 255000
+      },
+      {
+        "date": "2026-03-09",
+        "description": "စရိတ်",
+        "total_mmk": -35100,
+        "amount": -35100
+      },
+      {
+        "date": "2026-03-12",
+        "description": "ရောင်းရ",
+        "total_mmk": 119000,
+        "amount": 119000
+      },
+      {
+        "date": "2026-03-12",
+        "description": "စရိတ်",
+        "total_mmk": -15600,
+        "amount": -15600
+      },
+      {
+        "date": "2026-03-13",
+        "description": "ရောင်းရ",
+        "total_mmk": 3234100,
+        "amount": 3234100
+      },
+      {
+        "date": "2026-03-13",
+        "description": "စရိတ်",
+        "total_mmk": -115000,
+        "amount": -115000
+      },
+      {
+        "date": "2026-03-14",
+        "description": "ရောင်းရ",
+        "total_mmk": 1238500,
+        "amount": 1238500
+      },
+      {
+        "date": "2026-03-14",
+        "description": "စရိတ်",
+        "total_mmk": -78000,
+        "amount": -78000
+      },
+      {
+        "date": "2026-03-15",
+        "description": "ရောင်းရ",
+        "total_mmk": 1139800,
+        "amount": 1139800
+      },
+      {
+        "date": "2026-03-15",
+        "description": "စရိတ်",
+        "total_mmk": -123500,
+        "amount": -123500
+      },
+      {
+        "date": "2026-03-15",
+        "description": "သံဝယ် (တံတားပြင်)",
+        "total_mmk": -5000,
+        "amount": -5000
+      },
+      {
+        "date": "2026-03-16",
+        "description": "ရောင်းရ",
+        "total_mmk": 410500,
+        "amount": 410500
+      },
+      {
+        "date": "2026-03-16",
+        "description": "စရိတ်",
+        "total_mmk": -19500,
+        "amount": -19500
+      },
+      {
+        "date": "2026-03-17",
+        "description": "ရောင်းရ",
+        "total_mmk": 357000,
+        "amount": 357000
+      },
+      {
+        "date": "2026-03-17",
+        "description": "စရိတ်",
+        "total_mmk": -52000,
+        "amount": -52000
+      },
+      {
+        "date": "2026-03-18",
+        "description": "ရောင်းရ",
+        "total_mmk": 1702000,
+        "amount": 1702000
+      },
+      {
+        "date": "2026-03-18",
+        "description": "စရိတ်",
+        "total_mmk": -130000,
+        "amount": -130000
+      },
+      {
+        "date": "2026-03-19",
+        "description": "ရောင်းရ",
+        "total_mmk": 101600,
+        "amount": 101600
+      },
+      {
         "date": "2026-03-20",
-        "rate": 30,
-        "total_mmk": 3000,
-        "originalIndex": 0
+        "description": "ရောင်းရ",
+        "total_mmk": 399000,
+        "amount": 399000
+      },
+      {
+        "date": "2026-03-20",
+        "description": "စရိတ်",
+        "total_mmk": -63450,
+        "amount": -63450
       }
     ]
   },
   {
-    "name": "Baht ဝယ်စာရင်း ()",
-    "total_mmk": 175000,
-    "total_foreign": 5000,
+    "name": "ဒီဇယ်",
+    "total_mmk": 25281376,
     "order": 2,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 5000,
-        "date": "2026-03-20",
-        "rate": 35,
-        "total_mmk": 175000,
+        "amount": 25281376,
+        "date": "2026-02-25",
+        "total_mmk": 25281376,
         "originalIndex": 0
       }
     ]
   },
   {
-    "name": "abc",
-    "total_mmk": 50090000,
+    "name": "HOH",
+    "total_mmk": 3119900,
     "order": 3,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 50000000,
-        "date": "2026-03-20",
-        "total_mmk": 50000000,
-        "originalIndex": 0
-      },
-      {
-        "date": "2026-03-20",
-        "description": "output",
-        "amount": 100000,
-        "total_mmk": 100000
-      },
-      {
-        "date": "2026-03-20",
-        "description": "output",
-        "amount": -10000,
-        "total_mmk": -10000
+        "amount": 3119900,
+        "date": "2026-02-25",
+        "total_mmk": 3119900
       }
     ]
   },
   {
-    "name": "Baht ဝယ်စာရင်း (3)",
-    "total_mmk": 150357168,
-    "total_foreign": 1222785,
+    "name": "NLH",
+    "total_mmk": 500000,
     "order": 4,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 1222785,
-        "date": "2026-03-20",
-        "rate": 122.96288227284437,
-        "total_mmk": 150357168
+        "amount": 500000,
+        "date": "2026-02-25",
+        "total_mmk": 500000
       }
     ]
   },
   {
-    "name": "Baht ဝယ်စာရင်း (5)",
-    "total_mmk": 150357168,
-    "total_foreign": 1222785,
+    "name": "ငါး",
+    "total_mmk": 232615171,
     "order": 5,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 1222785,
-        "date": "2026-03-20",
-        "rate": 122.96288227284437,
-        "total_mmk": 150357168
+        "amount": 232615171,
+        "date": "2026-02-25",
+        "total_mmk": 232615171
+      }
+    ]
+  },
+  {
+    "name": "ရာဘာခြံဝန်ထမ်းရန်ပုံငွေ",
+    "total_mmk": 11000000,
+    "order": 6,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 11000000,
+        "date": "2026-02-25",
+        "total_mmk": 11000000
+      }
+    ]
+  },
+  {
+    "name": "TTM",
+    "total_mmk": -791301,
+    "order": 7,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -791301,
+        "date": "2026-02-25",
+        "total_mmk": -791301
+      }
+    ]
+  },
+  {
+    "name": "မော်စွန်းခြံရာဘာ",
+    "total_mmk": -36873421,
+    "order": 8,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -36873421,
+        "date": "2026-02-25",
+        "total_mmk": -36873421
+      }
+    ]
+  },
+  {
+    "name": "ဝန့်ချောင်းခြံရာဘာ",
+    "total_mmk": -30791031,
+    "order": 9,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -30791031,
+        "date": "2026-02-25",
+        "total_mmk": -30791031
+      }
+    ]
+  },
+  {
+    "name": "အစာအိတ်",
+    "total_mmk": -16904165,
+    "order": 10,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -16904165,
+        "date": "2026-02-25",
+        "total_mmk": -16904165
+      }
+    ]
+  },
+  {
+    "name": "Main cash အတွင်း",
+    "total_mmk": 582536,
+    "order": 11,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 582536,
+        "date": "2026-02-25",
+        "total_mmk": 582536
+      }
+    ]
+  },
+  {
+    "name": "Bank ချေးငွေအတိုး",
+    "total_mmk": 18670453,
+    "order": 12,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 18670453,
+        "date": "2026-02-25",
+        "total_mmk": 18670453
+      }
+    ]
+  },
+  {
+    "name": "သက်န်းရောင်းရငွေ",
+    "total_mmk": -5141556,
+    "order": 13,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -5141556,
+        "date": "2026-02-25",
+        "total_mmk": -5141556
+      }
+    ]
+  },
+  {
+    "name": "စိုက်/ချေး စာရင်း",
+    "total_mmk": 6792178,
+    "order": 14,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 6792178,
+        "date": "2026-02-25",
+        "total_mmk": 6792178
+      }
+    ]
+  },
+  {
+    "name": "ဗမချေးငွေ",
+    "total_mmk": -21940000,
+    "order": 15,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -21940000,
+        "date": "2026-02-25",
+        "total_mmk": -21940000
+      }
+    ]
+  },
+  {
+    "name": "အလှူရန်ပုံငွေ",
+    "total_mmk": 556282,
+    "order": 16,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 556282,
+        "date": "2026-02-25",
+        "total_mmk": 556282
+      }
+    ]
+  },
+  {
+    "name": "လစာရန်ပုံငွေ",
+    "total_mmk": 9801000,
+    "order": 17,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9801000,
+        "date": "2026-02-25",
+        "total_mmk": 9801000
+      }
+    ]
+  },
+  {
+    "name": "အင်ဂျင်ဝိုင်",
+    "total_mmk": 10826950,
+    "order": 18,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 10826950,
+        "date": "2026-02-25",
+        "total_mmk": 10826950
+      }
+    ]
+  },
+  {
+    "name": "ယောလုံချည်/ပုဝါပိုင်း",
+    "total_mmk": 1960300,
+    "order": 19,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 1960300,
+        "date": "2026-02-25",
+        "total_mmk": 1960300
+      }
+    ]
+  },
+  {
+    "name": "ကွမ်း + ဒူးရင်း + ငှက်ပျော",
+    "total_mmk": 9216024,
+    "order": 20,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9216024,
+        "date": "2026-02-25",
+        "total_mmk": 9216024
+      }
+    ]
+  },
+  {
+    "name": "သမုတ်ဆီရောင်းရငွေ",
+    "total_mmk": 43818168,
+    "order": 21,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 43818168,
+        "date": "2026-02-25",
+        "total_mmk": 43818168
+      }
+    ]
+  },
+  {
+    "name": "ဆီဆိုင်လုပ်ငန်း",
+    "total_mmk": 22519,
+    "order": 22,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 22519,
+        "date": "2026-02-25",
+        "total_mmk": 22519
+      }
+    ]
+  },
+  {
+    "name": "လှေကပ်ခရငွေ",
+    "total_mmk": 2203700,
+    "order": 23,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 2203700,
+        "date": "2026-02-25",
+        "total_mmk": 2203700
+      }
+    ]
+  },
+  {
+    "name": "ရာဘာရောင်းရငွေ",
+    "total_mmk": 78253828,
+    "order": 24,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 78253828,
+        "date": "2026-02-25",
+        "total_mmk": 78253828
+      }
+    ]
+  },
+  {
+    "name": "(မဒဂ) အိမ်ဆောက်စာရင်း",
+    "total_mmk": -137445000,
+    "order": 25,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -137445000,
+        "date": "2026-02-25",
+        "total_mmk": -137445000
+      }
+    ]
+  },
+  {
+    "name": "UZW, TTM ရန်ပုံငွေ",
+    "total_mmk": 7641350,
+    "order": 26,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 7641350,
+        "date": "2026-02-25",
+        "total_mmk": 7641350
+      }
+    ]
+  },
+  {
+    "name": "Nyan Lin Htet",
+    "total_mmk": 100000000,
+    "order": 27,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 100000000,
+        "date": "2026-03-22",
+        "total_mmk": 100000000,
+        "originalIndex": 0
+      }
+    ]
+  },
+  {
+    "name": "Baht ဝယ်စာရင်း",
+    "total_mmk": 1000000,
+    "total_foreign": 100000,
+    "order": 28,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 100000,
+        "date": "2026-03-22",
+        "rate": 10,
+        "total_mmk": 1000000
       }
     ]
   }
@@ -228,7 +842,7 @@ FILE: frontend\package.json
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite", 
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -548,21 +1162,7 @@ FILE: frontend\src\components\Sheets\CorpList.jsx
 
 import styles from '../../pages/Sheets.module.css';
 
-function CorpList({ 
-  corps, 
-  grandTotal, 
-  selectedCorpIndex, 
-  setSelectedCorpIndex, 
-  showAddCorpForm, 
-  setShowAddCorpForm,
-  newCorpName,
-  setNewCorpName,
-  newCorpBalance,
-  setNewCorpBalance,
-  handleAddCorp,
-  newCorpForeign,
-  setNewCorpForeign
-}) {
+function CorpList({ corps, grandTotal, selectedCorpIndex, setSelectedCorpIndex, showAddCorpForm, setShowAddCorpForm, newCorpName, setNewCorpName, newCorpBalance, setNewCorpBalance, handleAddCorp, newCorpForeign, setNewCorpForeign }) {
   const isBahtCorp = newCorpName.includes('ဝယ်စာရင်း');
 
   return (
@@ -581,31 +1181,41 @@ function CorpList({
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
           <div className={styles.corpFormWrapper}>
             <div className={styles.inputFieldCont} style={{flex:'2' }}>
-              <input 
-                type="text" 
-                placeholder="Corporation Name" 
-                required 
-                value={newCorpName} 
-                onChange={(e) => setNewCorpName(e.target.value)} 
+              <input
+                type="text"
+                placeholder="Corporation Name"
+                required
+                value={newCorpName}
+                onChange={(e) => setNewCorpName(e.target.value)}
               />
             </div>
-
+            
             <div className={styles.inputFieldCont} style={{flex:'.5' }}>
-              <input 
-                type="number" 
-                placeholder={isBahtCorp ? "Initial Kyat" : "Balance"} 
-                value={newCorpBalance} 
-                onChange={(e) => setNewCorpBalance(e.target.value)}
+              <input
+                type="text"
+                placeholder={isBahtCorp ? "Initial Kyat" : "Balance"}
+                // 1. Safely format the value
+                value={newCorpBalance === '-' ? '-' : newCorpBalance ? Number(newCorpBalance).toLocaleString() : ''}
+                onChange={(e) => {
+                  const raw = e.target.value.replace(/,/g, '');
+                  // 2. Allow empty string, lone minus sign, or valid numbers
+                  if (raw === '' || raw === '-' || !isNaN(raw)) {
+                    setNewCorpBalance(raw);
+                  }
+                }}
               />
             </div>
-          
+            
             {isBahtCorp && (
               <div className={styles.inputFieldCont} style={{ flex: '1' }}>
-                <input 
-                  type="number" 
-                  placeholder="Initial Baht" 
-                  value={newCorpForeign} 
-                  onChange={(e) => setNewCorpForeign(e.target.value)}
+                <input
+                  type="text"
+                  placeholder="Initial Baht"
+                  value={newCorpForeign ? Number(newCorpForeign).toLocaleString() : ''}
+                  onChange={(e) => {
+                    const raw = e.target.value.replace(/,/g, '');
+                    if (!isNaN(raw)) setNewCorpForeign(raw);
+                  }}
                 />
               </div>
             )}
@@ -619,16 +1229,16 @@ function CorpList({
 
       <div className={`${styles.corpItems} custom-scrollbar`}>
         {corps.map((corp, index) => (
-          <div 
-            key={corp.name} 
-            className={styles.corpItem} 
+          <div
+            key={corp.name}
+            className={styles.corpItem}
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}
           >
             <span>{corp.name}</span>
             <span>{Number(corp.total_mmk || 0).toLocaleString()}</span>
           </div>
-        ))} 
+        ))}
       </div>
     </div>
   );
@@ -641,23 +1251,28 @@ export default CorpList;
 FILE: frontend\src\components\Sheets\TransactionForm.jsx
 ==================================================
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from '../../pages/Sheets.module.css';
 
 const today = new Date();
 const years = Array.from({ length: 3 }, (_, i) => today.getFullYear() - 1 + i);
 const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
-export default function TransactionForm({ onSubmit, corpname }) {  
+export default function TransactionForm({ onSubmit, corpname }) {
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth() + 1);
   const [day, setDay] = useState(today.getDate());
-  
+
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [rate, setRate] = useState(''); 
+  const [rate, setRate] = useState('');
   
+  // References for focusing
+  const dayInputRef = useRef(null);
+  const descriptionInputRef = useRef(null);
+
   const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
+  
   const daysInSelectedMonth = new Date(year, month, 0).getDate();
   const days = Array.from({ length: daysInSelectedMonth }, (_, i) => i + 1);
 
@@ -667,12 +1282,25 @@ export default function TransactionForm({ onSubmit, corpname }) {
     }
   }, [year, month, daysInSelectedMonth, day]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!description || !amount || (isBaht && !rate)) return;
+  // UPDATED: Helper function to handle commas AND negative numbers
+  const handleNumberChange = (setter) => (e) => {
+    const rawValue = e.target.value.replace(/,/g, '');
+    
+    // Explicitly allow an empty string or a lone minus sign
+    if (rawValue === '' || rawValue === '-') {
+      setter(rawValue);
+    } 
+    // Otherwise, check if it's a valid number
+    else if (!isNaN(rawValue)) {
+      setter(rawValue);
+    }
+  };
+
+  const processSubmit = (isShiftEnter) => {
+    // Prevent submission if amount is just a lone minus sign
+    if (!description || !amount || amount === '-' || (isBaht && (!rate || rate === '-'))) return;
 
     const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-
     const txData = {
       date: formattedDate,
       description,
@@ -681,43 +1309,113 @@ export default function TransactionForm({ onSubmit, corpname }) {
     };
 
     onSubmit(txData);
-
+    
+    // Reset form fields
     setDescription('');
     setAmount('');
     setRate('');
-    setYear(today.getFullYear());
-    setMonth(today.getMonth() + 1);
-    setDay(today.getDate());
+
+    if (isShiftEnter) {
+      const nextDate = new Date(year, month - 1, day + 1);
+      setYear(nextDate.getFullYear());
+      setMonth(nextDate.getMonth() + 1);
+      setDay(nextDate.getDate());
+      
+      if (descriptionInputRef.current) {
+        descriptionInputRef.current.focus();
+      }
+    } else {
+      if (dayInputRef.current) {
+        dayInputRef.current.focus();
+      }
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    processSubmit(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && e.shiftKey) {
+      e.preventDefault(); 
+      processSubmit(true);
+    }
   };
 
   const spacing = [.5, 2, .5, .5];
+
+  // Helper function to format the value for display
+  const formatValue = (val) => {
+    if (val === '' || val === '-') return val;
+    return Number(val).toLocaleString();
+  };
+
   return (
     <div className={styles.transactionFormWrapper}>
       <h3 className={styles.formTitle}>Add New Transaction</h3>
       
-      <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className={styles.formContainer}>
         <div className={styles.inputRow}>
           <div style={{ display: 'flex', gap: '4px', flex: spacing[0] }}>
-            <select value={year} onChange={(e) => setYear(Number(e.target.value))} className={styles.flexInput}>
+            <select
+              value={year}
+              onChange={(e) => setYear(Number(e.target.value))}
+              className={styles.flexInput}
+            >
               {years.map(y => <option key={y} value={y}>{y}</option>)}
             </select>
-            <select value={month} onChange={(e) => setMonth(Number(e.target.value))} className={styles.flexInput}>
+            <select
+              value={month}
+              onChange={(e) => setMonth(Number(e.target.value))}
+              className={styles.flexInput}
+            >
               {months.map(m => (
                 <option key={m} value={m}>
                   {new Date(2000, m - 1).toLocaleString('default', { month: 'short' })}
                 </option>
               ))}
             </select>
-            <select value={day} onChange={(e) => setDay(Number(e.target.value))} className={styles.flexInput}>
+            <select
+              ref={dayInputRef}
+              value={day}
+              onChange={(e) => setDay(Number(e.target.value))}
+              className={styles.flexInput}
+            >
               {days.map(d => <option key={d} value={d}>{d}</option>)}
             </select>
           </div>
-
-          <input style={{flex: spacing[1] }} type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
-          <input style={{flex: spacing[2] }} type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+          
+          <input
+            ref={descriptionInputRef}
+            style={{flex: spacing[1] }}
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          
+          <input
+            style={{flex: spacing[2] }}
+            type="text"
+            placeholder="Amount"
+            // UPDATED: Safely handle "-" during formatting
+            value={formatValue(amount)}
+            onChange={handleNumberChange(setAmount)}
+            required
+          />
           
           {isBaht && (
-            <input style={{flex: spacing[3] }} type="number" placeholder="Rate" value={rate} onChange={(e) => setRate(e.target.value)} required />
+            <input
+              style={{flex: spacing[3] }}
+              type="text"
+              placeholder="Rate"
+              // UPDATED: Safely handle "-" during formatting
+              value={formatValue(rate)}
+              onChange={handleNumberChange(setRate)}
+              required
+            />
           )}
         </div>
         <button type="submit" className={styles.submitBtn}>Add Transaction</button>
@@ -739,12 +1437,15 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
   const isEmpty = !data || data.length === 0;
 
   const [isTableEditMode, setIsTableEditMode] = useState(false);
-  const [editingRowIndex, setEditingRowIndex] = useState(null); 
+  const [editingRowIndex, setEditingRowIndex] = useState(null);
   const [editFormData, setEditFormData] = useState({});
 
   const handleEditClick = (tx) => {
     setEditingRowIndex(tx.originalIndex);
-    const formattedDate = new Date(tx.date).toISOString().split('T')[0];
+    const formattedDate =
+      typeof tx.date === 'string'
+        ? tx.date.split('T')[0]
+        : new Date(tx.date).toISOString().split('T')[0];
     setEditFormData({ ...tx, date: formattedDate });
   };
 
@@ -786,37 +1487,74 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                 ) : (
                   <th>Amount</th>
                 )}
-                {isTableEditMode && <th>Actions</th>} 
+                {isTableEditMode && <th>Actions</th>}
               </tr>
             </thead>
+
             <tbody>
               {data.map((tx, index) => {
                 const isEditingThisRow = editingRowIndex === tx.originalIndex;
+
                 return (
                   <tr key={index}>
                     {isEditingThisRow ? (
                       <>
-                        <td><input type="date" value={editFormData.date} onChange={(e) => handleInputChange(e, 'date')} /></td>
-                        <td><input type="text" value={editFormData.description} onChange={(e) => handleInputChange(e, 'description')} /></td>
+                        <td>
+                          <input type="date" value={editFormData.date} onChange={(e) => handleInputChange(e, 'date')} />
+                        </td>
+                        <td>
+                          <input type="text" value={editFormData.description} onChange={(e) => handleInputChange(e, 'description')} />
+                        </td>
+
                         {isBaht ? (
                           <>
-                            <td><input type="number" value={editFormData.amount} onChange={(e) => handleInputChange(e, 'amount')} /></td>
-                            <td><input type="number" value={editFormData.rate} onChange={(e) => handleInputChange(e, 'rate')} /></td>
+                            <td>
+                              <input
+                                type="text"
+                                value={
+                                  editFormData.amount === '-'
+                                    ? '-'
+                                    : editFormData.amount
+                                    ? Number(editFormData.amount).toLocaleString()
+                                    : ''
+                                }
+                                onChange={(e) => {
+                                  const raw = e.target.value.replace(/,/g, '');
+                                  if (raw === '' || raw === '-' || !isNaN(raw)) {
+                                    setEditFormData({ ...editFormData, amount: raw });
+                                  }
+                                }}
+                              />
+                            </td>
+                            <td>
+                              <input type="number" value={editFormData.rate} onChange={(e) => handleInputChange(e, 'rate')} />
+                            </td>
                             <td style={{ fontSize: '0.8rem', color: 'gray' }}>Auto-calc</td>
                           </>
                         ) : (
-                          <td><input type="number" value={editFormData.amount} onChange={(e) => handleInputChange(e, 'amount')} /></td>
+                          <td>
+                            <input type="number" value={editFormData.amount} onChange={(e) => handleInputChange(e, 'amount')} />
+                          </td>
                         )}
-                        <td style={{ display: 'flex', gap: '5px' }}>
-                          <button onClick={handleSaveClick}>Save</button>
-                          <button onClick={() => setEditingRowIndex(null)}>Cancel</button>
+
+                        <td className={styles.actionCell}>
+                          <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={handleSaveClick}>
+                            Save
+                          </button>
+                          <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => setEditingRowIndex(null)}>
+                            Cancel
+                          </button>
                         </td>
                       </>
                     ) : (
                       <>
-                        <td>{new Date(tx.date).toLocaleDateString()}</td>
+                        <td>{new Date(tx.date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</td>
                         <td>{tx.description}</td>
-                        <td style={{ color: type === 'income' ? 'green' : 'red', fontWeight: 'bold' }}>{Number(tx.amount).toLocaleString()}</td>
+
+                        <td style={{ color: type === 'income' ? 'green' : 'red', fontWeight: 'bold' }}>
+                          {Number(tx.total_mmk).toLocaleString()}
+                        </td>
+
                         {isBaht && (
                           <>
                             <td>{tx.rate.toFixed(2) || '-'}</td>
@@ -825,10 +1563,15 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                             </td>
                           </>
                         )}
+
                         {isTableEditMode && (
-                          <td style={{ display: 'flex', gap: '5px' }}>
-                            <button onClick={() => handleEditClick(tx)}>✎ Edit</button>
-                            <button onClick={() => onDelete(tx.originalIndex)}>🗑 Delete</button>
+                          <td className={styles.actionCell}>
+                            <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleEditClick(tx)}>
+                              Edit
+                            </button>
+                            <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => onDelete(tx.originalIndex)}>
+                              Delete
+                            </button>
                           </td>
                         )}
                       </>
@@ -949,20 +1692,20 @@ function Sheets() {
     });
   };
 
-  const handleAddTx = (newTx) => {
+ const handleAddTx = (newTx) => {
+
     if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
     const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
-    
     const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate) : Number(newTx.amount);
     newTx.total_mmk = txTotalMmk;
 
-    const updatedCorp = { 
-      ...selectedCorp, 
-      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
+    const updatedCorp = {
+      ...selectedCorp,
+      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx]
     };
-    
     const currentTotalMmk = Number(updatedCorp.total_mmk || 0);
     updatedCorp.total_mmk = currentTotalMmk + txTotalMmk;
+
 
     if (isBaht) {
       const currentTotalForeign = Number(updatedCorp.total_foreign || 0);
@@ -987,12 +1730,24 @@ function Sheets() {
       const txTotalMmk = isBaht ? Number(tx.amount) * Number(tx.rate || 0) : Number(tx.amount);
       newTotalMmk += txTotalMmk;
       if (isBaht) newTotalForeign += Number(tx.amount);
-      return { 
-        ...tx, 
-        amount: Number(tx.amount), 
-        ...(isBaht && { rate: Number(tx.rate) }), 
-        total_mmk: txTotalMmk 
-      };
+      if (isBaht) {
+        // For Baht: Return everything, formatted correctly
+        return { 
+          ...tx, 
+          amount: Number(tx.amount), 
+          rate: Number(tx.rate), 
+          total_mmk: txTotalMmk 
+        };
+      } else {
+        // For Kyat (Not Baht): Remove the old 'amount' field from 'tx', 
+        // so we ONLY return 'total_mmk' along with the rest of the tx details (like date, desc)
+        const { amount, ...txWithoutAmount } = tx; 
+        return { 
+          ...txWithoutAmount, 
+          amount: Number(tx.amount),
+          total_mmk: txTotalMmk 
+        };
+      }
     });
 
     const updatedCorp = {
@@ -1289,6 +2044,64 @@ FILE: frontend\src\pages\Sheets.module.css
 .tableScroll:hover {
   scrollbar-width: thin; 
 }
+
+/* --- Table Uniform Row & Button Styles --- */
+
+/* Give all table cells consistent padding to match the "enlarged" input view */
+.table th, 
+.table td {
+  padding: 12px 16px; /* Adjust this to make the row taller or shorter */
+  vertical-align: middle;
+}
+
+/* Flex container for the action buttons to keep them neatly side-by-side */
+.actionCell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Consistent styling for all table action buttons */
+.actionBtn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.actionBtn:hover {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+/* Optional: Add specific colors for destructive/constructive actions if you like */
+.deleteBtn {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.deleteBtn:hover {
+  background-color: #fecaca;
+  border-color: #f87171;
+}
+
+.saveBtn {
+  background-color: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+.saveBtn:hover {
+  background-color: #bbf7d0;
+  border-color: #4ade80;
+}
+
 
 /* --- WebKit (Chrome, Safari, modern Edge) --- */
 

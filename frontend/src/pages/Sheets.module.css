@@ -233,6 +233,64 @@
   scrollbar-width: thin; 
 }
 
+/* --- Table Uniform Row & Button Styles --- */
+
+/* Give all table cells consistent padding to match the "enlarged" input view */
+.table th, 
+.table td {
+  padding: 12px 16px; /* Adjust this to make the row taller or shorter */
+  vertical-align: middle;
+}
+
+/* Flex container for the action buttons to keep them neatly side-by-side */
+.actionCell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Consistent styling for all table action buttons */
+.actionBtn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.actionBtn:hover {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+/* Optional: Add specific colors for destructive/constructive actions if you like */
+.deleteBtn {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.deleteBtn:hover {
+  background-color: #fecaca;
+  border-color: #f87171;
+}
+
+.saveBtn {
+  background-color: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+.saveBtn:hover {
+  background-color: #bbf7d0;
+  border-color: #4ade80;
+}
+
+
 /* --- WebKit (Chrome, Safari, modern Edge) --- */
 
 /* 1. Define the scrollbar width but keep the track completely invisible */

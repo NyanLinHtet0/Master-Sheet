@@ -6,12 +6,15 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
   const isEmpty = !data || data.length === 0;
 
   const [isTableEditMode, setIsTableEditMode] = useState(false);
-  const [editingRowIndex, setEditingRowIndex] = useState(null); 
+  const [editingRowIndex, setEditingRowIndex] = useState(null);
   const [editFormData, setEditFormData] = useState({});
 
   const handleEditClick = (tx) => {
     setEditingRowIndex(tx.originalIndex);
-    const formattedDate = new Date(tx.date).toISOString().split('T')[0];
+    const formattedDate =
+      typeof tx.date === 'string'
+        ? tx.date.split('T')[0]
+        : new Date(tx.date).toISOString().split('T')[0];
     setEditFormData({ ...tx, date: formattedDate });
   };
 
@@ -53,37 +56,74 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                 ) : (
                   <th>Amount</th>
                 )}
-                {isTableEditMode && <th>Actions</th>} 
+                {isTableEditMode && <th>Actions</th>}
               </tr>
             </thead>
+
             <tbody>
               {data.map((tx, index) => {
                 const isEditingThisRow = editingRowIndex === tx.originalIndex;
+
                 return (
                   <tr key={index}>
                     {isEditingThisRow ? (
                       <>
-                        <td><input type="date" value={editFormData.date} onChange={(e) => handleInputChange(e, 'date')} /></td>
-                        <td><input type="text" value={editFormData.description} onChange={(e) => handleInputChange(e, 'description')} /></td>
+                        <td>
+                          <input type="date" value={editFormData.date} onChange={(e) => handleInputChange(e, 'date')} />
+                        </td>
+                        <td>
+                          <input type="text" value={editFormData.description} onChange={(e) => handleInputChange(e, 'description')} />
+                        </td>
+
                         {isBaht ? (
                           <>
-                            <td><input type="number" value={editFormData.amount} onChange={(e) => handleInputChange(e, 'amount')} /></td>
-                            <td><input type="number" value={editFormData.rate} onChange={(e) => handleInputChange(e, 'rate')} /></td>
+                            <td>
+                              <input
+                                type="text"
+                                value={
+                                  editFormData.amount === '-'
+                                    ? '-'
+                                    : editFormData.amount
+                                    ? Number(editFormData.amount).toLocaleString()
+                                    : ''
+                                }
+                                onChange={(e) => {
+                                  const raw = e.target.value.replace(/,/g, '');
+                                  if (raw === '' || raw === '-' || !isNaN(raw)) {
+                                    setEditFormData({ ...editFormData, amount: raw });
+                                  }
+                                }}
+                              />
+                            </td>
+                            <td>
+                              <input type="number" value={editFormData.rate} onChange={(e) => handleInputChange(e, 'rate')} />
+                            </td>
                             <td style={{ fontSize: '0.8rem', color: 'gray' }}>Auto-calc</td>
                           </>
                         ) : (
-                          <td><input type="number" value={editFormData.amount} onChange={(e) => handleInputChange(e, 'amount')} /></td>
+                          <td>
+                            <input type="number" value={editFormData.amount} onChange={(e) => handleInputChange(e, 'amount')} />
+                          </td>
                         )}
-                        <td style={{ display: 'flex', gap: '5px' }}>
-                          <button onClick={handleSaveClick}>Save</button>
-                          <button onClick={() => setEditingRowIndex(null)}>Cancel</button>
+
+                        <td className={styles.actionCell}>
+                          <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={handleSaveClick}>
+                            Save
+                          </button>
+                          <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => setEditingRowIndex(null)}>
+                            Cancel
+                          </button>
                         </td>
                       </>
                     ) : (
                       <>
-                        <td>{new Date(tx.date).toLocaleDateString()}</td>
+                        <td>{new Date(tx.date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</td>
                         <td>{tx.description}</td>
-                        <td style={{ color: type === 'income' ? 'green' : 'red', fontWeight: 'bold' }}>{Number(tx.amount).toLocaleString()}</td>
+
+                        <td style={{ color: type === 'income' ? 'green' : 'red', fontWeight: 'bold' }}>
+                          {Number(tx.total_mmk).toLocaleString()}
+                        </td>
+
                         {isBaht && (
                           <>
                             <td>{tx.rate.toFixed(2) || '-'}</td>
@@ -92,10 +132,15 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                             </td>
                           </>
                         )}
+
                         {isTableEditMode && (
-                          <td style={{ display: 'flex', gap: '5px' }}>
-                            <button onClick={() => handleEditClick(tx)}>✎ Edit</button>
-                            <button onClick={() => onDelete(tx.originalIndex)}>🗑 Delete</button>
+                          <td className={styles.actionCell}>
+                            <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleEditClick(tx)}>
+                              Edit
+                            </button>
+                            <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => onDelete(tx.originalIndex)}>
+                              Delete
+                            </button>
                           </td>
                         )}
                       </>

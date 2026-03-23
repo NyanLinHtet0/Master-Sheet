@@ -78,20 +78,20 @@ function Sheets() {
     });
   };
 
-  const handleAddTx = (newTx) => {
+ const handleAddTx = (newTx) => {
+
     if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
     const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
-    
     const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate) : Number(newTx.amount);
     newTx.total_mmk = txTotalMmk;
 
-    const updatedCorp = { 
-      ...selectedCorp, 
-      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
+    const updatedCorp = {
+      ...selectedCorp,
+      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx]
     };
-    
     const currentTotalMmk = Number(updatedCorp.total_mmk || 0);
     updatedCorp.total_mmk = currentTotalMmk + txTotalMmk;
+
 
     if (isBaht) {
       const currentTotalForeign = Number(updatedCorp.total_foreign || 0);
@@ -116,12 +116,24 @@ function Sheets() {
       const txTotalMmk = isBaht ? Number(tx.amount) * Number(tx.rate || 0) : Number(tx.amount);
       newTotalMmk += txTotalMmk;
       if (isBaht) newTotalForeign += Number(tx.amount);
-      return { 
-        ...tx, 
-        amount: Number(tx.amount), 
-        ...(isBaht && { rate: Number(tx.rate) }), 
-        total_mmk: txTotalMmk 
-      };
+      if (isBaht) {
+        // For Baht: Return everything, formatted correctly
+        return { 
+          ...tx, 
+          amount: Number(tx.amount), 
+          rate: Number(tx.rate), 
+          total_mmk: txTotalMmk 
+        };
+      } else {
+        // For Kyat (Not Baht): Remove the old 'amount' field from 'tx', 
+        // so we ONLY return 'total_mmk' along with the rest of the tx details (like date, desc)
+        const { amount, ...txWithoutAmount } = tx; 
+        return { 
+          ...txWithoutAmount, 
+          amount: Number(tx.amount),
+          total_mmk: txTotalMmk 
+        };
+      }
     });
 
     const updatedCorp = {

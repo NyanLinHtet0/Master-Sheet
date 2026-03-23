@@ -1,20 +1,6 @@
 import styles from '../../pages/Sheets.module.css';
 
-function CorpList({ 
-  corps, 
-  grandTotal, 
-  selectedCorpIndex, 
-  setSelectedCorpIndex, 
-  showAddCorpForm, 
-  setShowAddCorpForm,
-  newCorpName,
-  setNewCorpName,
-  newCorpBalance,
-  setNewCorpBalance,
-  handleAddCorp,
-  newCorpForeign,
-  setNewCorpForeign
-}) {
+function CorpList({ corps, grandTotal, selectedCorpIndex, setSelectedCorpIndex, showAddCorpForm, setShowAddCorpForm, newCorpName, setNewCorpName, newCorpBalance, setNewCorpBalance, handleAddCorp, newCorpForeign, setNewCorpForeign }) {
   const isBahtCorp = newCorpName.includes('ဝယ်စာရင်း');
 
   return (
@@ -33,31 +19,41 @@ function CorpList({
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
           <div className={styles.corpFormWrapper}>
             <div className={styles.inputFieldCont} style={{flex:'2' }}>
-              <input 
-                type="text" 
-                placeholder="Corporation Name" 
-                required 
-                value={newCorpName} 
-                onChange={(e) => setNewCorpName(e.target.value)} 
+              <input
+                type="text"
+                placeholder="Corporation Name"
+                required
+                value={newCorpName}
+                onChange={(e) => setNewCorpName(e.target.value)}
               />
             </div>
-
+            
             <div className={styles.inputFieldCont} style={{flex:'.5' }}>
-              <input 
-                type="number" 
-                placeholder={isBahtCorp ? "Initial Kyat" : "Balance"} 
-                value={newCorpBalance} 
-                onChange={(e) => setNewCorpBalance(e.target.value)}
+              <input
+                type="text"
+                placeholder={isBahtCorp ? "Initial Kyat" : "Balance"}
+                // 1. Safely format the value
+                value={newCorpBalance === '-' ? '-' : newCorpBalance ? Number(newCorpBalance).toLocaleString() : ''}
+                onChange={(e) => {
+                  const raw = e.target.value.replace(/,/g, '');
+                  // 2. Allow empty string, lone minus sign, or valid numbers
+                  if (raw === '' || raw === '-' || !isNaN(raw)) {
+                    setNewCorpBalance(raw);
+                  }
+                }}
               />
             </div>
-          
+            
             {isBahtCorp && (
               <div className={styles.inputFieldCont} style={{ flex: '1' }}>
-                <input 
-                  type="number" 
-                  placeholder="Initial Baht" 
-                  value={newCorpForeign} 
-                  onChange={(e) => setNewCorpForeign(e.target.value)}
+                <input
+                  type="text"
+                  placeholder="Initial Baht"
+                  value={newCorpForeign ? Number(newCorpForeign).toLocaleString() : ''}
+                  onChange={(e) => {
+                    const raw = e.target.value.replace(/,/g, '');
+                    if (!isNaN(raw)) setNewCorpForeign(raw);
+                  }}
                 />
               </div>
             )}
@@ -71,16 +67,16 @@ function CorpList({
 
       <div className={`${styles.corpItems} custom-scrollbar`}>
         {corps.map((corp, index) => (
-          <div 
-            key={corp.name} 
-            className={styles.corpItem} 
+          <div
+            key={corp.name}
+            className={styles.corpItem}
             style={{ backgroundColor: selectedCorpIndex === index ? 'var(--bg-color)' : 'white' }}
             onClick={() => setSelectedCorpIndex(index)}
           >
             <span>{corp.name}</span>
             <span>{Number(corp.total_mmk || 0).toLocaleString()}</span>
           </div>
-        ))} 
+        ))}
       </div>
     </div>
   );

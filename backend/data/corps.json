@@ -1,89 +1,634 @@
 [
   {
-    "name": "Baht ဝယ်စာရင်း (1)",
-    "total_mmk": 3000,
-    "total_foreign": 100,
+    "name": "ရေခဲ",
+    "total_mmk": 43133910,
     "order": 1,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 100,
+        "date": "2026-02-25",
+        "total_mmk": 43264260,
+        "amount": 43264260
+      },
+      {
+        "date": "2026-02-26",
+        "description": "ရောင်းရ",
+        "total_mmk": 993100,
+        "amount": 993100
+      },
+      {
+        "date": "2026-02-26",
+        "description": "စရိတ်",
+        "total_mmk": -18000,
+        "amount": -18000
+      },
+      {
+        "date": "2026-02-26",
+        "description": "ရုံးခန်းမီတာ",
+        "total_mmk": -500,
+        "amount": -500
+      },
+      {
+        "date": "2026-02-27",
+        "description": "ရောင်းရ",
+        "total_mmk": 913800,
+        "amount": 913800
+      },
+      {
+        "date": "2026-02-27",
+        "description": "စရိတ်",
+        "total_mmk": -38400,
+        "amount": -38400
+      },
+      {
+        "date": "2026-02-28",
+        "description": "ရောင်းရ",
+        "total_mmk": 279900,
+        "amount": 279900
+      },
+      {
+        "date": "2026-02-28",
+        "description": "စရိတ်",
+        "total_mmk": -14400,
+        "amount": -14400
+      },
+      {
+        "date": "2026-02-28",
+        "description": "မောင်နိုင်ပေး",
+        "total_mmk": -300000,
+        "amount": -300000
+      },
+      {
+        "date": "2026-03-01",
+        "description": "ရောင်းရ",
+        "total_mmk": 530000,
+        "amount": 530000
+      },
+      {
+        "date": "2026-03-01",
+        "description": "စရိတ်",
+        "total_mmk": -24000,
+        "amount": -24000
+      },
+      {
+        "date": "2026-03-02",
+        "description": "ရောင်းရ",
+        "total_mmk": 2428700,
+        "amount": 2428700
+      },
+      {
+        "date": "2026-03-03",
+        "description": "ရောင်းရ",
+        "total_mmk": 364100,
+        "amount": 364100
+      },
+      {
+        "date": "2026-03-03",
+        "description": "စရိတ်",
+        "total_mmk": -46800,
+        "amount": -46800
+      },
+      {
+        "date": "2026-03-03",
+        "description": "(2/2026) မိသားစုရေခဲ ဖိုးပေး",
+        "total_mmk": -14366400,
+        "amount": -14366400
+      },
+      {
+        "date": "2026-03-04",
+        "description": "ရောင်းရ",
+        "total_mmk": 58000,
+        "amount": 58000
+      },
+      {
+        "date": "2026-03-04",
+        "description": "စရိတ်",
+        "total_mmk": -48000,
+        "amount": -48000
+      },
+      {
+        "date": "2026-03-05",
+        "description": "ရောင်းရ",
+        "total_mmk": 325500,
+        "amount": 325500
+      },
+      {
+        "date": "2026-03-05",
+        "description": "စရိတ်",
+        "total_mmk": -90000,
+        "amount": -90000
+      },
+      {
+        "date": "2026-03-06",
+        "description": "ရောင်းရ",
+        "total_mmk": 62000,
+        "amount": 62000
+      },
+      {
+        "date": "2026-03-06",
+        "description": "စရိတ်",
+        "total_mmk": -172000,
+        "amount": -172000
+      },
+      {
+        "date": "2026-03-07",
+        "description": "ရောင်းရ",
+        "total_mmk": 604500,
+        "amount": 604500
+      },
+      {
+        "date": "2026-03-07",
+        "description": "စရိတ်",
+        "total_mmk": -66000,
+        "amount": -66000
+      },
+      {
+        "date": "2026-03-08",
+        "description": "ရောင်းရ",
+        "total_mmk": 216800,
+        "amount": 216800
+      },
+      {
+        "date": "2026-03-08",
+        "description": "စရိတ်",
+        "total_mmk": -41600,
+        "amount": -41600
+      },
+      {
+        "date": "2026-03-09",
+        "description": "ရောင်းရ",
+        "total_mmk": 255000,
+        "amount": 255000
+      },
+      {
+        "date": "2026-03-09",
+        "description": "စရိတ်",
+        "total_mmk": -35100,
+        "amount": -35100
+      },
+      {
+        "date": "2026-03-12",
+        "description": "ရောင်းရ",
+        "total_mmk": 119000,
+        "amount": 119000
+      },
+      {
+        "date": "2026-03-12",
+        "description": "စရိတ်",
+        "total_mmk": -15600,
+        "amount": -15600
+      },
+      {
+        "date": "2026-03-13",
+        "description": "ရောင်းရ",
+        "total_mmk": 3234100,
+        "amount": 3234100
+      },
+      {
+        "date": "2026-03-13",
+        "description": "စရိတ်",
+        "total_mmk": -115000,
+        "amount": -115000
+      },
+      {
+        "date": "2026-03-14",
+        "description": "ရောင်းရ",
+        "total_mmk": 1238500,
+        "amount": 1238500
+      },
+      {
+        "date": "2026-03-14",
+        "description": "စရိတ်",
+        "total_mmk": -78000,
+        "amount": -78000
+      },
+      {
+        "date": "2026-03-15",
+        "description": "ရောင်းရ",
+        "total_mmk": 1139800,
+        "amount": 1139800
+      },
+      {
+        "date": "2026-03-15",
+        "description": "စရိတ်",
+        "total_mmk": -123500,
+        "amount": -123500
+      },
+      {
+        "date": "2026-03-15",
+        "description": "သံဝယ် (တံတားပြင်)",
+        "total_mmk": -5000,
+        "amount": -5000
+      },
+      {
+        "date": "2026-03-16",
+        "description": "ရောင်းရ",
+        "total_mmk": 410500,
+        "amount": 410500
+      },
+      {
+        "date": "2026-03-16",
+        "description": "စရိတ်",
+        "total_mmk": -19500,
+        "amount": -19500
+      },
+      {
+        "date": "2026-03-17",
+        "description": "ရောင်းရ",
+        "total_mmk": 357000,
+        "amount": 357000
+      },
+      {
+        "date": "2026-03-17",
+        "description": "စရိတ်",
+        "total_mmk": -52000,
+        "amount": -52000
+      },
+      {
+        "date": "2026-03-18",
+        "description": "ရောင်းရ",
+        "total_mmk": 1702000,
+        "amount": 1702000
+      },
+      {
+        "date": "2026-03-18",
+        "description": "စရိတ်",
+        "total_mmk": -130000,
+        "amount": -130000
+      },
+      {
+        "date": "2026-03-19",
+        "description": "ရောင်းရ",
+        "total_mmk": 101600,
+        "amount": 101600
+      },
+      {
         "date": "2026-03-20",
-        "rate": 30,
-        "total_mmk": 3000,
-        "originalIndex": 0
+        "description": "ရောင်းရ",
+        "total_mmk": 399000,
+        "originalIndex": 43,
+        "amount": 399000
+      },
+      {
+        "date": "2026-03-20",
+        "description": "စရိတ်",
+        "total_mmk": -63450,
+        "amount": -63450
       }
     ]
   },
   {
-    "name": "Baht ဝယ်စာရင်း ()",
-    "total_mmk": 175000,
-    "total_foreign": 5000,
+    "name": "ဒီဇယ်",
+    "total_mmk": 25281376,
     "order": 2,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 5000,
-        "date": "2026-03-20",
-        "rate": 35,
-        "total_mmk": 175000,
+        "amount": 25281376,
+        "date": "2026-02-25",
+        "total_mmk": 25281376,
         "originalIndex": 0
       }
     ]
   },
   {
-    "name": "abc",
-    "total_mmk": 50090000,
+    "name": "HOH",
+    "total_mmk": 3119900,
     "order": 3,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 50000000,
-        "date": "2026-03-20",
-        "total_mmk": 50000000,
-        "originalIndex": 0
-      },
-      {
-        "date": "2026-03-20",
-        "description": "output",
-        "amount": 100000,
-        "total_mmk": 100000
-      },
-      {
-        "date": "2026-03-20",
-        "description": "output",
-        "amount": -10000,
-        "total_mmk": -10000
+        "amount": 3119900,
+        "date": "2026-02-25",
+        "total_mmk": 3119900
       }
     ]
   },
   {
-    "name": "Baht ဝယ်စာရင်း (3)",
-    "total_mmk": 150357168,
-    "total_foreign": 1222785,
+    "name": "NLH",
+    "total_mmk": 500000,
     "order": 4,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 1222785,
-        "date": "2026-03-20",
-        "rate": 122.96288227284437,
-        "total_mmk": 150357168
+        "amount": 500000,
+        "date": "2026-02-25",
+        "total_mmk": 500000
       }
     ]
   },
   {
-    "name": "Baht ဝယ်စာရင်း (5)",
-    "total_mmk": 150357168,
-    "total_foreign": 1222785,
+    "name": "ငါး",
+    "total_mmk": 232615171,
     "order": 5,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 1222785,
-        "date": "2026-03-20",
-        "rate": 122.96288227284437,
-        "total_mmk": 150357168
+        "amount": 232615171,
+        "date": "2026-02-25",
+        "total_mmk": 232615171
+      }
+    ]
+  },
+  {
+    "name": "ရာဘာခြံဝန်ထမ်းရန်ပုံငွေ",
+    "total_mmk": 11000000,
+    "order": 6,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 11000000,
+        "date": "2026-02-25",
+        "total_mmk": 11000000
+      }
+    ]
+  },
+  {
+    "name": "TTM",
+    "total_mmk": -791301,
+    "order": 7,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -791301,
+        "date": "2026-02-25",
+        "total_mmk": -791301
+      }
+    ]
+  },
+  {
+    "name": "မော်စွန်းခြံရာဘာ",
+    "total_mmk": -36873421,
+    "order": 8,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -36873421,
+        "date": "2026-02-25",
+        "total_mmk": -36873421
+      }
+    ]
+  },
+  {
+    "name": "ဝန့်ချောင်းခြံရာဘာ",
+    "total_mmk": -30791031,
+    "order": 9,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -30791031,
+        "date": "2026-02-25",
+        "total_mmk": -30791031
+      }
+    ]
+  },
+  {
+    "name": "အစာအိတ်",
+    "total_mmk": -16904165,
+    "order": 10,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -16904165,
+        "date": "2026-02-25",
+        "total_mmk": -16904165
+      }
+    ]
+  },
+  {
+    "name": "Main cash အတွင်း",
+    "total_mmk": 582536,
+    "order": 11,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 582536,
+        "date": "2026-02-25",
+        "total_mmk": 582536
+      }
+    ]
+  },
+  {
+    "name": "Bank ချေးငွေအတိုး",
+    "total_mmk": 18670453,
+    "order": 12,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 18670453,
+        "date": "2026-02-25",
+        "total_mmk": 18670453
+      }
+    ]
+  },
+  {
+    "name": "သက်န်းရောင်းရငွေ",
+    "total_mmk": -5141556,
+    "order": 13,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -5141556,
+        "date": "2026-02-25",
+        "total_mmk": -5141556
+      }
+    ]
+  },
+  {
+    "name": "စိုက်/ချေး စာရင်း",
+    "total_mmk": 6792178,
+    "order": 14,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 6792178,
+        "date": "2026-02-25",
+        "total_mmk": 6792178
+      }
+    ]
+  },
+  {
+    "name": "ဗမချေးငွေ",
+    "total_mmk": -21940000,
+    "order": 15,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -21940000,
+        "date": "2026-02-25",
+        "total_mmk": -21940000
+      }
+    ]
+  },
+  {
+    "name": "အလှူရန်ပုံငွေ",
+    "total_mmk": 556282,
+    "order": 16,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 556282,
+        "date": "2026-02-25",
+        "total_mmk": 556282
+      }
+    ]
+  },
+  {
+    "name": "လစာရန်ပုံငွေ",
+    "total_mmk": 9801000,
+    "order": 17,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9801000,
+        "date": "2026-02-25",
+        "total_mmk": 9801000
+      }
+    ]
+  },
+  {
+    "name": "အင်ဂျင်ဝိုင်",
+    "total_mmk": 10826950,
+    "order": 18,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 10826950,
+        "date": "2026-02-25",
+        "total_mmk": 10826950
+      }
+    ]
+  },
+  {
+    "name": "ယောလုံချည်/ပုဝါပိုင်း",
+    "total_mmk": 1960300,
+    "order": 19,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 1960300,
+        "date": "2026-02-25",
+        "total_mmk": 1960300
+      }
+    ]
+  },
+  {
+    "name": "ကွမ်း + ဒူးရင်း + ငှက်ပျော",
+    "total_mmk": 9216024,
+    "order": 20,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 9216024,
+        "date": "2026-02-25",
+        "total_mmk": 9216024
+      }
+    ]
+  },
+  {
+    "name": "သမုတ်ဆီရောင်းရငွေ",
+    "total_mmk": 43818168,
+    "order": 21,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 43818168,
+        "date": "2026-02-25",
+        "total_mmk": 43818168
+      }
+    ]
+  },
+  {
+    "name": "ဆီဆိုင်လုပ်ငန်း",
+    "total_mmk": 22519,
+    "order": 22,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 22519,
+        "date": "2026-02-25",
+        "total_mmk": 22519
+      }
+    ]
+  },
+  {
+    "name": "လှေကပ်ခရငွေ",
+    "total_mmk": 2203700,
+    "order": 23,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 2203700,
+        "date": "2026-02-25",
+        "total_mmk": 2203700
+      }
+    ]
+  },
+  {
+    "name": "ရာဘာရောင်းရငွေ",
+    "total_mmk": 78253828,
+    "order": 24,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 78253828,
+        "date": "2026-02-25",
+        "total_mmk": 78253828
+      }
+    ]
+  },
+  {
+    "name": "(မဒဂ) အိမ်ဆောက်စာရင်း",
+    "total_mmk": -137445000,
+    "order": 25,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": -137445000,
+        "date": "2026-02-25",
+        "total_mmk": -137445000
+      }
+    ]
+  },
+  {
+    "name": "UZW, TTM ရန်ပုံငွေ",
+    "total_mmk": 7641350,
+    "order": 26,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 7641350,
+        "date": "2026-02-25",
+        "total_mmk": 7641350
+      }
+    ]
+  },
+  {
+    "name": "Nyan Lin Htet",
+    "total_mmk": 100000000,
+    "order": 27,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 100000000,
+        "date": "2026-03-22",
+        "total_mmk": 100000000,
+        "originalIndex": 0
+      }
+    ]
+  },
+  {
+    "name": "Baht ဝယ်စာရင်း",
+    "total_mmk": 1000000,
+    "total_foreign": 100000,
+    "order": 28,
+    "transactions": [
+      {
+        "description": "Initial Balance",
+        "amount": 100000,
+        "date": "2026-03-22",
+        "rate": 10,
+        "total_mmk": 1000000
       }
     ]
   }
