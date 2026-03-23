@@ -602,34 +602,5 @@
         "total_mmk": 7641350
       }
     ]
-  },
-  {
-    "name": "Nyan Lin Htet",
-    "total_mmk": 100000000,
-    "order": 27,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 100000000,
-        "date": "2026-03-22",
-        "total_mmk": 100000000,
-        "originalIndex": 0
-      }
-    ]
-  },
-  {
-    "name": "Baht ဝယ်စာရင်း",
-    "total_mmk": 1000000,
-    "total_foreign": 100000,
-    "order": 28,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 100000,
-        "date": "2026-03-22",
-        "rate": 10,
-        "total_mmk": 1000000
-      }
-    ]
   }
 ]

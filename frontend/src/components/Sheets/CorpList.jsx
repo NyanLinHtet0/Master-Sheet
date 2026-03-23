@@ -9,12 +9,6 @@ function CorpList({ corps, grandTotal, selectedCorpIndex, setSelectedCorpIndex, 
         <h2>Corporations</h2>
         <button onClick={() => setShowAddCorpForm(true)}>+ Add Corporation</button>
       </div>
-
-      <div className={styles.grandTotal}>
-        <span>Grand Total: </span>
-        <span>{Number(grandTotal).toLocaleString()}</span>
-      </div>
-
       {showAddCorpForm && (
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
           <div className={styles.corpFormWrapper}>
@@ -62,8 +56,12 @@ function CorpList({ corps, grandTotal, selectedCorpIndex, setSelectedCorpIndex, 
             <button type="submit">Submit</button>
             <button type="button" onClick={() => setShowAddCorpForm(false)}>Cancel</button>
           </div>
-        </form>
-      )}
+        </form>)}
+
+      <div className={styles.grandTotal}>
+        <span>Grand Total: </span>
+        <span>{Number(grandTotal).toLocaleString()}</span>
+      </div>
 
       <div className={`${styles.corpItems} custom-scrollbar`}>
         {corps.map((corp, index) => (
