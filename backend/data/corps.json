@@ -1,7 +1,7 @@
 [
   {
     "name": "ရေခဲ",
-    "total_mmk": 43133910,
+    "total_mmk": 42562860,
     "order": 1,
     "transactions": [
       {
@@ -272,8 +272,9 @@
       {
         "date": "2026-03-20",
         "description": "စရိတ်",
-        "total_mmk": -63450,
-        "amount": -63450
+        "total_mmk": -634500,
+        "amount": -634500,
+        "originalIndex": 44
       }
     ]
   },
