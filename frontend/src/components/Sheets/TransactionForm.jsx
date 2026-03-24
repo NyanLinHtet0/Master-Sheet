@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from '../../pages/Sheets.module.css';
+import transactionstyles from './TransactionForm.module.css';
 
 const today = new Date();
 const years = Array.from({ length: 3 }, (_, i) => today.getFullYear() - 1 + i);
@@ -103,8 +104,8 @@ export default function TransactionForm({ onSubmit, corpname }) {
       <h3 className={styles.formTitle}>Add New Transaction</h3>
       
       <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className={styles.formContainer}>
-        <div className={styles.inputRow}>
-          <div style={{ display: 'flex', gap: '4px', flex: spacing[0] }}>
+        <div className={transactionstyles.inputRow}>
+          <div style={styles.inputDatefields}>
             <select
               value={year}
               onChange={(e) => setYear(Number(e.target.value))}

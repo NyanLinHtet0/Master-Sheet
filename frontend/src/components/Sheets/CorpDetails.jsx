@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import TransactionForm from './TransactionForm';
 import TransactionTable from './TransactionTable';
 import SaveButton from './SaveButton';
 import styles from '../../pages/Sheets.module.css';
 
-export default function CorpDetails({ selectedCorp, onAddTransaction, onDeleteTransaction, onUpdateTransaction, isDirty, onSave }) {
+export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdateTransaction, isDirty, onSave }) {
   // State to handle toggling between Single and Split table views
   const [isSingleTableView, setIsSingleTableView] = useState(false);
 
@@ -74,8 +73,6 @@ export default function CorpDetails({ selectedCorp, onAddTransaction, onDeleteTr
           {isSingleTableView ? 'Split View' : 'Single View'}
         </button>
       </div>
-
-      <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
 
       <div className={styles.tablesContainer}>
         {isSingleTableView ? (

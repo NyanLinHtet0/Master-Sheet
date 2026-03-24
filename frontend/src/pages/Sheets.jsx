@@ -1,85 +1,79 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './Sheets.module.css';
 import CorpList from '../components/Sheets/CorpList';
 import CorpDetails from '../components/Sheets/CorpDetails';
 
-function Sheets() {
-  const [corps, setCorps] = useState([]);
+function Sheets({ corps, fetchCorps }) {
   const [selectedCorpIndex, setSelectedCorpIndex] = useState(null);
   const [showAddCorpForm, setShowAddCorpForm] = useState(false);
-  
-  // State for tracking unsaved changes
-  const [dirtyCorps, setDirtyCorps] = useState(new Set());
 
   const [newCorpName, setNewCorpName] = useState('');
-  const [newCorpBalance, setNewCorpBalance] = useState('');
+  const [newCorpBalance, setNewCorpBalance] = useState(''); 
   const [newCorpForeign, setNewCorpForeign] = useState('');
 
-  const fetchCorps = () => {
-    fetch('/api/corps')
-      .then(res => res.json())
-      .then(data => {
-        const sortedData = data.sort((a, b) => (a.order || 999) - (b.order || 999));
-        setCorps(sortedData);
-      })
-      .catch(err => console.error("Error fetching corps:", err));
-  };
+  const grandTotal = corps.reduce((sum, corp) => {
+    const corpTotal = corp.total_mmk || 0; 
+    return sum + Number(corpTotal);
+  }, 0);
 
-  useEffect(() => {
-    fetchCorps();
-  }, []);
+  const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
 
   const handleAddCorp = (e) => {
     e.preventDefault();
-    if (!newCorpName.trim()) return;
+
+    if (corps.some(c => c?.name === newCorpName.trim())) {
+      alert("A corporation with this name already exists!");
+      return;
+    }
 
     const isBaht = newCorpName.includes('ဝယ်စာရင်း');
+    const kyatVal = Number(newCorpBalance) || 0;
+    const foreignVal = Number(newCorpForeign) || 0;
+
+    const calculatedRate = (isBaht && foreignVal !== 0) ? kyatVal / foreignVal : 0;
+    const initialTotalMmk = kyatVal;
+
     const newCorp = {
       name: newCorpName.trim(),
-      total_mmk: Number(newCorpBalance) || 0,
+      total_mmk: initialTotalMmk,
+      ...(isBaht && { total_foreign: foreignVal }),
       order: corps.length + 1,
-      transactions: [
+      transactions: (kyatVal !== 0 || foreignVal !== 0) ? [
         {
           description: "Initial Balance",
-          amount: Number(newCorpBalance) || 0,
-          date: new Date().toISOString().split('T')[0],
-          total_mmk: Number(newCorpBalance) || 0
+          amount: isBaht ? foreignVal : kyatVal,
+          date: new Date().toLocaleDateString('en-CA'),
+          ...(isBaht && { rate: calculatedRate }),
+          total_mmk: initialTotalMmk
         }
-      ]
+      ] : []
     };
-
-    if (isBaht) {
-      newCorp.total_foreign = Number(newCorpForeign) || 0;
-    }
 
     fetch('/api/corps', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newCorp)
     }).then(() => {
+      fetchCorps(); 
       setNewCorpName('');
       setNewCorpBalance('');
       setNewCorpForeign('');
       setShowAddCorpForm(false);
-      fetchCorps();
     });
   };
 
-  const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
-
-  // Handles adding a new transaction locally and marks it dirty
   const handleAddTx = (newTx) => {
-    if (!selectedCorp) return;
-
+    if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
     const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
-    const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate || 0) : Number(newTx.amount);
+
+    const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate) : Number(newTx.amount);
     newTx.total_mmk = txTotalMmk;
 
-    const updatedCorp = {
-      ...selectedCorp,
-      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx]
+    const updatedCorp = { 
+      ...selectedCorp, 
+      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
     };
-
+    
     const currentTotalMmk = Number(updatedCorp.total_mmk || 0);
     updatedCorp.total_mmk = currentTotalMmk + txTotalMmk;
 
@@ -88,10 +82,15 @@ function Sheets() {
       updatedCorp.total_foreign = currentTotalForeign + Number(newTx.amount);
     }
 
-    updateLocalStateAndMarkDirty(updatedCorp);
+    fetch('/api/corps', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedCorp)
+    }).then(() => {
+      fetchCorps(); 
+    });
   };
 
-  // Shared function to update local transactions
   const saveUpdatedTransactions = (newTransactions) => {
     const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
     let newTotalMmk = 0;
@@ -101,12 +100,12 @@ function Sheets() {
       const txTotalMmk = isBaht ? Number(tx.amount) * Number(tx.rate || 0) : Number(tx.amount);
       newTotalMmk += txTotalMmk;
       if (isBaht) newTotalForeign += Number(tx.amount);
-
-      if (isBaht) {
-        return { ...tx, amount: Number(tx.amount), rate: Number(tx.rate), total_mmk: txTotalMmk };
-      } else {
-        return { ...tx, amount: Number(tx.amount), total_mmk: txTotalMmk };
-      }
+      return { 
+        ...tx, 
+        amount: Number(tx.amount), 
+        ...(isBaht && { rate: Number(tx.rate) }), 
+        total_mmk: txTotalMmk 
+      };
     });
 
     const updatedCorp = {
@@ -116,26 +115,16 @@ function Sheets() {
       ...(isBaht && { total_foreign: newTotalForeign })
     };
 
-    updateLocalStateAndMarkDirty(updatedCorp);
-  };
-
-  // Helper function to update state and set dirty flag
-  const updateLocalStateAndMarkDirty = (updatedCorp) => {
-    setCorps(prevCorps => {
-      const newCorps = [...prevCorps];
-      newCorps[selectedCorpIndex] = updatedCorp;
-      return newCorps;
-    });
-
-    setDirtyCorps(prev => {
-      const newSet = new Set(prev);
-      newSet.add(updatedCorp.name);
-      return newSet;
-    });
+    fetch('/api/corps', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedCorp)
+    }).then(() => fetchCorps());
   };
 
   const handleDeleteTx = (originalIndex) => {
-    const newTransactions = selectedCorp.transactions.filter((_, i) => i !== originalIndex);
+    if (!window.confirm("Are you sure you want to delete this transaction?")) return;
+    const newTransactions = selectedCorp.transactions.filter((_, idx) => idx !== originalIndex);
     saveUpdatedTransactions(newTransactions);
   };
 
@@ -145,38 +134,15 @@ function Sheets() {
     saveUpdatedTransactions(newTransactions);
   };
 
-  // Master function to push all dirty updates to database
-  const handleSaveToDatabase = async () => {
-    const corpsToSave = corps.filter(c => dirtyCorps.has(c.name));
-    if (corpsToSave.length === 0) return;
-
-    try {
-      await Promise.all(corpsToSave.map(corp =>
-        fetch('/api/corps', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(corp)
-        })
-      ));
-
-      // Clear the dirty flag upon success
-      setDirtyCorps(new Set());
-    } catch (error) {
-      console.error('Failed to save to database', error);
-      alert('Error saving data. Please check connection.');
-    }
-  };
-
-  const grandTotal = corps.reduce((sum, corp) => sum + Number(corp.total_mmk || 0), 0);
-
   return (
     <div className={styles.appContainer}>
-      <CorpList
-        corps={corps}
-        grandTotal={grandTotal}
-        selectedCorpIndex={selectedCorpIndex}
-        setSelectedCorpIndex={setSelectedCorpIndex}
-        showAddCorpForm={showAddCorpForm}
+      <CorpList 
+        corps={corps} 
+        grandTotal={grandTotal} 
+        selectedCorpIndex={selectedCorpIndex} 
+        setSelectedCorpIndex={setSelectedCorpIndex} 
+        selectedCorp={selectedCorp} // <-- Passed this down
+        showAddCorpForm={showAddCorpForm} 
         setShowAddCorpForm={setShowAddCorpForm}
         newCorpName={newCorpName}
         setNewCorpName={setNewCorpName}
@@ -185,14 +151,13 @@ function Sheets() {
         handleAddCorp={handleAddCorp}
         newCorpForeign={newCorpForeign}
         setNewCorpForeign={setNewCorpForeign}
+        onAddTransaction={handleAddTx} // <-- Fixed this to pass the correct function
       />
-      <CorpDetails
-        selectedCorp={selectedCorp}
-        onAddTransaction={handleAddTx}
+      <CorpDetails 
+        selectedCorp={selectedCorp} 
+
         onDeleteTransaction={handleDeleteTx}
         onUpdateTransaction={handleUpdateTx}
-        isDirty={selectedCorp ? dirtyCorps.has(selectedCorp.name) : false}
-        onSave={handleSaveToDatabase}
       />
     </div>
   );

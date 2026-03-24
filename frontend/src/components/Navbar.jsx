@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
 function Navbar() {
-  const location = useLocation(); // This tells us which page we are on
+  const location = useLocation();
 
   return (
     <nav className={styles.navbar}>
@@ -17,6 +17,13 @@ function Navbar() {
         className={location.pathname === '/Sheets' ? `${styles.link} ${styles.activeLink}` : styles.link}
       >
         Sheets
+      </Link>
+      {/* Added View route to Navbar */}
+      <Link 
+        to="/View" 
+        className={location.pathname === '/View' ? `${styles.link} ${styles.activeLink}` : styles.link}
+      >
+        View
       </Link>
     </nav>
   );

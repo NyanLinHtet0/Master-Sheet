@@ -37,6 +37,10 @@
   flex: 2;
 }
 
+.corpList{
+  padding: 10px 5px 10px 5px;
+}
+
 
 
 /* --- HEADERS & TOTALS --- */
@@ -421,4 +425,18 @@
 
 .rateText {
   color: #dd6b20; /* A nice orange to highlight the rate */
+}
+
+/* frontend/src/pages/Sheets.module.css */
+
+@media (max-width: 1180px) {
+  .tablesContainer {
+    flex-direction: column;
+  }
+  
+  /* Optional: You may also want to remove fixed heights or allow them to expand naturally */
+  .tableWrapper {
+    flex: none;
+    height: auto;
+  }
 }
