@@ -279,15 +279,158 @@
   },
   {
     "name": "ဒီဇယ်",
-    "total_mmk": 25281376,
-    "order": 2,
+    "total_mmk": 25463079,
+    "order": 1,
     "transactions": [
       {
         "description": "Initial Balance",
-        "amount": 25281376,
-        "date": "2026-02-25",
-        "total_mmk": 25281376,
-        "originalIndex": 0
+        "amount": 10236779,
+        "date": "2026-03-21",
+        "total_mmk": 10236779
+      },
+      {
+        "date": "2026-02-26",
+        "description": "ဒီဇယ်ရောင်းရငွေ ",
+        "amount": 2054300,
+        "total_mmk": 2054300
+      },
+      {
+        "date": "2026-02-27",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 2624200,
+        "total_mmk": 2624200
+      },
+      {
+        "date": "2026-02-28",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 417300,
+        "total_mmk": 417300
+      },
+      {
+        "date": "2026-03-01",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 963000,
+        "total_mmk": 963000
+      },
+      {
+        "date": "2026-03-02",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 14029800,
+        "total_mmk": 14029800
+      },
+      {
+        "date": "2026-03-03",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 11426000,
+        "total_mmk": 11426000
+      },
+      {
+        "date": "2026-03-04",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 1680000,
+        "total_mmk": 1680000
+      },
+      {
+        "date": "2026-03-05",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 1552100,
+        "total_mmk": 1552100
+      },
+      {
+        "date": "2026-03-06",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 230200,
+        "total_mmk": 230200
+      },
+      {
+        "date": "2026-03-07",
+        "description": "D (25 ပီပါ= 5500 li * 24.00) ဝယ် (132000 bath * 126.50)",
+        "amount": -16698000,
+        "total_mmk": -16698000
+      },
+      {
+        "date": "2026-03-07",
+        "description": "D (15 ပီပါ * 1030000) ဝယ် ",
+        "amount": -15450000,
+        "total_mmk": -15450000
+      },
+      {
+        "date": "2026-03-07",
+        "description": "(2/2026)  ငါးစာရင်းသို့ပေး",
+        "amount": -300000,
+        "total_mmk": -300000
+      },
+      {
+        "date": "2026-03-08",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 334000,
+        "total_mmk": 334000
+      },
+      {
+        "date": "2026-03-09",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 225500,
+        "total_mmk": 225500
+      },
+      {
+        "date": "2026-03-11",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 59100,
+        "total_mmk": 59100
+      },
+      {
+        "date": "2026-03-12",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 433400,
+        "total_mmk": 433400
+      },
+      {
+        "date": "2026-03-13",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 835600,
+        "total_mmk": 835600
+      },
+      {
+        "date": "2026-03-14",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 2473600,
+        "total_mmk": 2473600
+      },
+      {
+        "date": "2026-03-15",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 4657400,
+        "total_mmk": 4657400
+      },
+      {
+        "date": "2026-03-16",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 1943300,
+        "total_mmk": 1943300
+      },
+      {
+        "date": "2026-03-17",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 906900,
+        "total_mmk": 906900
+      },
+      {
+        "date": "2026-03-18",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 44600,
+        "total_mmk": 44600
+      },
+      {
+        "date": "2026-03-19",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 549000,
+        "total_mmk": 549000
+      },
+      {
+        "date": "2026-03-20",
+        "description": "ဒီဇယ်ရောင်းရငွေ",
+        "amount": 235000,
+        "total_mmk": 235000
       }
     ]
   },
