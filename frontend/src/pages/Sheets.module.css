@@ -429,14 +429,35 @@
 
 /* frontend/src/pages/Sheets.module.css */
 
-@media (max-width: 1180px) {
-  .tablesContainer {
-    flex-direction: column;
+@media (max-width: 1300px) {
+  .tableScroll {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+    
+    /* For Firefox */
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; 
   }
-  
-  /* Optional: You may also want to remove fixed heights or allow them to expand naturally */
-  .tableWrapper {
-    flex: none;
-    height: auto;
+
+  /* Force the scrollbar to show in Chrome/Safari/Edge */
+  .tableScroll::-webkit-scrollbar {
+    display: block; /* Ensures it overrides any previous 'display: none' */
+    height: 8px; /* The thickness of the horizontal scrollbar */
+  }
+
+  /* The track (background) of the scrollbar */
+  .tableScroll::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+
+  /* The draggable thumb of the scrollbar */
+  .tableScroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Dark enough to be seen */
+    border-radius: 4px; /* Gives it nice rounded edges */
+  }
+
+  /* Darken the scrollbar when the user hovers over it */
+  .tableScroll::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
   }
 }

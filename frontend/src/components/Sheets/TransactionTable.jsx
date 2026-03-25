@@ -1,39 +1,78 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from '../../pages/Sheets.module.css';
 
 export default function TransactionTable({ title, data, type, corpname, onDelete, onUpdate }) {
+  const isEmpty = data.length === 0;
   const isBaht = corpname && corpname.includes('ဝယ်စာရင်း');
-  const isEmpty = !data || data.length === 0;
-  
+
+  // New state to toggle edit mode for the table
   const [isTableEditMode, setIsTableEditMode] = useState(false);
+
+  // State to track which row is actively being edited
   const [editingRowIndex, setEditingRowIndex] = useState(null);
-  const [editFormData, setEditFormData] = useState({});
+  
+  // State to hold the temporary edit values
+  const [editFormData, setEditFormData] = useState({
+    date: '',
+    description: '',
+    amount: '',
+    rate: ''
+  });
 
   const handleEditClick = (tx) => {
     setEditingRowIndex(tx.originalIndex);
-    const formattedDate = typeof tx.date === 'string' ? 
-      tx.date.split('T')[0] : new Date(tx.date).toISOString().split('T')[0];
-    setEditFormData({ ...tx, date: formattedDate });
+    
+    // Format the date for the date input (YYYY-MM-DD)
+    let formattedDate = '';
+    if (tx.date) {
+      const [year, month, day] = tx.date.split('-');
+      formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+
+    setEditFormData({
+      date: formattedDate,
+      description: tx.description || '',
+      amount: tx.amount || '',
+      rate: tx.rate || ''
+    });
   };
 
-  const handleSaveClick = () => {
-    onUpdate(editingRowIndex, editFormData);
+  const handleCancelEdit = () => {
+    setEditingRowIndex(null);
+  };
+
+  const handleSaveEdit = (originalIndex) => {
+    // Determine the year, month, day from the input
+    const [year, month, day] = editFormData.date.split('-');
+    const formattedDate = `${year}-${Number(month)}-${Number(day)}`; // Strip leading zeros to match original format if desired
+
+    const updatedTx = {
+      date: formattedDate,
+      description: editFormData.description,
+      amount: editFormData.amount,
+      ...(isBaht && { rate: editFormData.rate })
+    };
+
+    onUpdate(originalIndex, updatedTx);
     setEditingRowIndex(null);
   };
 
   const handleInputChange = (e, field) => {
-    setEditFormData({ ...editFormData, [field]: e.target.value });
+    setEditFormData({
+      ...editFormData,
+      [field]: e.target.value
+    });
   };
 
   return (
     <>
-      <div className={styles.txHeader}>
+      <div className={styles.txHeader} style={{ marginBottom: '10px' }}>
         <h3 className={styles.tableTitle}>{title}</h3>
         {!isEmpty && (
           <button 
             onClick={() => {
               setIsTableEditMode(!isTableEditMode);
-              setEditingRowIndex(null);
+              setEditingRowIndex(null); 
             }}
           >
             {isTableEditMode ? 'Done' : 'Edit Table'}
@@ -59,77 +98,79 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                 ) : (
                   <th style={{ textAlign: 'right' }}>Amount</th>
                 )}
-                {isTableEditMode && <th style={{ textAlign: 'center' }}>Actions</th>}
+                {/* Provide a non-breaking space when hidden to maintain perfect border alignment */}
+                <th style={{ textAlign: 'center', width: '150px' }}>
+                  {isTableEditMode ? 'Actions' : '\u00A0'}
+                </th>
               </tr>
             </thead>
             <tbody>
               {data.map((tx, index) => {
                 const isEditingThisRow = editingRowIndex === tx.originalIndex;
-                
+
                 // Dynamic Color Logic
-                const amountColor = 
-                  (type === 'income' || (type === 'all' && Number(tx.amount) >= 0)) ? 'var(--success-color)' : 
-                  (type === 'expense' || (type === 'all' && Number(tx.amount) < 0)) ? '#ef4444' : 'inherit';
+                const amountColor = (type === 'income' || (type === 'all' && Number(tx.amount) >= 0)) 
+                  ? 'var(--success-color)' 
+                  : (type === 'expense' || (type === 'all' && Number(tx.amount) < 0)) 
+                    ? '#ef4444' 
+                    : 'inherit';
 
                 return (
                   <tr key={index}>
                     {isEditingThisRow ? (
                       <>
                         <td>
-                          <input type="date" value={editFormData.date} onChange={(e) => handleInputChange(e, 'date')} />
+                          <input 
+                            type="date" 
+                            value={editFormData.date} 
+                            onChange={(e) => handleInputChange(e, 'date')} 
+                          />
                         </td>
                         <td>
-                          <input type="text" value={editFormData.description} onChange={(e) => handleInputChange(e, 'description')} />
+                          <input 
+                            type="text" 
+                            value={editFormData.description} 
+                            onChange={(e) => handleInputChange(e, 'description')} 
+                          />
                         </td>
                         {isBaht ? (
                           <>
                             <td style={{ textAlign: 'right' }}>
                               <input 
-                                style={{ textAlign: 'right' }}
-                                type="text" 
-                                value={ editFormData.amount === '-' ? '-' : editFormData.amount ? Number(editFormData.amount).toLocaleString() : '' } 
-                                onChange={(e) => { 
-                                  const raw = e.target.value.replace(/,/g, ''); 
-                                  if (raw === '' || raw === '-' || !isNaN(raw)) { 
-                                    setEditFormData({ ...editFormData, amount: raw }); 
-                                  } 
-                                }} 
+                                style={{ textAlign: 'right', width: '80px' }}
+                                type="number" 
+                                value={editFormData.amount} 
+                                onChange={(e) => handleInputChange(e, 'amount')} 
                               />
                             </td>
                             <td style={{ textAlign: 'right' }}>
                               <input 
-                                style={{ textAlign: 'right' }}
+                                style={{ textAlign: 'right', width: '60px' }}
                                 type="number" 
                                 value={editFormData.rate} 
                                 onChange={(e) => handleInputChange(e, 'rate')} 
                               />
                             </td>
-                            <td style={{ textAlign: 'right' }}>
-                              {editFormData.total_mmk ? Number(editFormData.total_mmk).toLocaleString() : ''}
+                            <td style={{ textAlign: 'right', color: 'var(--text-muted)' }}>
+                              Auto
                             </td>
                           </>
                         ) : (
                           <td style={{ textAlign: 'right' }}>
                             <input 
-                              style={{ textAlign: 'right' }}
-                              type="text" 
-                              value={ editFormData.amount === '-' ? '-' : editFormData.amount ? Number(editFormData.amount).toLocaleString() : '' } 
-                              onChange={(e) => { 
-                                const raw = e.target.value.replace(/,/g, ''); 
-                                if (raw === '' || raw === '-' || !isNaN(raw)) { 
-                                  setEditFormData({ ...editFormData, amount: raw }); 
-                                } 
-                              }} 
+                              style={{ textAlign: 'right', width: '100px' }}
+                              type="number" 
+                              value={editFormData.amount} 
+                              onChange={(e) => handleInputChange(e, 'amount')} 
                             />
                           </td>
                         )}
-                        <td className={styles.actionCell} style={{ textAlign: 'center', justifyContent: 'center' }}>
-                          <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={handleSaveClick}>
-                            Save
-                          </button>
-                          <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => setEditingRowIndex(null)}>
-                            Cancel
-                          </button>
+                        {/* Consistent 150px width and flex layout for inline editing */}
+                        <td className={styles.actionCell} style={{ textAlign: 'center', width: '150px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                            <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleSaveEdit(tx.originalIndex)}>Save</button>
+                            <button className={`${styles.actionBtn} ${styles.cancelBtn}`} onClick={handleCancelEdit}>Cancel</button>
+                          </div>
                         </td>
                       </>
                     ) : (
@@ -159,16 +200,21 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                             </span>
                           </td>
                         )}
-                        {isTableEditMode && (
-                          <td className={styles.actionCell} style={{ textAlign: 'center', justifyContent: 'center' }}>
-                            <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleEditClick(tx)}>
-                              Edit
-                            </button>
-                            <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => onDelete(tx.originalIndex)}>
-                              Delete
-                            </button>
-                          </td>
-                        )}
+                        {/* Always render the td. If not in edit mode, insert a non-breaking space */}
+                        <td className={styles.actionCell} style={{ textAlign: 'center', width: '150px' }}>
+                          {isTableEditMode ? (
+                            <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                              <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleEditClick(tx)}>
+                                Edit
+                              </button>
+                              <button className={`${styles.actionBtn} ${styles.deleteBtn}`} onClick={() => onDelete(tx.originalIndex)}>
+                                Delete
+                              </button>
+                            </div>
+                          ) : (
+                            <span>&nbsp;</span>
+                          )}
+                        </td>
                       </>
                     )}
                   </tr>

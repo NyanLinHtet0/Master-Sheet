@@ -5,7 +5,7 @@ OUTPUT_FILE = "important_project_files.txt"
 # Folders to completely ignore
 IGNORE_DIRS = {'node_modules', '.git', 'dist', 'assets', 'public'}
 # Extensions you want to capture
-INCLUDE_EXTENSIONS = {'.js', '.jsx', '.css', '.json'}
+INCLUDE_EXTENSIONS = {'.js', '.jsx', '.css'}
 
 def bundle_files():
     # Get the directory where the script is running
