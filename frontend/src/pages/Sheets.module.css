@@ -460,4 +460,10 @@
   .tableScroll::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5); 
   }
+
+  .grandTotal{
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px;
+  }
 }

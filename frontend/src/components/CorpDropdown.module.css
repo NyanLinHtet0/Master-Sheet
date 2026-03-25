@@ -43,6 +43,7 @@
   min-width: 50px;
   line-height: 1.8;
   padding: 4px 0;
+  text-align: center;
 }
 
 .searchInput::placeholder {
@@ -131,4 +132,20 @@
   font-style: italic;
   font-size: 18px;
   font-weight: 700;
+}
+
+
+@media (max-width: 1300px) {
+  .inputGroup {
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+  .searchInput{
+    align-items: center;
+    margin: 0;
+  }
+  .dropdownWrapper {
+    padding: 0;
+  }
 }
