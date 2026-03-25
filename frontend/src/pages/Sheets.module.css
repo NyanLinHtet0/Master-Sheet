@@ -33,6 +33,10 @@
   flex-direction: column;
   height: 100%;
 }
+
+.corpList{
+  flex:.5
+}
 .corpDetails{
   flex: 2;
 }
@@ -472,5 +476,8 @@
     flex-direction: column;
     padding: 5px;
     margin: 5px;
+  }
+  .corpList{
+    flex: 1;
   }
 }
