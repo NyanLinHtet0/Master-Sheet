@@ -5,10 +5,10 @@
     "order": 1,
     "transactions": [
       {
+        "date": "2026-2-25",
         "description": "Initial Balance",
-        "date": "2026-02-25",
-        "total_mmk": 43264260,
-        "amount": 43264260
+        "amount": 43264260,
+        "total_mmk": 43264260
       },
       {
         "date": "2026-02-26",

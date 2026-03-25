@@ -167,7 +167,7 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                         )}
                         {/* Consistent 150px width and flex layout for inline editing */}
                         <td className={styles.actionCell} style={{ textAlign: 'center', width: '150px' }}>
-                          <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                          <div className={styles.actionCellButtons}>
                             <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleSaveEdit(tx.originalIndex)}>Save</button>
                             <button className={`${styles.actionBtn} ${styles.cancelBtn}`} onClick={handleCancelEdit}>Cancel</button>
                           </div>
@@ -203,7 +203,7 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                         {/* Always render the td. If not in edit mode, insert a non-breaking space */}
                         <td className={styles.actionCell} style={{ textAlign: 'center', width: '150px' }}>
                           {isTableEditMode ? (
-                            <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                            <div className={styles.actionCellButtons}>
                               <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleEditClick(tx)}>
                                 Edit
                               </button>

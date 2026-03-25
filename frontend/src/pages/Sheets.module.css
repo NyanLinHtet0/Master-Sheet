@@ -246,10 +246,17 @@
   vertical-align: middle;
 }
 
-/* Flex container for the action buttons to keep them neatly side-by-side */
+/* Fix: Remove 'display: flex' from the td to keep table-cell properties intact */
 .actionCell {
+  vertical-align: middle;
+  text-align: center;
+  min-width: 150px;
+}
+
+/* New class for the div inside the td that holds the buttons */
+.actionCellButtons {
   display: flex;
-  gap: 8px;
+  gap: 5px;
   justify-content: center;
   align-items: center;
 }
@@ -342,7 +349,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 1px 0 var(--border-color); /* Keeps a crisp line under the sticky header */
+  box-shadow: 0 1px 0 var(--border-color);
 }
 
 
