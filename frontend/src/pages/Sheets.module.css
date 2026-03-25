@@ -429,7 +429,7 @@
 
 /* frontend/src/pages/Sheets.module.css */
 
-@media (max-width: 1180px) {
+@media (max-width: 1300px) {
   .tablesContainer {
     flex-direction: column;
   }
@@ -438,5 +438,11 @@
   .tableWrapper {
     flex: none;
     height: auto;
+  }
+
+  .grandTotal{
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px;
   }
 }
