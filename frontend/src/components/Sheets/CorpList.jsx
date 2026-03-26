@@ -1,13 +1,12 @@
 import styles from '../../pages/Sheets.module.css';
 import CorpDropdown from '../CorpDropdown';
-// Make sure to import TransactionForm here if you haven't already!
 import TransactionForm from './TransactionForm'; 
 
 function CorpList({ 
   corps, 
   grandTotal, 
   setSelectedCorpIndex,
-  selectedCorp, // Added this prop to safely access selectedCorp.name
+  selectedCorp, 
   showAddCorpForm, 
   setShowAddCorpForm, 
   newCorpName, 
@@ -17,7 +16,7 @@ function CorpList({
   handleAddCorp, 
   newCorpForeign, 
   setNewCorpForeign,
-  onAddTransaction // We will pass handleAddTx from Sheets into this prop
+  onAddTransaction 
 }) {
   const isBahtCorp = newCorpName.includes('ဝယ်စာရင်း');
 
@@ -30,11 +29,11 @@ function CorpList({
 
       {showAddCorpForm && (
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
-          <div className={styles.corpFormWrapper}>
+          <div className={styles.corpFormWrapper} style={{ alignItems: 'center' }}>
             <div className={styles.inputFieldCont} style={{flex:'2' }}>
               <input
                 type="text"
-                placeholder="Corporation Name"
+                placeholder="Corporation Name ('.../i' for inverse)"
                 required
                 value={newCorpName}
                 onChange={(e) => setNewCorpName(e.target.value)}
@@ -49,7 +48,7 @@ function CorpList({
                 onChange={(e) => {
                   const raw = e.target.value.replace(/,/g, '');
                   if (raw === '' || raw === '-' || !isNaN(raw)) {
-                    setNewCorpBalance(raw);
+                      setNewCorpBalance(raw);
                   }
                 }}
               />
@@ -60,10 +59,12 @@ function CorpList({
                 <input
                   type="text"
                   placeholder="Initial Baht"
-                  value={newCorpForeign ? Number(newCorpForeign).toLocaleString() : ''}
+                  value={newCorpForeign === '-' ? '-' : newCorpForeign ? Number(newCorpForeign).toLocaleString() : ''}
                   onChange={(e) => {
-                    const raw = e.target.value.replace(/,/g, '');
-                    if (!isNaN(raw)) setNewCorpForeign(raw);
+                    const raw2 = e.target.value.replace(/,/g, '');
+                    if (raw2 === '' || raw2 === '-' || !isNaN(raw2)) {
+                      setNewCorpForeign(raw2);
+                    }
                   }}
                 />
               </div>
@@ -92,11 +93,12 @@ function CorpList({
         />
       </div>
 
-      {/* Added a safety check so it only renders if a corp is selected */}
       {selectedCorp && (
-        <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
+        <TransactionForm 
+           corpname={selectedCorp.name} 
+           onSubmit={onAddTransaction} 
+        />
       )}
-      
     </div>
   );
 }

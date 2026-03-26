@@ -1,137 +1,150 @@
-import { useState } from 'react';
-import styles from './Sheets.module.css';
+import React, { useState, useEffect } from 'react';
 import CorpList from '../components/Sheets/CorpList';
 import CorpDetails from '../components/Sheets/CorpDetails';
+import styles from './Sheets.module.css';
 
 function Sheets({ corps, fetchCorps }) {
   const [selectedCorpIndex, setSelectedCorpIndex] = useState(null);
   const [showAddCorpForm, setShowAddCorpForm] = useState(false);
-
+  
+  // New Corp State
   const [newCorpName, setNewCorpName] = useState('');
-  const [newCorpBalance, setNewCorpBalance] = useState(''); 
+  const [newCorpBalance, setNewCorpBalance] = useState('');
   const [newCorpForeign, setNewCorpForeign] = useState('');
-
-  const grandTotal = corps.reduce((sum, corp) => {
-    const corpTotal = corp.total_mmk || 0; 
-    return sum + Number(corpTotal);
-  }, 0);
 
   const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
 
+  const grandTotal = corps.reduce((sum, corp) => sum + Number(corp.total_mmk || 0), 0);
+
   const handleAddCorp = (e) => {
     e.preventDefault();
+    
+    // Parse name for '/i' suffix
+    let parsedName = newCorpName.trim();
+    let isInverse = false;
+    
+    if (parsedName.toLowerCase().endsWith('/i')) {
+        isInverse = true;
+        parsedName = parsedName.slice(0, -2).trim(); // Remove the '/i' from the name
+    }
 
-    if (corps.some(c => c?.name === newCorpName.trim())) {
+    if (corps.some(c => c?.name === parsedName)) {
       alert("A corporation with this name already exists!");
       return;
     }
-
-    const isBaht = newCorpName.includes('ဝယ်စာရင်း');
+    
+    const isBaht = parsedName.includes('ဝယ်စာရင်း');
     const kyatVal = Number(newCorpBalance) || 0;
     const foreignVal = Number(newCorpForeign) || 0;
-
+    
+    // Apply inverse multiplier based on the parsed flag
+    const multiplier = isInverse ? -1 : 1;
+    const initialTotalMmk = kyatVal * multiplier;
+    const initialTotalForeign = foreignVal * multiplier;
     const calculatedRate = (isBaht && foreignVal !== 0) ? kyatVal / foreignVal : 0;
-    const initialTotalMmk = kyatVal;
-
+    
     const newCorp = {
-      name: newCorpName.trim(),
+      name: parsedName, // Save the clean name
+      inverse: isInverse, // Save inverse flag to the database
       total_mmk: initialTotalMmk,
-      ...(isBaht && { total_foreign: foreignVal }),
+      ...(isBaht && { total_foreign: initialTotalForeign }),
       order: corps.length + 1,
-      transactions: (kyatVal !== 0 || foreignVal !== 0) ? [
-        {
-          description: "Initial Balance",
-          amount: isBaht ? foreignVal : kyatVal,
-          date: new Date().toLocaleDateString('en-CA'),
-          ...(isBaht && { rate: calculatedRate }),
-          total_mmk: initialTotalMmk
-        }
-      ] : []
+      transactions: (kyatVal !== 0 || foreignVal !== 0) ?
+      [ { 
+          description: "Initial Balance", 
+          amount: isBaht ? (foreignVal * multiplier) : (kyatVal * multiplier), 
+          date: new Date().toLocaleDateString('en-CA'), 
+          ...(isBaht && { rate: calculatedRate }), 
+          total_mmk: initialTotalMmk 
+        } ] : []
     };
-
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newCorp)
-    }).then(() => {
+  
+    fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newCorp) })
+    .then(() => { 
       fetchCorps(); 
-      setNewCorpName('');
-      setNewCorpBalance('');
-      setNewCorpForeign('');
-      setShowAddCorpForm(false);
+      setNewCorpName(''); 
+      setNewCorpBalance(''); 
+      setNewCorpForeign(''); 
+      setShowAddCorpForm(false); 
     });
   };
 
   const handleAddTx = (newTx) => {
     if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
     const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
-
+    
+    // Invert the submitted positive value into negative for the database
+    if (selectedCorp.inverse) {
+        newTx.amount = Number(newTx.amount) * -1;
+    }
+  
     const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate) : Number(newTx.amount);
     newTx.total_mmk = txTotalMmk;
-
-    const updatedCorp = { 
-      ...selectedCorp, 
-      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
-    };
-    
+  
+    const updatedCorp = { ...selectedCorp, transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] };
     const currentTotalMmk = Number(updatedCorp.total_mmk || 0);
     updatedCorp.total_mmk = currentTotalMmk + txTotalMmk;
-
+    
     if (isBaht) {
-      const currentTotalForeign = Number(updatedCorp.total_foreign || 0);
-      updatedCorp.total_foreign = currentTotalForeign + Number(newTx.amount);
+        const currentForeign = Number(updatedCorp.total_foreign || 0);
+        updatedCorp.total_foreign = currentForeign + Number(newTx.amount);
+    }
+    
+    fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedCorp) })
+    .then(() => fetchCorps());
+  };
+
+  const handleUpdateTx = (index, updatedTx) => {
+    // If the user updates an edited transaction, the value they put in is visually positive, invert it back before saving
+    if (selectedCorp.inverse) {
+       updatedTx.amount = Number(updatedTx.amount) * -1;
+    }
+    
+    const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
+    const txTotalMmk = isBaht ? Number(updatedTx.amount) * Number(updatedTx.rate) : Number(updatedTx.amount);
+    updatedTx.total_mmk = txTotalMmk;
+
+    const newTransactions = [...selectedCorp.transactions];
+    newTransactions[index] = updatedTx;
+
+    let totalMmk = 0;
+    let totalForeign = 0;
+
+    newTransactions.forEach(tx => {
+        totalMmk += Number(tx.total_mmk || 0);
+        if (isBaht) {
+            totalForeign += Number(tx.amount || 0);
+        }
+    });
+
+    const updatedCorp = { ...selectedCorp, transactions: newTransactions, total_mmk: totalMmk };
+    if (isBaht) {
+        updatedCorp.total_foreign = totalForeign;
     }
 
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedCorp)
-    }).then(() => {
-      fetchCorps(); 
-    });
+    fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedCorp) })
+    .then(() => fetchCorps());
   };
 
-  const saveUpdatedTransactions = (newTransactions) => {
-    const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
-    let newTotalMmk = 0;
-    let newTotalForeign = 0;
+  const handleDeleteTx = (index) => {
+      const newTransactions = selectedCorp.transactions.filter((_, i) => i !== index);
+      const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
+      
+      let totalMmk = 0;
+      let totalForeign = 0;
+      
+      newTransactions.forEach(tx => {
+          totalMmk += Number(tx.total_mmk || 0);
+          if (isBaht) totalForeign += Number(tx.amount || 0);
+      });
 
-    const finalTransactions = newTransactions.map(tx => {
-      const txTotalMmk = isBaht ? Number(tx.amount) * Number(tx.rate || 0) : Number(tx.amount);
-      newTotalMmk += txTotalMmk;
-      if (isBaht) newTotalForeign += Number(tx.amount);
-      return { 
-        ...tx, 
-        amount: Number(tx.amount), 
-        ...(isBaht && { rate: Number(tx.rate) }), 
-        total_mmk: txTotalMmk 
-      };
-    });
+      const updatedCorp = { ...selectedCorp, transactions: newTransactions, total_mmk: totalMmk };
+      if (isBaht) {
+          updatedCorp.total_foreign = totalForeign;
+      }
 
-    const updatedCorp = {
-      ...selectedCorp,
-      transactions: finalTransactions,
-      total_mmk: newTotalMmk,
-      ...(isBaht && { total_foreign: newTotalForeign })
-    };
-
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedCorp)
-    }).then(() => fetchCorps());
-  };
-
-  const handleDeleteTx = (originalIndex) => {
-    if (!window.confirm("Are you sure you want to delete this transaction?")) return;
-    const newTransactions = selectedCorp.transactions.filter((_, idx) => idx !== originalIndex);
-    saveUpdatedTransactions(newTransactions);
-  };
-
-  const handleUpdateTx = (originalIndex, updatedTx) => {
-    const newTransactions = [...selectedCorp.transactions];
-    newTransactions[originalIndex] = updatedTx;
-    saveUpdatedTransactions(newTransactions);
+      fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedCorp) })
+      .then(() => fetchCorps());
   };
 
   return (
@@ -139,25 +152,23 @@ function Sheets({ corps, fetchCorps }) {
       <CorpList 
         corps={corps} 
         grandTotal={grandTotal} 
-        selectedCorpIndex={selectedCorpIndex} 
         setSelectedCorpIndex={setSelectedCorpIndex} 
-        selectedCorp={selectedCorp} // <-- Passed this down
+        selectedCorp={selectedCorp} 
         showAddCorpForm={showAddCorpForm} 
-        setShowAddCorpForm={setShowAddCorpForm}
-        newCorpName={newCorpName}
-        setNewCorpName={setNewCorpName}
-        newCorpBalance={newCorpBalance}
-        setNewCorpBalance={setNewCorpBalance}
-        handleAddCorp={handleAddCorp}
-        newCorpForeign={newCorpForeign}
-        setNewCorpForeign={setNewCorpForeign}
-        onAddTransaction={handleAddTx} // <-- Fixed this to pass the correct function
+        setShowAddCorpForm={setShowAddCorpForm} 
+        newCorpName={newCorpName} 
+        setNewCorpName={setNewCorpName} 
+        newCorpBalance={newCorpBalance} 
+        setNewCorpBalance={setNewCorpBalance} 
+        newCorpForeign={newCorpForeign} 
+        setNewCorpForeign={setNewCorpForeign} 
+        handleAddCorp={handleAddCorp} 
+        onAddTransaction={handleAddTx} 
       />
       <CorpDetails 
         selectedCorp={selectedCorp} 
-
-        onDeleteTransaction={handleDeleteTx}
-        onUpdateTransaction={handleUpdateTx}
+        onDeleteTransaction={handleDeleteTx} 
+        onUpdateTransaction={handleUpdateTx} 
       />
     </div>
   );

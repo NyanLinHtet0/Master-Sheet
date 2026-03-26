@@ -1,7 +1,7 @@
 /* Your existing inputRow styles (assuming it's a flex container) */
 .inputRow {
   display: flex;
-  flex-direction: row; /* Default horizontal layout */
+  flex-direction: column; /* Default horizontal layout */
   /* ... other properties ... */
 }
 

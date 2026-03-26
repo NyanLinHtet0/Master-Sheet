@@ -6,7 +6,7 @@
   flex-direction: row;
   margin: 0 auto;
   padding: 0;
-  gap: 24px;
+  gap: 8px;
   width: 98vw;
   /* height: 84.3vh; */
   height: 91.5vh;
@@ -39,6 +39,7 @@
 }
 .corpDetails{
   flex: 2;
+  overflow-x: auto;
 }
 
 .corpList{
@@ -479,5 +480,11 @@
   }
   .corpList{
     flex: 1;
+    margin: 0 0 0 0 ;
+  }
+  .corpDetails{
+    flex: 2;
+    
+    padding: 30px 10px 30px 10px;
   }
 }

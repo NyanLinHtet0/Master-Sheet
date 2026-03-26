@@ -62,10 +62,10 @@ app.listen(PORT, () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
 });
 
-// app.listen(PORT, '0.0.0.0', () => {
-//   console.log(`Backend server running on http://0.0.0.0:${PORT}`);
-//   console.log(`(Accessible on your network)`);
-// });
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Backend server running on http://0.0.0.0:${PORT}`);
+  console.log(`(Accessible on your network)`);
+});
 
 
 ==================================================
@@ -179,7 +179,7 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   server: {
-    // host: true,
+    host: true,
     proxy: {
       // Any request that starts with /api will be forwarded to Express
       '/api': {
@@ -355,14 +355,12 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
   
   const dropdownRef = useRef(null);
 
-  // Sync the search term with the selected corp when it changes from the outside
   useEffect(() => {
     if (selectedCorp && !isOpen) {
       setSearchTerm(selectedCorp.name);
     }
   }, [selectedCorp, isOpen]);
 
-  // Handle clicking outside the dropdown to close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -373,19 +371,16 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [selectedCorp]);
 
-  // Helpers to manage opening and closing cleanly
   const handleOpenDropdown = () => {
     setIsOpen(true);
-    setSearchTerm(''); // Clear text immediately so they see all options
+    setSearchTerm('');
   };
 
   const handleCloseDropdown = () => {
     setIsOpen(false);
-    // Restore the search term to the selected corp if they abandon the search
     setSearchTerm(selectedCorp ? selectedCorp.name : '');
   };
 
-  // Filter corps based on the search term
   const filteredCorps = corps.filter(corp =>
     corp.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -403,12 +398,9 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
 
   return (
     <div className={styles.dropdownWrapper} ref={dropdownRef}>
-      
       <div
         className={`${styles.dropdownHeader} ${isOpen ? styles.activeHeader : ''}`}
-        onClick={() => {
-          if (!isOpen) handleOpenDropdown();
-        }}
+        onClick={() => { if (!isOpen) handleOpenDropdown(); }}
       >
         <div className={styles.inputGroup}>
           <input
@@ -416,37 +408,31 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
             className={styles.searchInput}
             value={isOpen ? searchTerm : (selectedCorp ? selectedCorp.name : 'None')}
             onChange={handleInputChange}
-            onFocus={() => {
-              if (!isOpen) handleOpenDropdown();
-            }}
+            onFocus={() => { if (!isOpen) handleOpenDropdown(); }}
             placeholder="Search or select a corp..."
           />
           
-          {/* Show balance inline only when closed and a corp is selected */}
+          {/* <--- APPLIED INVERSE TO HEADER DISPLAY ---> */}
           {!isOpen && selectedCorp && (
             <span className={styles.headerBalance}>
-              {selectedCorp.total_mmk ? selectedCorp.total_mmk.toLocaleString() : 0} MMK
+              {selectedCorp.total_mmk 
+                  ? (selectedCorp.inverse ? -Number(selectedCorp.total_mmk) : Number(selectedCorp.total_mmk)).toLocaleString() 
+                  : 0}
             </span>
           )}
         </div>
         
-        {/* Dropdown Indicator */}
         <div
           className={`${styles.caret} ${isOpen ? styles.caretOpen : ''}`}
           onClick={(e) => {
-            e.stopPropagation(); // Prevent double-triggering from the header click
-            if (isOpen) {
-              handleCloseDropdown();
-            } else {
-              handleOpenDropdown();
-            }
+            e.stopPropagation();
+            if (isOpen) { handleCloseDropdown(); } else { handleOpenDropdown(); }
           }}
         >
           ▼
         </div>
       </div>
 
-      {/* Dropdown List */}
       {isOpen && (
         <ul className={styles.dropdownList}>
           {filteredCorps.length > 0 ? (
@@ -457,10 +443,18 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
                 onClick={() => handleSelectCorp(corp)}
               >
                 <span className={styles.corpName}>{corp.name}</span>
-                <span className={styles.corpBalance}>
-                  {corp.total_mmk ? corp.total_mmk.toLocaleString() : 0} MMK
-                  {corp.total_foreign ? ` / ${corp.total_foreign.toLocaleString()} Foreign` : ''}
-                </span>
+                {/* <--- APPLIED INVERSE TO DROPDOWN ITEMS DISPLAY ---> */}
+                <div className={styles.corpBalance}>
+                  <span>
+                    {corp.total_mmk ? (corp.inverse ? -Number(corp.total_mmk) : Number(corp.total_mmk)).toLocaleString() : 0}
+                  </span>
+                  
+                  {corp.total_foreign ? (
+                    <span className={styles.foreignText}>
+                      {(corp.inverse ? -Number(corp.total_foreign) : Number(corp.total_foreign)).toLocaleString()} {corp.name.split('ဝယ်စာရင်း')[0].trim()}
+                    </span>
+                  ) : null}
+                </div>
               </li>
             ))
           ) : (
@@ -468,7 +462,6 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
           )}
         </ul>
       )}
-
     </div>
   );
 }
@@ -479,8 +472,6 @@ export default CorpDropdown;
 ==================================================
 FILE: frontend\src\components\CorpDropdown.module.css
 ==================================================
-
-/* src/pages/View.module.css */
 
 .dropdownWrapper {
   position: relative;
@@ -604,7 +595,15 @@ FILE: frontend\src\components\CorpDropdown.module.css
   color: #64748b;
   font-size: 18px; /* Increased by ~15% */
   font-weight: 700;
-  line-height: 1.8;
+  line-height: 1.4; /* Adjusted for stacked layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Keeps the numbers aligned on the right */
+}
+
+.foreignText {
+  font-size: 16px; 
+  color: #94a3b8;
 }
 
 .noResults {
@@ -615,7 +614,6 @@ FILE: frontend\src\components\CorpDropdown.module.css
   font-size: 18px;
   font-weight: 700;
 }
-
 
 @media (max-width: 1300px) {
   .inputGroup {
@@ -703,10 +701,8 @@ import SaveButton from './SaveButton';
 import styles from '../../pages/Sheets.module.css';
 
 export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdateTransaction, isDirty, onSave }) {
-  // State to handle toggling between Single and Split table views
   const [isSingleTableView, setIsSingleTableView] = useState(false);
 
-  // Clean, centered default view when no corporation is selected
   if (!selectedCorp) {
     return (
       <div className={styles.corpDetails} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', color: 'var(--text-muted)' }}>
@@ -716,22 +712,36 @@ export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdat
     );
   }
 
+  // <--- INVERSE LOGIC FOR DISPLAY --->
+  const isInverse = selectedCorp.inverse === true;
+
   const transactions = selectedCorp.transactions || [];
-  const txWithIndex = transactions.map((tx, index) => ({ ...tx, originalIndex: index }));
+  const txWithIndex = transactions.map((tx, index) => {
+      let displayTx = { ...tx, originalIndex: index };
+      if (isInverse) {
+          // Visually flip the amounts so negatives look positive
+          displayTx.amount = -Number(tx.amount || 0);
+          displayTx.total_mmk = -Number(tx.total_mmk || 0);
+      }
+      return displayTx;
+  });
 
   const incomeTx = txWithIndex.filter(tx => tx.amount >= 0);
   const expenseTx = txWithIndex.filter(tx => tx.amount < 0);
 
   const isForeign = selectedCorp.name && selectedCorp.name.includes('ဝယ်စာရင်း');
-  const currencyName = isForeign ? selectedCorp.name.replace('ဝယ်စာရင်း', '').trim() : '';
+  const currencyName = isForeign ? selectedCorp.name.split('ဝယ်စာရင်း')[0].trim() : '';
+
+  // <--- APPLY INVERSE LOGIC TO HEADER TOTALS --->
+  const displayTotalMmk = isInverse ? -Number(selectedCorp.total_mmk || 0) : Number(selectedCorp.total_mmk || 0);
+  const displayTotalForeign = isInverse ? -Number(selectedCorp.total_foreign || 0) : Number(selectedCorp.total_foreign || 0);
 
   const currentRate = (isForeign && Number(selectedCorp.total_foreign)) 
-    ? (Number(selectedCorp.total_mmk || 0) / Number(selectedCorp.total_foreign)).toLocaleString(undefined, { maximumFractionDigits: 2 }) 
+    ? (displayTotalMmk / displayTotalForeign).toLocaleString(undefined, { maximumFractionDigits: 2 }) 
     : '-';
 
   return (
     <div className={styles.corpDetails}>
-      {/* Save Button Header Container */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', paddingBottom: '10px', borderBottom: '1px solid var(--border-color)' }}>
         <h2 style={{ margin: 0, fontSize: '24px', color: 'var(--text-main)' }}>{selectedCorp.name}</h2>
         <div>
@@ -739,15 +749,15 @@ export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdat
         </div>
       </div>
 
-      {/* Balance and Toggle Container */}
       <div className={styles.balanceContainer} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: '600' }}>Balance: {Number(selectedCorp.total_mmk || 0).toLocaleString()} MMK</span>
+          {/* <--- USE INVERTED TOTALS ---> */}
+          <span style={{ fontWeight: '600' }}>Balance: {displayTotalMmk.toLocaleString()} MMK</span>
           {isForeign && (
             <>
               <span className={styles.divider}>|</span>
               <span className={styles.foreignText} style={{ fontWeight: '600' }}>
-                {currencyName} Balance: {Number(selectedCorp.total_foreign || 0).toLocaleString()}
+                {currencyName} Balance: {displayTotalForeign.toLocaleString()}
               </span>
               <span className={styles.divider}>|</span>
               <span className={styles.rateText}>Rate: {currentRate}</span>
@@ -755,19 +765,9 @@ export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdat
           )}
         </div>
         
-        {/* Toggle View Button */}
         <button 
           onClick={() => setIsSingleTableView(!isSingleTableView)}
-          style={{
-            padding: '6px 12px',
-            borderRadius: '6px',
-            border: '1px solid var(--border-color)',
-            backgroundColor: 'white',
-            cursor: 'pointer',
-            fontWeight: '600',
-            color: 'var(--text-main)',
-            boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
-          }}
+          style={{ padding: '6px 12px', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'white', cursor: 'pointer', fontWeight: '600', color: 'var(--text-main)', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
         >
           {isSingleTableView ? 'Split View' : 'Single View'}
         </button>
@@ -775,7 +775,6 @@ export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdat
 
       <div className={styles.tablesContainer}>
         {isSingleTableView ? (
-          // --- Single Combined View ---
           <div className={styles.tableWrapper} style={{ width: '100%' }}>
             <TransactionTable 
               title="All Transactions"
@@ -787,7 +786,6 @@ export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdat
             />
           </div>
         ) : (
-          // --- Two Separate Tables View ---
           <>
             <div className={styles.tableWrapper}>
               <TransactionTable 
@@ -823,14 +821,13 @@ FILE: frontend\src\components\Sheets\CorpList.jsx
 
 import styles from '../../pages/Sheets.module.css';
 import CorpDropdown from '../CorpDropdown';
-// Make sure to import TransactionForm here if you haven't already!
 import TransactionForm from './TransactionForm'; 
 
 function CorpList({ 
   corps, 
   grandTotal, 
   setSelectedCorpIndex,
-  selectedCorp, // Added this prop to safely access selectedCorp.name
+  selectedCorp, 
   showAddCorpForm, 
   setShowAddCorpForm, 
   newCorpName, 
@@ -840,7 +837,7 @@ function CorpList({
   handleAddCorp, 
   newCorpForeign, 
   setNewCorpForeign,
-  onAddTransaction // We will pass handleAddTx from Sheets into this prop
+  onAddTransaction 
 }) {
   const isBahtCorp = newCorpName.includes('ဝယ်စာရင်း');
 
@@ -853,11 +850,11 @@ function CorpList({
 
       {showAddCorpForm && (
         <form onSubmit={handleAddCorp} className={styles.formContainer}>
-          <div className={styles.corpFormWrapper}>
+          <div className={styles.corpFormWrapper} style={{ alignItems: 'center' }}>
             <div className={styles.inputFieldCont} style={{flex:'2' }}>
               <input
                 type="text"
-                placeholder="Corporation Name"
+                placeholder="Corporation Name ('.../i' for inverse)"
                 required
                 value={newCorpName}
                 onChange={(e) => setNewCorpName(e.target.value)}
@@ -872,7 +869,7 @@ function CorpList({
                 onChange={(e) => {
                   const raw = e.target.value.replace(/,/g, '');
                   if (raw === '' || raw === '-' || !isNaN(raw)) {
-                    setNewCorpBalance(raw);
+                      setNewCorpBalance(raw);
                   }
                 }}
               />
@@ -883,10 +880,12 @@ function CorpList({
                 <input
                   type="text"
                   placeholder="Initial Baht"
-                  value={newCorpForeign ? Number(newCorpForeign).toLocaleString() : ''}
+                  value={newCorpForeign === '-' ? '-' : newCorpForeign ? Number(newCorpForeign).toLocaleString() : ''}
                   onChange={(e) => {
-                    const raw = e.target.value.replace(/,/g, '');
-                    if (!isNaN(raw)) setNewCorpForeign(raw);
+                    const raw2 = e.target.value.replace(/,/g, '');
+                    if (raw2 === '' || raw2 === '-' || !isNaN(raw2)) {
+                      setNewCorpForeign(raw2);
+                    }
                   }}
                 />
               </div>
@@ -915,11 +914,12 @@ function CorpList({
         />
       </div>
 
-      {/* Added a safety check so it only renders if a corp is selected */}
       {selectedCorp && (
-        <TransactionForm onSubmit={onAddTransaction} corpname={selectedCorp.name} />
+        <TransactionForm 
+           corpname={selectedCorp.name} 
+           onSubmit={onAddTransaction} 
+        />
       )}
-      
     </div>
   );
 }
@@ -1196,7 +1196,7 @@ FILE: frontend\src\components\Sheets\TransactionForm.module.css
 /* Your existing inputRow styles (assuming it's a flex container) */
 .inputRow {
   display: flex;
-  flex-direction: row; /* Default horizontal layout */
+  flex-direction: column; /* Default horizontal layout */
   /* ... other properties ... */
 }
 
@@ -1391,7 +1391,7 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                         )}
                         {/* Consistent 150px width and flex layout for inline editing */}
                         <td className={styles.actionCell} style={{ textAlign: 'center', width: '150px' }}>
-                          <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                          <div className={styles.actionCellButtons}>
                             <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleSaveEdit(tx.originalIndex)}>Save</button>
                             <button className={`${styles.actionBtn} ${styles.cancelBtn}`} onClick={handleCancelEdit}>Cancel</button>
                           </div>
@@ -1427,7 +1427,7 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                         {/* Always render the td. If not in edit mode, insert a non-breaking space */}
                         <td className={styles.actionCell} style={{ textAlign: 'center', width: '150px' }}>
                           {isTableEditMode ? (
-                            <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                            <div className={styles.actionCellButtons}>
                               <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={() => handleEditClick(tx)}>
                                 Edit
                               </button>
@@ -1477,140 +1477,153 @@ FILE: frontend\src\pages\Home.module.css
 FILE: frontend\src\pages\Sheets.jsx
 ==================================================
 
-import { useState } from 'react';
-import styles from './Sheets.module.css';
+import React, { useState, useEffect } from 'react';
 import CorpList from '../components/Sheets/CorpList';
 import CorpDetails from '../components/Sheets/CorpDetails';
+import styles from './Sheets.module.css';
 
 function Sheets({ corps, fetchCorps }) {
   const [selectedCorpIndex, setSelectedCorpIndex] = useState(null);
   const [showAddCorpForm, setShowAddCorpForm] = useState(false);
-
+  
+  // New Corp State
   const [newCorpName, setNewCorpName] = useState('');
-  const [newCorpBalance, setNewCorpBalance] = useState(''); 
+  const [newCorpBalance, setNewCorpBalance] = useState('');
   const [newCorpForeign, setNewCorpForeign] = useState('');
-
-  const grandTotal = corps.reduce((sum, corp) => {
-    const corpTotal = corp.total_mmk || 0; 
-    return sum + Number(corpTotal);
-  }, 0);
 
   const selectedCorp = selectedCorpIndex !== null ? corps[selectedCorpIndex] : null;
 
+  const grandTotal = corps.reduce((sum, corp) => sum + Number(corp.total_mmk || 0), 0);
+
   const handleAddCorp = (e) => {
     e.preventDefault();
+    
+    // Parse name for '/i' suffix
+    let parsedName = newCorpName.trim();
+    let isInverse = false;
+    
+    if (parsedName.toLowerCase().endsWith('/i')) {
+        isInverse = true;
+        parsedName = parsedName.slice(0, -2).trim(); // Remove the '/i' from the name
+    }
 
-    if (corps.some(c => c?.name === newCorpName.trim())) {
+    if (corps.some(c => c?.name === parsedName)) {
       alert("A corporation with this name already exists!");
       return;
     }
-
-    const isBaht = newCorpName.includes('ဝယ်စာရင်း');
+    
+    const isBaht = parsedName.includes('ဝယ်စာရင်း');
     const kyatVal = Number(newCorpBalance) || 0;
     const foreignVal = Number(newCorpForeign) || 0;
-
+    
+    // Apply inverse multiplier based on the parsed flag
+    const multiplier = isInverse ? -1 : 1;
+    const initialTotalMmk = kyatVal * multiplier;
+    const initialTotalForeign = foreignVal * multiplier;
     const calculatedRate = (isBaht && foreignVal !== 0) ? kyatVal / foreignVal : 0;
-    const initialTotalMmk = kyatVal;
-
+    
     const newCorp = {
-      name: newCorpName.trim(),
+      name: parsedName, // Save the clean name
+      inverse: isInverse, // Save inverse flag to the database
       total_mmk: initialTotalMmk,
-      ...(isBaht && { total_foreign: foreignVal }),
+      ...(isBaht && { total_foreign: initialTotalForeign }),
       order: corps.length + 1,
-      transactions: (kyatVal !== 0 || foreignVal !== 0) ? [
-        {
-          description: "Initial Balance",
-          amount: isBaht ? foreignVal : kyatVal,
-          date: new Date().toLocaleDateString('en-CA'),
-          ...(isBaht && { rate: calculatedRate }),
-          total_mmk: initialTotalMmk
-        }
-      ] : []
+      transactions: (kyatVal !== 0 || foreignVal !== 0) ?
+      [ { 
+          description: "Initial Balance", 
+          amount: isBaht ? (foreignVal * multiplier) : (kyatVal * multiplier), 
+          date: new Date().toLocaleDateString('en-CA'), 
+          ...(isBaht && { rate: calculatedRate }), 
+          total_mmk: initialTotalMmk 
+        } ] : []
     };
-
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newCorp)
-    }).then(() => {
+  
+    fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newCorp) })
+    .then(() => { 
       fetchCorps(); 
-      setNewCorpName('');
-      setNewCorpBalance('');
-      setNewCorpForeign('');
-      setShowAddCorpForm(false);
+      setNewCorpName(''); 
+      setNewCorpBalance(''); 
+      setNewCorpForeign(''); 
+      setShowAddCorpForm(false); 
     });
   };
 
   const handleAddTx = (newTx) => {
     if (!newTx.date) newTx.date = new Date().toLocaleDateString('en-CA');
     const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
-
+    
+    // Invert the submitted positive value into negative for the database
+    if (selectedCorp.inverse) {
+        newTx.amount = Number(newTx.amount) * -1;
+    }
+  
     const txTotalMmk = isBaht ? Number(newTx.amount) * Number(newTx.rate) : Number(newTx.amount);
     newTx.total_mmk = txTotalMmk;
-
-    const updatedCorp = { 
-      ...selectedCorp, 
-      transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] 
-    };
-    
+  
+    const updatedCorp = { ...selectedCorp, transactions: selectedCorp.transactions ? [...selectedCorp.transactions, newTx] : [newTx] };
     const currentTotalMmk = Number(updatedCorp.total_mmk || 0);
     updatedCorp.total_mmk = currentTotalMmk + txTotalMmk;
-
+    
     if (isBaht) {
-      const currentTotalForeign = Number(updatedCorp.total_foreign || 0);
-      updatedCorp.total_foreign = currentTotalForeign + Number(newTx.amount);
+        const currentForeign = Number(updatedCorp.total_foreign || 0);
+        updatedCorp.total_foreign = currentForeign + Number(newTx.amount);
+    }
+    
+    fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedCorp) })
+    .then(() => fetchCorps());
+  };
+
+  const handleUpdateTx = (index, updatedTx) => {
+    // If the user updates an edited transaction, the value they put in is visually positive, invert it back before saving
+    if (selectedCorp.inverse) {
+       updatedTx.amount = Number(updatedTx.amount) * -1;
+    }
+    
+    const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
+    const txTotalMmk = isBaht ? Number(updatedTx.amount) * Number(updatedTx.rate) : Number(updatedTx.amount);
+    updatedTx.total_mmk = txTotalMmk;
+
+    const newTransactions = [...selectedCorp.transactions];
+    newTransactions[index] = updatedTx;
+
+    let totalMmk = 0;
+    let totalForeign = 0;
+
+    newTransactions.forEach(tx => {
+        totalMmk += Number(tx.total_mmk || 0);
+        if (isBaht) {
+            totalForeign += Number(tx.amount || 0);
+        }
+    });
+
+    const updatedCorp = { ...selectedCorp, transactions: newTransactions, total_mmk: totalMmk };
+    if (isBaht) {
+        updatedCorp.total_foreign = totalForeign;
     }
 
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedCorp)
-    }).then(() => {
-      fetchCorps(); 
-    });
+    fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedCorp) })
+    .then(() => fetchCorps());
   };
 
-  const saveUpdatedTransactions = (newTransactions) => {
-    const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
-    let newTotalMmk = 0;
-    let newTotalForeign = 0;
+  const handleDeleteTx = (index) => {
+      const newTransactions = selectedCorp.transactions.filter((_, i) => i !== index);
+      const isBaht = selectedCorp.name.includes('ဝယ်စာရင်း');
+      
+      let totalMmk = 0;
+      let totalForeign = 0;
+      
+      newTransactions.forEach(tx => {
+          totalMmk += Number(tx.total_mmk || 0);
+          if (isBaht) totalForeign += Number(tx.amount || 0);
+      });
 
-    const finalTransactions = newTransactions.map(tx => {
-      const txTotalMmk = isBaht ? Number(tx.amount) * Number(tx.rate || 0) : Number(tx.amount);
-      newTotalMmk += txTotalMmk;
-      if (isBaht) newTotalForeign += Number(tx.amount);
-      return { 
-        ...tx, 
-        amount: Number(tx.amount), 
-        ...(isBaht && { rate: Number(tx.rate) }), 
-        total_mmk: txTotalMmk 
-      };
-    });
+      const updatedCorp = { ...selectedCorp, transactions: newTransactions, total_mmk: totalMmk };
+      if (isBaht) {
+          updatedCorp.total_foreign = totalForeign;
+      }
 
-    const updatedCorp = {
-      ...selectedCorp,
-      transactions: finalTransactions,
-      total_mmk: newTotalMmk,
-      ...(isBaht && { total_foreign: newTotalForeign })
-    };
-
-    fetch('/api/corps', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedCorp)
-    }).then(() => fetchCorps());
-  };
-
-  const handleDeleteTx = (originalIndex) => {
-    if (!window.confirm("Are you sure you want to delete this transaction?")) return;
-    const newTransactions = selectedCorp.transactions.filter((_, idx) => idx !== originalIndex);
-    saveUpdatedTransactions(newTransactions);
-  };
-
-  const handleUpdateTx = (originalIndex, updatedTx) => {
-    const newTransactions = [...selectedCorp.transactions];
-    newTransactions[originalIndex] = updatedTx;
-    saveUpdatedTransactions(newTransactions);
+      fetch('/api/corps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedCorp) })
+      .then(() => fetchCorps());
   };
 
   return (
@@ -1618,25 +1631,23 @@ function Sheets({ corps, fetchCorps }) {
       <CorpList 
         corps={corps} 
         grandTotal={grandTotal} 
-        selectedCorpIndex={selectedCorpIndex} 
         setSelectedCorpIndex={setSelectedCorpIndex} 
-        selectedCorp={selectedCorp} // <-- Passed this down
+        selectedCorp={selectedCorp} 
         showAddCorpForm={showAddCorpForm} 
-        setShowAddCorpForm={setShowAddCorpForm}
-        newCorpName={newCorpName}
-        setNewCorpName={setNewCorpName}
-        newCorpBalance={newCorpBalance}
-        setNewCorpBalance={setNewCorpBalance}
-        handleAddCorp={handleAddCorp}
-        newCorpForeign={newCorpForeign}
-        setNewCorpForeign={setNewCorpForeign}
-        onAddTransaction={handleAddTx} // <-- Fixed this to pass the correct function
+        setShowAddCorpForm={setShowAddCorpForm} 
+        newCorpName={newCorpName} 
+        setNewCorpName={setNewCorpName} 
+        newCorpBalance={newCorpBalance} 
+        setNewCorpBalance={setNewCorpBalance} 
+        newCorpForeign={newCorpForeign} 
+        setNewCorpForeign={setNewCorpForeign} 
+        handleAddCorp={handleAddCorp} 
+        onAddTransaction={handleAddTx} 
       />
       <CorpDetails 
         selectedCorp={selectedCorp} 
-
-        onDeleteTransaction={handleDeleteTx}
-        onUpdateTransaction={handleUpdateTx}
+        onDeleteTransaction={handleDeleteTx} 
+        onUpdateTransaction={handleUpdateTx} 
       />
     </div>
   );
@@ -1683,6 +1694,10 @@ FILE: frontend\src\pages\Sheets.module.css
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.corpList{
+  flex:.5
 }
 .corpDetails{
   flex: 2;
@@ -1897,8 +1912,15 @@ FILE: frontend\src\pages\Sheets.module.css
   vertical-align: middle;
 }
 
-/* Flex container for the action buttons to keep them neatly side-by-side */
+/* Fix: Remove 'display: flex' from the td to keep table-cell properties intact */
 .actionCell {
+  vertical-align: middle;
+  text-align: center;
+  min-width: 150px;
+}
+
+/* New class for the div inside the td that holds the buttons */
+.actionCellButtons {
   display: flex;
   gap: 5px;
   justify-content: center;
@@ -2117,8 +2139,10 @@ FILE: frontend\src\pages\Sheets.module.css
     padding: 5px;
     margin: 5px;
   }
+  .corpList{
+    flex: 1;
+  }
 }
-
 
 
 ==================================================
