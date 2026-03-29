@@ -473,7 +473,7 @@
   },
   {
     "name": "NLH",
-    "total_mmk": 600000,
+    "total_mmk": 500000,
     "order": 4,
     "transactions": [
       {
@@ -481,12 +481,6 @@
         "amount": 500000,
         "date": "2026-02-25",
         "total_mmk": 500000
-      },
-      {
-        "date": "2026-03-26",
-        "description": "abcd",
-        "amount": 100000,
-        "total_mmk": 100000
       }
     ]
   },
@@ -1382,59 +1376,6 @@
         "amount": 7641350,
         "date": "2026-02-25",
         "total_mmk": 7641350
-      }
-    ]
-  },
-  {
-    "name": "Baht ဝယ်စာရင်း (1)",
-    "inverse": false,
-    "total_mmk": 885159.273129,
-    "total_foreign": 499123.123,
-    "order": 27,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": 500000,
-        "date": "2026-03-26",
-        "rate": 2,
-        "total_mmk": 1000000
-      },
-      {
-        "date": "2026-3-26",
-        "description": "buy oil",
-        "amount": "-1000",
-        "rate": 130,
-        "total_mmk": -130000
-      },
-      {
-        "date": "2026-03-28",
-        "description": "abcd",
-        "amount": 123.123,
-        "rate": 123.123,
-        "total_mmk": 15159.273129000001
-      }
-    ]
-  },
-  {
-    "name": "Baht ဝယ်စာရင်း (2)",
-    "inverse": true,
-    "total_mmk": -15659288.273129001,
-    "total_foreign": -128123.123,
-    "order": 28,
-    "transactions": [
-      {
-        "description": "Initial Balance",
-        "amount": -5000,
-        "date": "2026-03-26",
-        "rate": 100,
-        "total_mmk": -500000
-      },
-      {
-        "date": "2026-03-28",
-        "description": "snvf",
-        "amount": -123123.123,
-        "rate": 123.123,
-        "total_mmk": -15159288.273129001
       }
     ]
   }

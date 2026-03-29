@@ -68,7 +68,7 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
           {!isOpen && selectedCorp && (
             <span className={styles.headerBalance}>
               {selectedCorp.total_mmk 
-                  ? (selectedCorp.inverse ? -Number(selectedCorp.total_mmk) : Number(selectedCorp.total_mmk)).toLocaleString() 
+                  ? (selectedCorp.inverse ? -Number(selectedCorp.total_mmk) : Number(selectedCorp.total_mmk)).toLocaleString(undefined, {maximumFractionDigits: 0}) 
                   : 0}
             </span>
           )}
