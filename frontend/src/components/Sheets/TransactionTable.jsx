@@ -185,11 +185,11 @@ export default function TransactionTable({ title, data, type, corpname, onDelete
                               </span>
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {tx.rate === '-' ? '-' : tx.rate ? Number(tx.rate).toLocaleString() : ''}
+                              {tx.rate === '-' ? '-' : tx.rate ? Number(tx.rate).toLocaleString(undefined, {maximumFractionDigits: 2}) : ''}
                             </td>
                             <td style={{ textAlign: 'right' }}>
                               <span style={{ color: amountColor, fontWeight: 'bold' }}>
-                                {tx.total_mmk ? Number(tx.total_mmk).toLocaleString() : ''}
+                                {tx.total_mmk ? Math.round(Number(tx.total_mmk)).toLocaleString(): ''}
                               </span>
                             </td>
                           </>

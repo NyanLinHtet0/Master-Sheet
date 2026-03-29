@@ -55,7 +55,7 @@ export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdat
       <div className={styles.balanceContainer} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
           {/* <--- USE INVERTED TOTALS ---> */}
-          <span style={{ fontWeight: '600' }}>Balance: {displayTotalMmk.toLocaleString()} MMK</span>
+          <span style={{ fontWeight: '600' }}>Balance: {displayTotalMmk.toLocaleString(undefined, {maximumFractionDigits: 0})} MMK</span>
           {isForeign && (
             <>
               <span className={styles.divider}>|</span>

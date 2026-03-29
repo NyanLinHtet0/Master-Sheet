@@ -98,7 +98,7 @@ function CorpDropdown({ corps = [], selectedCorp, onSelect }) {
                 {/* <--- APPLIED INVERSE TO DROPDOWN ITEMS DISPLAY ---> */}
                 <div className={styles.corpBalance}>
                   <span>
-                    {corp.total_mmk ? (corp.inverse ? -Number(corp.total_mmk) : Number(corp.total_mmk)).toLocaleString() : 0}
+                    {corp.total_mmk ? (corp.inverse ? -Number(corp.total_mmk) : Number(corp.total_mmk)).toLocaleString(undefined, {maximumFractionDigits: 0}) : 0}
                   </span>
                   
                   {corp.total_foreign ? (

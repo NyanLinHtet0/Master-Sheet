@@ -30,23 +30,20 @@ export default function TransactionForm({ onSubmit, corpname }) {
     }
   }, [year, month, daysInSelectedMonth, day]);
 
-  // UPDATED: Helper function to handle commas AND negative numbers
+  // UPDATED: Allows negative numbers and decimals safely
   const handleNumberChange = (setter) => (e) => {
+    // Remove commas to get the raw string
     const rawValue = e.target.value.replace(/,/g, '');
     
-    // Explicitly allow an empty string or a lone minus sign
-    if (rawValue === '' || rawValue === '-') {
-      setter(rawValue);
-    } 
-    // Otherwise, check if it's a valid number
-    else if (!isNaN(rawValue)) {
+    // Regex allows: optional minus, digits, optional dot, optional digits
+    if (/^-?\d*\.?\d*$/.test(rawValue)) {
       setter(rawValue);
     }
   };
 
   const processSubmit = (isShiftEnter) => {
-    // Prevent submission if amount is just a lone minus sign
-    if (!description || !amount || amount === '-' || (isBaht && (!rate || rate === '-'))) return;
+    // UPDATED: Prevent submission if fields are empty or invalid numbers (like a lone "-" or ".")
+    if (!description || !amount || isNaN(Number(amount)) || (isBaht && (!rate || isNaN(Number(rate))))) return;
 
     const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const txData = {
@@ -93,10 +90,23 @@ export default function TransactionForm({ onSubmit, corpname }) {
 
   const spacing = [.5, 2, .5, .5];
 
-  // Helper function to format the value for display
+  // UPDATED: Formats the integer part with commas, keeps the decimal part intact
   const formatValue = (val) => {
-    if (val === '' || val === '-') return val;
-    return Number(val).toLocaleString();
+    // Handle empty state, lone minus, or lone decimal safely
+    if (val === '' || val === '-' || val === '.' || val === '-.') return val;
+
+    // Split the string into integer and decimal parts
+    const parts = val.toString().split('.');
+    
+    // Add commas to the integer part using Regex
+    const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // If there's a decimal part, append it back exactly as typed
+    if (parts.length > 1) {
+      return `${integerPart}.${parts[1]}`;
+    }
+
+    return integerPart;
   };
 
   return (
@@ -148,7 +158,6 @@ export default function TransactionForm({ onSubmit, corpname }) {
             style={{flex: spacing[2] }}
             type="text"
             placeholder="Amount"
-            // UPDATED: Safely handle "-" during formatting
             value={formatValue(amount)}
             onChange={handleNumberChange(setAmount)}
             required
@@ -159,7 +168,6 @@ export default function TransactionForm({ onSubmit, corpname }) {
               style={{flex: spacing[3] }}
               type="text"
               placeholder="Rate"
-              // UPDATED: Safely handle "-" during formatting
               value={formatValue(rate)}
               onChange={handleNumberChange(setRate)}
               required

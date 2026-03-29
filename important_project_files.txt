@@ -72,64 +72,100 @@ app.listen(PORT, '0.0.0.0', () => {
 FILE: backend\server_local.js
 ==================================================
 
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+import express from "express";
+import mysql from "mysql2/promise";
 
 const app = express();
-const PORT = 3000;
-
-// This allows Express to understand JSON data sent from React
 app.use(express.json());
 
-// The absolute path to your JSON database file
-const DATA_FILE = path.join(__dirname, 'data', 'corps.json');
-
-// --- GET: Send the corporations to React ---
-app.get('/api/corps', (req, res) => {
-  fs.readFile(DATA_FILE, 'utf8', (err, data) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: 'Failed to read data' });
-    }
-    try {
-      let corps = JSON.parse(data);
-      res.json(corps);
-    } catch (parseError) {
-      return res.status(500).json({ error: 'Database JSON is corrupted' });
-    }
-  });
+const db = await mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "your_password",
+  database: "master_sheets",
+  charset: "utf8mb4",
 });
 
-// --- POST: Save a new corp OR update an existing corp ---
-app.post('/api/corps', (req, res) => {
-  const incomingCorp = req.body;
+app.post("/api/transaction", async (req, res) => {
+  const { corp_id, t_date, description, amount, rate } = req.body;
 
-  try {
-    const data = fs.readFileSync(DATA_FILE, 'utf8');
-    let corps = data.trim() ? JSON.parse(data) : [];
-    if (!Array.isArray(corps)) corps = [];
+  // get corp info
+  const [corpRows] = await db.query(
+    "SELECT is_foreign, inverse FROM corp_data WHERE id = ?",
+    [corp_id]
+  );
 
-    const existingIndex = corps.findIndex(c => c.name === incomingCorp.name);
+  const corp = corpRows[0];
 
-    if (existingIndex >= 0) {
-      corps[existingIndex] = incomingCorp;
-    } else {
-      corps.push(incomingCorp);
-    }
+  let total_mmk = corp.is_foreign
+    ? amount * rate
+    : amount;
 
-    fs.writeFileSync(DATA_FILE, JSON.stringify(corps, null, 2));
-    res.json({ success: true, message: 'Saved successfully!' });
+  if (corp.inverse) total_mmk *= -1;
 
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: 'Failed to process data' });
-  }
+  await db.query(
+    `INSERT INTO transaction_table 
+     (corp_id, t_date, description, amount, rate, total_mmk)
+     VALUES (?, ?, ?, ?, ?, ?)`,
+    [corp_id, t_date, description, amount, rate, total_mmk]
+  );
+
+  res.send({ success: true });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Backend server running on http://0.0.0.0:${PORT}`);
-  console.log(`(Accessible on your network)`);
+
+app.get("/api/transactions/:corp_id", async (req, res) => {
+  const { corp_id } = req.params;
+
+  const [rows] = await db.query(
+    "SELECT * FROM transaction_table WHERE corp_id = ? ORDER BY t_date",
+    [corp_id]
+  );
+
+  res.json(rows);
+});
+
+
+app.put("/api/transaction/:id", async (req, res) => {
+  const { id } = req.params;
+  const { amount, rate, corp_id } = req.body;
+
+  const [corpRows] = await db.query(
+    "SELECT is_foreign, inverse FROM corp_data WHERE id = ?",
+    [corp_id]
+  );
+
+  const corp = corpRows[0];
+
+  let total_mmk = corp.is_foreign
+    ? amount * rate
+    : amount;
+
+  if (corp.inverse) total_mmk *= -1;
+
+  await db.query(
+    `UPDATE transaction_table 
+     SET amount=?, rate=?, total_mmk=?
+     WHERE id=?`,
+    [amount, rate, total_mmk, id]
+  );
+
+  res.send({ success: true });
+});
+
+app.delete("/api/transaction/:id", async (req, res) => {
+  const { id } = req.params;
+
+  await db.query(
+    "DELETE FROM transaction_table WHERE id=?",
+    [id]
+  );
+
+  res.send({ success: true });
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
 
 
@@ -1668,7 +1704,7 @@ FILE: frontend\src\pages\Sheets.module.css
   flex-direction: row;
   margin: 0 auto;
   padding: 0;
-  gap: 24px;
+  gap: 8px;
   width: 98vw;
   /* height: 84.3vh; */
   height: 91.5vh;
@@ -1701,6 +1737,7 @@ FILE: frontend\src\pages\Sheets.module.css
 }
 .corpDetails{
   flex: 2;
+  overflow-x: auto;
 }
 
 .corpList{
@@ -2141,6 +2178,12 @@ FILE: frontend\src\pages\Sheets.module.css
   }
   .corpList{
     flex: 1;
+    margin: 0 0 0 0 ;
+  }
+  .corpDetails{
+    flex: 2;
+    
+    padding: 30px 10px 30px 10px;
   }
 }
 
