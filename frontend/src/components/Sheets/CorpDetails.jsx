@@ -40,7 +40,7 @@ export default function CorpDetails({ selectedCorp, onDeleteTransaction, onUpdat
   const displayTotalForeign = isInverse ? -Number(selectedCorp.total_foreign || 0) : Number(selectedCorp.total_foreign || 0);
 
   const currentRate = (isForeign && Number(selectedCorp.total_foreign)) 
-    ? (displayTotalMmk / displayTotalForeign).toLocaleString(undefined, { maximumFractionDigits: 2 }) 
+    ? Math.abs((displayTotalMmk / displayTotalForeign).toLocaleString(undefined, { maximumFractionDigits: 2 })) 
     : '-';
 
   return (
